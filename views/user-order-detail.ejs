@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <base href="<%= baseURL %>" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alfa Meanswear | Product Details</title>
+  <%- include('includes/head') %>
+</head>
+<style>
+  .full-stars .rating-group {
+    display: inline-flex;
+  }
+
+  .full-stars input {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .full-stars label {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .full-stars label svg {
+    margin: 2px;
+    height: 22px;
+    width: 22px;
+    fill: #F9CF2D;
+    transition: fill 0.3s;
+  }
+
+  .full-stars input:checked~label svg {
+    fill: #e4d79c;
+  }
+
+  .full-stars .rating-group:hover label svg {
+    fill: #F9CF2D;
+  }
+
+  .full-stars .rating-group input:hover~label svg {
+    fill: #e4d79c;
+  }
+</style>
+<body>
+
+  <div id="flash-message-container">
+    <% if (messages.success) { %>
+      <div id="flash-message" data-message="<%= messages.success %>">
+        <%= messages.success %>
+      </div>
+    <% } %>
+  </div>
+  
+  
+  <div class="alfa-main-wraper">
+    <%- include('includes/header') %>
+      <div class="mt-100 mt-150">
+        <div class="checkout-wrapper margin-180">
+          <div class="container">
+            <div class="checkout-title text-center">
+              <h3>Order Information</h3>
+              <h6>Order ID: <%= order.order_id %>
+              </h6>
+            </div>
+
+            <div class="checkout-title text-left">
+              <h3>Order Status</h3>
+
+              <% if (order.status=="CANCELLED" ) { %>
+                <h6 class="order-status" style="color: red;">
+                  <%= order.status %>
+                </h6>
+              
+                  <% } else { %>
+                    <h6 class="order-status success">
+                      <%= order.status %>
+                    </h6>
+                    <% } %>
+            </div>
+
+            <div class="row mt-5">
+              <div class="col-md-8">
+                <div class="alfa-checkout-address">
+                  <div class="order-proccess-wrapper">
+                    <% const statusSteps=['ORDER PLACED', 'ORDER CONFIRMED' , 'PROCESSING' , 'SHIPPED' , 'IN TRANSIT'
+                      , 'DELIVERED' ]; %>
+                      <% if (order.status.trim()==='CANCEL' ) { statusSteps.push('CANCEL'); } %>
+                        <div class="process-wrapper">
+                          <% statusSteps.forEach(step=> {
+
+                            %>
+
+                            <div
+                              class="process-item <%= statusSteps.indexOf(order.status.trim()) >= statusSteps.indexOf(step) ? 'process-active' : '' %>">
+                              <div class="proccess-text-center">
+                                <span>
+                                  <% if (step==='ORDER PLACED' ) { %>
+                                    <i class="fa-solid fa-file-invoice"></i>
+                                    <% } else if (step==='ORDER CONFIRMED' ) { %>
+                                      <i class="fa-solid fa-file-invoice"></i>
+                                      <% } else if (step==='PROCESSING' ) { %>
+                                        <i class="fa-solid fa-cube"></i>
+                                        <% } else if (step==='SHIPPED' ) { %>
+                                          <i class="fa-solid fa-truck"></i>
+                                          <% } else if (step==='IN TRANSIT' ) { %>
+                                            <i class="fa-solid fa-truck"></i>
+                                            <% } else if (step==='DELIVERED' ) { %>
+                                              <i class="fa-regular fa-handshake"></i>
+                                              <% } else if (step==='CANCEL' ) { %>
+                                                <i class="fa-regular fa-handshake"></i>
+                                                <% } %>
+                                </span>
+                                <h6>
+                                  <%= step %>
+                                </h6>
+                              </div>
+                            </div>
+                            <% }); %>
+                        </div>
+                  </div>
+                  <div class="shiping-title">
+                    <h5>Delivery Address </h5>
+                  </div>
+                  <div class="shipping-address">
+                    <div class="shipping-address-display">
+                      <div class="address-content">
+                        <div class="shipper-name">
+
+                        </div>
+                        <div class="shipper-email">
+                          <p>
+                           <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#1a0808" d="M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h16q.825 0 1.413.588T22 6v12q0 .825-.587 1.413T20 20zm8-7L4 8v10h16V8zm0-2l8-5H4zM4 8V6v12z"/></svg></span> <%= order.email %>
+                          </p>
+                          <p style="margin: 10px 0 12px;">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#1a0808" d="M19.44 13c-.22 0-.45-.07-.67-.12a9.4 9.4 0 0 1-1.31-.39a2 2 0 0 0-2.48 1l-.22.45a12.2 12.2 0 0 1-2.66-2a12.2 12.2 0 0 1-2-2.66l.42-.28a2 2 0 0 0 1-2.48a10 10 0 0 1-.39-1.31c-.05-.22-.09-.45-.12-.68a3 3 0 0 0-3-2.49h-3a3 3 0 0 0-3 3.41a19 19 0 0 0 16.52 16.46h.38a3 3 0 0 0 2-.76a3 3 0 0 0 1-2.25v-3a3 3 0 0 0-2.47-2.9m.5 6a1 1 0 0 1-.34.75a1.05 1.05 0 0 1-.82.25A17 17 0 0 1 4.07 5.22a1.1 1.1 0 0 1 .25-.82a1 1 0 0 1 .75-.34h3a1 1 0 0 1 1 .79q.06.41.15.81a11 11 0 0 0 .46 1.55l-1.4.65a1 1 0 0 0-.49 1.33a14.5 14.5 0 0 0 7 7a1 1 0 0 0 .76 0a1 1 0 0 0 .57-.52l.62-1.4a14 14 0 0 0 1.58.46q.4.09.81.15a1 1 0 0 1 .79 1Z"/></svg></span>
+                            <%= order.phone %>
+                          </p>
+                        </div>
+                        <div class="shipper-address">
+                          <span style="position: relative;top: -4px;"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#1a0808" fill-rule="evenodd" d="M16.25 3.75v1.69l2 1.6V3.75zm3.5 4.49V3.5c0-.69-.56-1.25-1.25-1.25H16c-.69 0-1.25.56-1.25 1.25v.74l-.407-.326a3.75 3.75 0 0 0-4.686 0l-8.125 6.5a.75.75 0 0 0 .937 1.172l.781-.626v10.29H2a.75.75 0 0 0 0 1.5h20a.75.75 0 0 0 0-1.5h-1.25V10.96l.782.626a.75.75 0 0 0 .936-1.172zm-.5 1.52l-5.844-4.675a2.25 2.25 0 0 0-2.812 0L4.75 9.76v11.49h3.5v-4.3c0-.664 0-1.237.062-1.696c.066-.492.215-.963.597-1.345s.854-.531 1.345-.597c.459-.062 1.032-.062 1.697-.062h.098c.665 0 1.238 0 1.697.062c.492.066.963.215 1.345.597s.531.853.597 1.345c.062.459.062 1.032.062 1.697v4.299h3.5zm-5 11.49V17c0-.728-.002-1.2-.048-1.546c-.044-.325-.114-.427-.172-.484s-.159-.128-.484-.172c-.347-.046-.818-.048-1.546-.048s-1.2.002-1.546.048c-.325.044-.427.115-.484.172s-.128.159-.172.484c-.046.347-.048.818-.048 1.546v4.25zM12 8.25a1.25 1.25 0 1 0 0 2.5a1.25 1.25 0 0 0 0-2.5M9.25 9.5a2.75 2.75 0 1 1 5.5 0a2.75 2.75 0 0 1-5.5 0" clip-rule="evenodd"/></svg></span>
+                          <%= order.full_address %>, <%= order.address_two %>, <%= order.city %>, <%=
+                                    order.pincode %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-4">
+                <div class="checkout-item-wrapper">
+                  <div class="item-counts">
+                    <div class="counts">
+                      <h6>
+                      </h6>
+                    </div>
+                  </div>
+                  <div class="checkout-cart-wrapper">
+                    <div class="checkout-wrapp">
+                      <% orderItems.forEach(product=> { %>
+                        <div>
+                          <div class="check-item">
+                            <div class="check-item-left">
+                              <div class="check-item-image">
+                                <img src="<%= product.product_main_image %>" class="check-image"
+                                  alt="" />
+                              </div>
+                              <div class="checkout-cont">
+                                <h4 style="font-size: 15px;">
+                                  <%= product.product_name %>
+                                </h4>
+                                <div class="checkout-rest-cont">
+                                  <!--  <p>Colour : </p>
+                                        <p>Size : M </p> -->
+                                  <p>Qty : <%= product.quantity %>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="check-item-right">
+                              <div class="review-btn-wrap">
+                                <a href="" data-bs-toggle="modal">
+                                </a>
+                              </div>
+                               <div class="check-price">
+                                <% if (order.status === "DELIVERED" && product.return_status !== "PENDING") { %>
+                                  <button class="order-return" data-bs-toggle="modal" data-bs-target="#exampleModal<%= product.id %>">
+                                      Return
+                                  </button>
+                              <% } else if (product.return_status === "PENDING") { %>
+                                  <span class="return-status order-return"><%= product.return_status %></span>
+                              <% } %>
+                                    <h3>£<%= (product.product_price * product.quantity).toFixed(2) %></h3>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal<%= product.id %>" tabindex="-1"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <div style="display: flex;gap: 10px;">
+                                  <div class="check-item-image">
+                                    <img src="<%= product.product_main_image %>" class="check-image"
+                                      alt="" />
+                                  </div>
+                                  <div>
+                                    <h5 style="font-size: 16px;margin: 0; color: #005d67;">
+                                      <%= product.product_name %>
+                                    </h5>
+                                    <h3 style="font-size: 20px;">£<%= (product.product_price *
+                                        product.quantity).toFixed(2) %>
+                                    </h3>
+                                  </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                  aria-label="Close"></button>
+                              </div>
+                              <form action="/return-submit" method="post">
+                                <div class="modal-body">
+                                  <input type="text" name="order_item_id" value="<%= product.id %>">
+                                  <input type="text" name="order_id" value="<%= product.orders_id %>">
+                                  <div>
+                                    <h2 class="return-m-text">Why are you returning?</h2>
+                                    <p class="return-para">Please choose the correct option for return. This information
+                                      is only used to improve our service.</p>
+                                  </div>
+                                  <div class="reason-content">
+                                    <h4>Select Reason</h4>
+                                    <div>
+                                      <div>
+                                          <input type="radio" id="Toobig" name="reason" value="Too big">
+                                          <label for="Toobig">Too big</label><br>
+                                      </div>
+                                      <div>
+                                          <input type="radio" id="Toosmall" name="reason" value="Too small">
+                                          <label for="Toosmall">Too small</label><br>
+                                      </div>
+                                      <div>
+                                          <input type="radio" id="nae" name="reason" value="Not as expected">
+                                          <label for="nae">Not as expected</label>
+                                      </div>
+                                      <div>
+                                          <input type="radio" id="didnotarivetime" name="reason"
+                                          value="Didn’t arrive in time">
+                                          <label for="didnotarivetime">Didn’t arrive in time</label>
+                                      </div>
+                                      <div>
+                                          <input type="radio" id="nln" name="reason" value="No longer needed">
+                                          <label for="nln">No longer needed</label>
+                                      </div>
+                                      <div class="mt-2">
+                                        <h4>How you want to return this?</h4>
+                                        <div>
+                                            <input type="radio" id="rbc" name="by_cs" value="Return by Courier">
+                                            <label for="rbc">Return by Courier</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" id="rac" name="by_cs" value="Return at Store">
+                                            <label for="rac">Return at Store </label>
+                                        </div>
+                                      </div>
+                                      <div class="mt-4">
+                                        <textarea class="form-control" name="comment"
+                                          placeholder="Additional Comments"></textarea>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footers">
+                                  <button type="submit" class="btn btn-primary return-btn">Submit</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <div class="alfa-cart-total">
+                      <ul>
+                        <li>
+                          <div class="alfa-text">Sub Total</div>
+                          <div class="alfa-price"> £ <%= subtotal %>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="alfa-text">Vat ( 20% )</div>
+                          <div class="alfa-price">£ <%= vat.toFixed(2) %>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="alfa-text">Delivery Fee</div>
+                          <div class="alfa-price">
+                            <% if (deliveryFee === 0) { %>
+                              <span id="Delivery-ajax" style="color: rgb(54, 50, 50);">Free Delivery</span>
+                              <% } else { %>
+                                <span id="Delivery-ajax"> £<%= deliveryFee.toFixed(2) %></span>
+                                <% } %>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="alfa-cart-total">
+                      <ul>
+                        <li>
+                          <div class="alfa-text">Total Cost</div>
+                          <div class="alfa-price">
+                            £ <%= totalCost.toFixed(2) %>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="alfa-checkout-wrapper">
+                      <% if (order.status !== "DELIVERED") { %>
+                        <% if (order.status === "CANCELLED") { %>
+                          <p style="color:red;font-size:18px;">Order Cancelled</p>
+                        <% } else { %>
+                          <button type="button" class="checkout-btn" id="cancel-order">
+                            CANCEL ORDER
+                          </button>
+                        <% } %>
+                      <% } %>
+                      
+                    </div>
+                    <!-- <div class="alfa-checkout-wrapper">
+                               <button type="button" class="checkout-btn"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                RETURN ORDER
+                              </button>
+                           </div> -->
+                    <!-- <input type="hidden" name="order_id" id="order_id" value="<%= order.id %>"> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- End -->
+      <!-- Footer -->
+      <%- include('includes/footer') %>
+        <!-- End -->
+  </div>
+  <%- include('includes/foot') %>
+    <script>
+      // Order Cancel
+      $(document).on("click", "#cancel-order", function () {
+        var order_id = $("#order_id").val();
+        console.log(order_id);
+        alertify.confirm("Are You Sure Want to Cancel this Order?")
+          .set("onok", function (closeEvent) {
+            $.ajax({
+              type: "POST",
+              url: "/api/cancel-order",
+              contentType: "application/json",
+              data: JSON.stringify({ order_id: order_id }),
+              success: function (response) {
+                alertify.set("notifier", "position", "top-center");
+                alertify.success(response.message);
+                setTimeout(function () {
+                  window.location.reload();
+                }, 1000);
+              },
+              error: function (xhr) {
+                alertify.error("An error occurred while cancelling the order.");
+                console.error(xhr.responseText);
+              }
+            });
+          })
+          .set({
+            title: "Order Cancel"
+          });
+      });
+
+      // Order Return
+      $(document).on("click", "#order-return", function () {
+        var order_id = $("#order_id").val();
+        console.log(order_id);
+        alertify.confirm("Are You Sure Want to Return this Order?")
+          .set("onok", function (closeEvent) {
+            $.ajax({
+              type: "POST",
+              url: "/api/order-return",
+              contentType: "application/json",
+              data: JSON.stringify({ order_id: order_id }),
+              success: function (response) {
+                alertify.set("notifier", "position", "top-center");
+                alertify.success(response.message);
+                setTimeout(function () {
+                  window.location.reload();
+                }, 1000);
+              },
+              error: function (xhr) {
+                alertify.error("An error occurred while cancelling the order.");
+                console.error(xhr.responseText);
+              }
+            });
+          })
+          .set({
+            title: "Order Return"
+          });
+      });
+
+    </script>
+    <script>
+      window.onload = function() {
+        const flashMessage = document.getElementById('flash-message');
+        if (flashMessage) {
+          const messageContainer = document.getElementById('flash-message-container');
+          // Ensure the message is visible as text
+          messageContainer.style.display = 'block';
+
+          // Optionally, fade out after 3 seconds
+          setTimeout(() => {
+            flashMessage.remove();
+          }, 3000); // 3000ms = 3 seconds
+        }
+      };
+    </script>
+
+    
+</body>
+
+</html>

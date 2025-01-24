@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="https://www.alfa-menswear.com/" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfa Meanswear | Blogs Detail</title>
+    <meta name="robots" content="noindex">
+    <%- include('includes/head') %>
+</head>
+
+<body>
+    <div class="alfa-main-wraper">
+        <%- include('includes/header') %>
+            <div class="mt-100">
+                <div class="product-banner brudcrumb">
+                    <div class="container">
+                        <div class="hero-product-row">
+                            <div class="product-col-6">
+                                <div class="breadcrubm-text">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="checkout-wrapper blog-detail-wrapper margin-190">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alfa-blog-wrappers">
+                                    <div class="blog-left-wrap">
+                                        <div class="blog-detail-wrap blod-d-2">
+                                            <div class="blog-tag">
+                                                <%=blog.tag %>
+                                            </div>
+                                            <div class="blog-date">
+                                                <%= new Date(blog.date).toLocaleDateString() %>
+                                            </div>
+                                        </div>
+                                        <div class="blog-middle-wrap">
+                                            <div class="blog-title-content" style="margin: 0 0 20px;">
+                                                <h1>
+                                                    <%= blog.title %>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="blog-detail-wrap">
+                                        <div class="blog-image">
+                                            <img src="./blog_images/<%= blog.image_path %>" width="100%" alt="">
+                                        </div>
+                                        <div class="blog-detail-pro">
+                                            <div class="d-p-left">
+                                                <img src="assets/images/blog-user.png" alt="">
+                                                <div class="blog-user-content">
+                                                    <h4>
+                                                        <%= blog.created_by%>
+                                                    </h4>
+                                                    <h6>
+                                                        <%= blog.profession%>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="d-p-right">
+                                                <ul>
+                                                    <li><a href=""><span><i
+                                                                    class="fa-brands fa-instagram"></i></span></a></li>
+                                                    <li><a href=""><span><i
+                                                                    class="fa-brands fa-facebook"></i></span></a></li>
+                                                    <li><a href=""><span><i class="fa-brands fa-twitter"></i></span></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <hr style="margin: 20px 0px 20px;">
+                                        <div class="blog-content">
+                                            <p>
+                                                <%= blog.content%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <%- include('includes/footer') %>
+                <!-- End -->
+    </div>
+    <%- include('includes/foot') %>
+
+</body>
+
+</html>

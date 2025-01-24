@@ -1,0 +1,401 @@
+<html lang="en">
+
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product | Alfamenswear</title>
+    <%- include('includes/head') %>
+        <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div>
+        <div class="flex">
+            <%- include('includes/side-bar') %>
+
+                <div class="pages">
+                    <div>
+                        <%- include('includes/header') %>
+                    </div>
+                    <!-- Page Content -->
+                    <div class="p-5">
+                        <div>
+                            <div class="">
+                                <h3 class="text-2xl font-bold">Add Product</h3>
+                            </div>
+                            <div class="mt-4">
+                                <form method="post" action="/admin/add-product" enctype="multipart/form-data">
+                                    <div class="flex gap-5">
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">Wear Type</label>
+                                                <select name="wear_type_id" class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none">
+                                                    <option value="active">Select</option>
+                                                 <% typeData.forEach(data =>{ %> 
+                                                       <option value="<%= data.id %>"><%= data.i_type %></option>
+                                                    <%})%>   
+                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">Category Name</label>
+                                                <select name="cat_id"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                    required>
+                                                    <option value="">Select</option>
+                                                    <% catData.forEach((data)=>{ %>
+                                                        <option value="<%= data.id %>" data-wear_type_id="<%= data.wear_type_id %>">
+                                                            <%= data.cat_name %>
+                                                        </option>
+                                                        <% }) %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', () => {
+                                                const wearTypeSelect = document.querySelector('select[name="wear_type_id"]');
+                                                const categorySelect = document.querySelector('select[name="cat_id"]');
+                                                const categoryOptions = Array.from(categorySelect.options);  
+                                                  wearTypeSelect.addEventListener('change', () => {
+                                                    const selectedWearTypeId = wearTypeSelect.value;
+                                                    
+                                                    categorySelect.innerHTML = '<option value="">Select</option>';
+                                        
+                                                    // Filter and add matching category options
+                                                    categoryOptions.forEach(option => {
+                                                        if (option.dataset.wear_type_id === selectedWearTypeId) {
+                                                            categorySelect.appendChild(option);
+                                                        }
+                                                        
+                                                    });
+                                                });
+                                            });
+                                        </script>
+                                        
+                                    </div>
+                                    <div class="flex gap-5 mt-5">
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">Product Name</label>
+                                                <input type="text" id="product-name" name="p_name"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">SEO Url</label>
+                                                <input type="text" id="seo-url" name="p_url"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font[600]">Similar Product</label>
+                                                <select name="similar_product" id=""
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none">
+                                                    <option value="">Select</option>
+                                                    <option value="yes">Yes</option>
+                                                    <option value="no">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex gap-5 mt-5">
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">Actual Price</label>
+                                                <input type="text" name="p_price" id="price"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">Discount</label>
+                                                <input type="text" name="discount" id="discount"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">Selling Price</label>
+                                                <input type="text" name="p_main_price" id="mainPrice"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex gap-5 mt-5">
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">Product Title</label>
+                                                <input type="text" name="p_title"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font[600]">New Arrival</label>
+                                                <select name="new_arrival" id=""
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none">
+                                                    <option value="">Select</option>
+                                                    <option value="yes">Yes</option>
+                                                    <option value="no">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font[600]">Best Seller</label>
+                                                <select name="best_seller" id=""
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none">
+                                                    <option value="">Select</option>
+                                                    <option value="yes">Yes</option>
+                                                    <option value="no">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">Tags</label>
+                                                <input type="text" name="tags"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex gap-5 mt-5">
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">Brand</label>
+                                                <input type="text" name="brand"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none">
+                                            </div>
+                                        </div>
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">SKU</label>
+                                                <input type="text" id="sku" name="sku"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none">
+                                            </div>
+                                        </div>
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">Barcode</label>
+                                                <input type="text" id="barcode" name="barcode"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none" readonly>
+                                            </div>
+                                        </div>
+                                    <script>
+                                        document.getElementById('sku').addEventListener('input', function () {
+                                            const sku = this.value;
+                                            const randomAlphanumeric = generateRandomAlphanumeric(8);
+                                            const barcode = sku + randomAlphanumeric;
+                                            document.getElementById('barcode').value = barcode;
+                                        });
+
+                                        function generateRandomAlphanumeric(length) {
+                                            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                                            let result = '';
+                                            for (let i = 0; i < length; i++) {
+                                                result += characters.charAt(Math.floor(Math.random() * characters.length));
+                                            }
+                                            return result;
+                                        }
+
+                                    </script>
+                                        <div class="sm:w-[50%]">
+                                            <div>
+                                                <label class="font-[600]">Colour</label>
+                                                <input type="text" name="colour"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex gap-5 mt-5">
+                                        <div class="sm:w-[100%]">
+                                            <div>
+                                                <label class="font-[600]">Description</label>
+                                                <textarea type="text" name="p_desc"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                    cols="4" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="sm:w-[100%]">
+                                            <div>
+                                                <label class="font-[600]">Features</label>
+                                                <textarea type="text" name="p_key_features"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                    cols="4" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-5">
+                                        <div class="sm:w-[100%]">
+                                            <div>
+                                                <label class="font-[600]">Image</label>
+                                                <input type="file" name="p_image"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-5">
+                                        <div class="sm:w-[100%]">
+                                            <div>
+                                                <label class="font-[600]">Multiple Image</label>
+                                                <input type="file" name="p_images" multiple
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 flex flex-col gap-5" id="inputContainer">
+                                        <div class="flex gap-5 input-row">
+                                            <div class="sm:w-[50%]">
+                                                <label class="font-[600]">Size</label>
+                                                <select name="size[]" id="selectMenuFecture"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                    required>
+                                                    <option value="">Select</option>
+                                                    <% sizeData.forEach((data)=>{ %>
+                                                        <option value="<%= data.size_name %>" data-menu_id="<%= data.id %>">
+                                                            <%= data.size_name %>
+                                                        </option>
+                                                        <% }) %>
+                                                </select>
+                                            </div>
+                                            <div class="sm:w-[50%]">
+                                                <div>
+                                                    <label class="font-[600]">Quantity</label>
+                                                    <input type="text" name="quantity[]"
+                                                        class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                        required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-2">
+                                            <div class="sm:w-[5%]">
+                                                <div class="mt-8">
+                                                    <button type="button"
+                                                        class="bg-red-500 p-2 px-5 text-white rounded-[10px] w-[100%] add-row">+</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-5">
+                                        <button type="submit"
+                                            class="p-2 bg-sky-400 text-white px-10 rounded-[10px]">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <%- include('includes/foot') %>
+    <script>
+        document.getElementById('product-name').addEventListener('input', function() {
+            const productName = this.value;
+            const seoUrl = productName
+                .toLowerCase()
+                .replace(/[^a-z0-9\s]/g, '')
+                .trim()
+                .replace(/\s+/g, '-');
+            document.getElementById('seo-url').value = seoUrl;
+        });
+
+    </script>
+        <script>
+            var price = document.getElementById("price")
+            var discount = document.getElementById("discount")
+            var mainPrice = document.getElementById("mainPrice")
+            price.addEventListener('input', updatePrice)
+            discount.addEventListener('input', updatePrice)
+
+            function updatePrice() {
+                var priceVal = parseFloat(price.value) || 0
+                var discountVal = parseFloat(discount.value) || 0
+                var discountPrice = (priceVal * discountVal) / 100;
+                var finalPrice = priceVal - discountPrice
+                mainPrice.value = parseFloat(finalPrice)
+            }
+
+        </script>
+        <script>
+            $(document).on("change", "#selectMenuFecture", function () {
+                // var menufecture = $(this).val()
+                var menu_id = $(this).find(':selected').data('menu_id');
+                $('select[name="c_modal"] option').each(function () {
+                    if ($(this).val() != "") {
+                        $(this).hide();
+                    }
+                });
+                $('select[name="c_modal"] option[data-menufecture="' + menu_id + '"]').show();
+            })
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const inputContainer = document.getElementById('inputContainer');
+                inputContainer.addEventListener('click', function (e) {
+                    if (e.target.classList.contains('add-row')) {
+                        e.preventDefault();
+
+                        // Create a new input row
+                        const newRow = document.createElement('div');
+                        newRow.classList.add('flex', 'gap-5', 'input-row');
+                         newRow.innerHTML = `
+                        <div class="sm:w-[50%]">
+                                                <label class="font-[600]">Size</label>
+                                                <select name="size[]" id="selectMenuFecture"
+                                                    class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none"
+                                                    required>
+                                                    <option value="">Select</option>
+                                                    <% sizeData.forEach((data)=>{ %>
+                                                        <option value="<%= data.size_name %>" data-menu_id="<%= data.id %>">
+                                                            <%= data.size_name %>
+                                                        </option>
+                                                        <% }) %>
+                                                </select>
+                                            </div>
+                        <div class="sm:w-[45%]">
+                            <div>
+                                <label class="font-[600]">Quantity</label>
+                                <input type="text" name="quantity[]" class="p-2 border-[1px] rounded-[10px] w-[100%] mt-2 outline-none" required>
+                            </div>
+                        </div>
+                        <div class="sm:w-[10%]">
+                            <div class="mt-8">
+                                <button type="button" class="bg-green-500 p-2 px-5 text-white rounded-[10px] w-[100%] remove-row">Remove</button>
+                            </div>
+                        </div>
+                    `;
+
+                        // Append the new row to the container
+                        inputContainer.appendChild(newRow);
+                    }
+
+                    if (e.target.classList.contains('remove-row')) {
+                        e.preventDefault();
+                        const row = e.target.closest('.input-row');
+                        inputContainer.removeChild(row);
+                    }
+                });
+            });
+        </script>
+
+</body>
+
+</html>

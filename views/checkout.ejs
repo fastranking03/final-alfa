@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfa Meanswear | Checkout</title>
+    <%- include('includes/head') %>
+</head>
+
+<body>
+    <div class="alfa-main-wraper">
+        <%- include('includes/header') %>
+
+        <div class="mt-100 mt-150">
+            <div class="checkout-wrapper margin-160">
+              <div class="container">
+              <form id="payForm" method="POST" action="/pay">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="alfa-checkout-address">
+                      <div class="address-t-wrapper">
+                        <div class="shiping-title">
+                          <h5>Select Delivery Address</h5>
+                        </div>
+                      </div>
+                     
+                        <div class="shipping-address">
+                          
+                            
+                              <div class="shipping-address-display" style="display: block">
+                                <div class="alfa-defaul-wrapper">
+                                  <h6>
+                                    Default Address
+                                  </h6>
+                                  <div class="alfa-action-warapper">
+                                    <!-- <a href="/remove-address/38" class="add-action-btn">Remove</a> -->
+                                    <a href="/edit-address/38" class="add-action-btn">Edit</a>
+                                  </div>
+                                </div>
+                                <div class="address-content">
+                                  <div class="shipper-name">
+                                    Arif Khan
+                                  </div>
+                                  <div class="address-type">
+                                    <input type="radio" id="address-38" name="selectedAddress" value="38" class="radio-input" checked="">
+                                    <label for="address-38">Home</label>
+                                  </div>
+                                  <div class="shipper-email">
+                                    <p>Email: fastranking03@gmail.com
+                                    </p>
+                                    <p>Mobile: 9027373515
+                                    </p>
+                                  </div>
+                                  <div class="shipper-address">
+                                    safdsafb sdgsfdh, sdg sdgsfdgh sdfgsfdh, 
+                                  </div>
+                                </div>
+                              </div>
+                              <input type="hidden" id="address_id" value="38">
+                              
+                              <div class="shipping-address-display" style="display: block">
+                                <div class="alfa-defaul-wrapper">
+                                  <h6>
+                                    Address
+                                  </h6>
+                                  <div class="alfa-action-warapper">
+                                    <!-- <a href="/remove-address/40" class="add-action-btn">Remove</a> -->
+                                    <a href="/edit-address/40" class="add-action-btn">Edit</a>
+                                  </div>
+                                </div>
+                                <div class="address-content">
+                                  <div class="shipper-name">
+                                    Harry
+                                  </div>
+                                  <div class="address-type">
+                                    <input type="radio" id="address-40" name="selectedAddress" value="40" class="radio-input">
+                                    <label for="address-40">Home</label>
+                                  </div>
+                                  <div class="shipper-email">
+                                    <p>Email: fastranking05@gmail.com
+                                    </p>
+                                    <p>Mobile: 12014141414
+                                    </p>
+                                  </div>
+                                  <div class="shipper-address">
+                                    UK London, sdg sdgsfdgh sdfgsfdh, 
+                                  </div>
+                                </div>
+                              </div>
+                              <input type="hidden" id="address_id" value="40">
+                              
+                              <div class="shipping-address-display" style="display: block">
+                                <div class="alfa-defaul-wrapper">
+                                  <h6>
+                                    Address
+                                  </h6>
+                                  <div class="alfa-action-warapper">
+                                    <!-- <a href="/remove-address/41" class="add-action-btn">Remove</a> -->
+                                    <a href="/edit-address/41" class="add-action-btn">Edit</a>
+                                  </div>
+                                </div>
+                                <div class="address-content">
+                                  <div class="shipper-name">
+                                    Nick
+                                  </div>
+                                  <div class="address-type">
+                                    <input type="radio" id="address-41" name="selectedAddress" value="41" class="radio-input">
+                                    <label for="address-41">Home</label>
+                                  </div>
+                                  <div class="shipper-email">
+                                    <p>Email: test@123.com
+                                    </p>
+                                    <p>Mobile: 7878787878
+                                    </p>
+                                  </div>
+                                  <div class="shipper-address">
+                                    , , 
+                                  </div>
+                                </div>
+                              </div>
+                              <input type="hidden" id="address_id" value="41">
+                              
+                              <div class="shipping-address-display" style="display: block">
+                                <div class="alfa-defaul-wrapper">
+                                  <h6>
+                                    Address
+                                  </h6>
+                                  <div class="alfa-action-warapper">
+                                    <!-- <a href="/remove-address/42" class="add-action-btn">Remove</a> -->
+                                    <a href="/edit-address/42" class="add-action-btn">Edit</a>
+                                  </div>
+                                </div>
+                                <div class="address-content">
+                                  <div class="shipper-name">
+                                    Arif Khanss
+                                  </div>
+                                  <div class="address-type">
+                                    <input type="radio" id="address-42" name="selectedAddress" value="42" class="radio-input">
+                                    <label for="address-42">Home</label>
+                                  </div>
+                                  <div class="shipper-email">
+                                    <p>Email: fastranking05@gmail.com
+                                    </p>
+                                    <p>Mobile: 9027373515
+                                    </p>
+                                  </div>
+                                  <div class="shipper-address">
+                                    safdsafb sdgsfdh, sdg sdgsfdgh sdfgsfdh, 
+                                  </div>
+                                </div>
+                              </div>
+                              <input type="hidden" id="address_id" value="42">
+                              
+                                
+                        </div>
+                    
+                        
+                          <div class="new-adderss-wrapper">
+                            <a href="add-address" style="color: #000">
+                              <div class="add-address">
+                                <div class="shipping-text">
+                                  <span><i class="fa-solid fa-plus"></i></span>
+                                  Add New Address
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                          
+    
+                    </div>
+                  </div>
+                 
+                  <div class="col-md-6">
+                
+                      <div class="checkout-item-wrapper mt-5">
+                        <div class="item-counts">
+                          <div class="counts">
+                            <h6>
+                              2 Items
+                            </h6>
+                          </div>
+                        </div>
+                        <div class="checkout-cart-wrapper">
+                          <div class="checkout-wrapp">
+                            
+                              <div class="check-item">
+                                <div class="check-item-left">
+                                  <div class="check-item-image">
+                                    <img src="../product_images/1728559840483.jpeg" class="check-image" alt="">
+                                  </div>
+                                  <!-- <h2>119</h2> -->
+                                  <div class="checkout-cont">
+                                    <h4>
+                                      Olymp Mauve Luxor Modern Fit Long Sleeve Shirt
+                                    </h4>
+                                    <div class="checkout-rest-cont">
+                                      <p>Colour : white
+                                      </p>
+                                      <p>Size : M
+                                      </p>
+                                      <p>Qty : 1
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="check-item-right">
+                                  <div class="check-price">
+                                    <h5>
+                                      <span class="final-price">£89.95</span>
+                                      <span class="mrp-price">£89.95</span>
+                                    </h5>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div class="check-item">
+                                <div class="check-item-left">
+                                  <div class="check-item-image">
+                                    <img src="../product_images/big_paisly.png" class="check-image" alt="">
+                                  </div>
+                                  <!-- <h2>120</h2> -->
+                                  <div class="checkout-cont">
+                                    <h4>
+                                      Giordano Big Paisley Print Long Sleeve Shirt
+                                    </h4>
+                                    <div class="checkout-rest-cont">
+                                      <p>Colour : null
+                                      </p>
+                                      <p>Size : M
+                                      </p>
+                                      <p>Qty : 1
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="check-item-right">
+                                  <div class="check-price">
+                                    <h5>
+                                      <span class="final-price">£89.95</span>
+                                      <span class="mrp-price">£89.95</span>
+                                    </h5>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                          </div>
+                          <div class="alfa-cart-total">
+                            <ul>
+                              <li>
+                                <div class="alfa-text">Total MRP</div>
+                                <div class="alfa-price">£179.90
+                                </div>
+                              </li>
+    
+                              <li>
+                                <div class="alfa-text">Discount on MRP </div>
+                                <div class="alfa-price">- £0.00
+                                </div>
+                              </li>
+    
+                              <li>
+                                <div class="alfa-text">Sub Total</div>
+                                <div class="alfa-price"> £ 179.9
+                                </div>
+                              </li>
+    
+                              
+    
+                                  <li>
+                                    <div class="alfa-text">Vat ( 20% )</div>
+    
+                                    <div class="alfa-price">£ 0
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="alfa-text">Delivery Fee</div>
+    
+                                    <div class="alfa-price">£0.00
+                                    </div>
+                                  </li>
+                            </ul>
+                          </div>
+                          <div class="alfa-cart-total">
+                            <ul>
+                              <li>
+                                <div class="alfa-text">Total Cost</div>
+                                <div class="alfa-price">£ 179.90
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                          <input type="hidden" id="user_id" name="user_id" value="1">
+                          <input type="hidden" id="totalCost" value="179.90">
+    
+                          <div class="alfa-checkout-wrapper">
+                            <button type="submit" class="checkout-btn"> Pay Now </button>
+                          </div>
+                    
+                        </div>
+                      </div>
+                       <input type="hidden" name="cartItemsInStock" value="[{&quot;id&quot;:115,&quot;user_id&quot;:1,&quot;product_id&quot;:115,&quot;selected_size&quot;:&quot;M&quot;,&quot;quantity&quot;:1,&quot;created_at&quot;:&quot;2024-10-10T11:30:40.000Z&quot;,&quot;cart_id&quot;:119,&quot;category_id&quot;:5,&quot;subcategory_id&quot;:1,&quot;product_name&quot;:&quot;Olymp Mauve Luxor Modern Fit Long Sleeve Shirt&quot;,&quot;product_sku&quot;:&quot;12445493&quot;,&quot;brand&quot;:&quot;Olymp&quot;,&quot;tags&quot;:&quot;Shirt, Mauve, Modern-Fit, Non-Iron, Elegant, Cotton, Global-Kent Collar, Easy-Care.&quot;,&quot;product_main_image&quot;:&quot;1728559840483.jpeg&quot;,&quot;product_price&quot;:&quot;89.95&quot;,&quot;discount_on_product&quot;:&quot;0&quot;,&quot;product_title&quot;:&quot;Olymp Mauve Luxor Modern Fit Long Sleeve Shirt&quot;,&quot;product_title_slug&quot;:&quot;olymp-mauve-luxor-modern-fit-long-sleeve-shirt&quot;,&quot;product_description&quot;:&quot;Festive OLYMP Luxor shirts are both sophisticated and elegant and underline any special occasion look in a very unique way. The particularly finely spun yarns have a lightweight and elegant texture. The modern Global Kent collar shape goes perfectly with the attractive, close-fitting modern fit. Easy care and non-iron.&quot;,&quot;wear_type_bottom_or_top&quot;:&quot;top&quot;,&quot;colour&quot;:&quot;white&quot;,&quot;varient_name&quot;:null,&quot;best_seller&quot;:null,&quot;unique_batch_id&quot;:&quot;5860677c-d7e4-4cb2-adc6-b2a39a3f560c&quot;,&quot;product_information&quot;:&quot;&quot;,&quot;shipping_information&quot;:&quot;&quot;,&quot;return_policy&quot;:&quot;&quot;,&quot;overall_rating&quot;:null,&quot;updated_at&quot;:null,&quot;sizes&quot;:{&quot;xs&quot;:0,&quot;s&quot;:10,&quot;m&quot;:2,&quot;l&quot;:2,&quot;xl&quot;:2,&quot;xxl&quot;:1,&quot;xxxl&quot;:10,&quot;xxxxl&quot;:0}},{&quot;id&quot;:108,&quot;user_id&quot;:1,&quot;product_id&quot;:108,&quot;selected_size&quot;:&quot;M&quot;,&quot;quantity&quot;:1,&quot;created_at&quot;:&quot;2024-10-10T09:51:49.000Z&quot;,&quot;cart_id&quot;:120,&quot;category_id&quot;:5,&quot;subcategory_id&quot;:1,&quot;product_name&quot;:&quot;Giordano Big Paisley Print Long Sleeve Shirt&quot;,&quot;product_sku&quot;:&quot;427489&quot;,&quot;brand&quot;:&quot;Giordano&quot;,&quot;tags&quot;:&quot;Shirt, Paisley-Print, Long-Sleeve, Semi-Cutaway, Casual&quot;,&quot;product_main_image&quot;:&quot;big_paisly.png&quot;,&quot;product_price&quot;:&quot;89.95&quot;,&quot;discount_on_product&quot;:&quot;0&quot;,&quot;product_title&quot;:&quot;Giordano Big Paisley Print Long Sleeve Shirt&quot;,&quot;product_title_slug&quot;:&quot;giordano-big-paisley-print-long-sleeve-shirt&quot;,&quot;product_description&quot;:&quot;Maggiore, Long Sleeve, Semi Cutaway Collar.&quot;,&quot;wear_type_bottom_or_top&quot;:&quot;top&quot;,&quot;colour&quot;:&quot;null&quot;,&quot;varient_name&quot;:null,&quot;best_seller&quot;:null,&quot;unique_batch_id&quot;:&quot;4f8a9fa1-9075-4190-b3da-087005d067f8&quot;,&quot;product_information&quot;:&quot;&quot;,&quot;shipping_information&quot;:&quot;&quot;,&quot;return_policy&quot;:&quot;&quot;,&quot;overall_rating&quot;:null,&quot;updated_at&quot;:null,&quot;sizes&quot;:{&quot;xs&quot;:0,&quot;s&quot;:0,&quot;m&quot;:2,&quot;l&quot;:0,&quot;xl&quot;:0,&quot;xxl&quot;:0,&quot;xxxl&quot;:0,&quot;xxxxl&quot;:0}}]" id="cartItemsInStockInput">
+                
+                    </div>
+                 </div>
+                </form>
+              </div>
+            </div>
+          </div>
+            <!-- Footer -->
+            <%- include('includes/footer') %>
+                <!-- End -->
+    </div>
+    <%- include('includes/foot') %>
+</body>
+
+</html>

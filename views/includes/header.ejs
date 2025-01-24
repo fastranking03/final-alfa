@@ -1,0 +1,287 @@
+<header class="header">
+    <div class="header-container">
+        <div class="left-header-wrapper">
+            <div class="alfa-navbar">
+                <ul>
+                    <li><a href="/" class="nav-item">Home</a></li>
+                    <li><a href="/about-us" class="nav-item">About Us</a></li>
+                    <li><a href="/blogs" class="nav-item">Blogs</a></li>
+                    <li class="position-relative alfa-menu-li">
+                            <style>
+                                .alfa-navbar ul.menu-ul-wrap .type-a{
+                                    color: #07626b;
+                                    font-size: 15px;
+                                    font-weight: 600;
+                                }
+                                .alfa-navbar ul.menu-ul-wrap .type-a:hover{
+                                border-bottom: 0px solid #eee !important;
+                                }
+                            </style>
+                        <a href="/product" class="nav-item">Shop <span class="icon-rotate"><i
+                                    class="fa-solid fa-angle-down"></i></span></a>
+                        <div class="dropdown-menu-wrapper">
+                            <div class="type-cat-grid">
+                              <% typeData.forEach (typed =>{ %>
+                                <ul class="menu-ul-wrap" style="width: 50%;">
+                                    <a href="<%= typed.type_url %>" class="type-a" ><%= typed.i_type %></a>
+                                    
+                                    <% const filteredCategories = catData.filter(data => data.wear_type_id === typed.id); %>
+                                   
+                                        <% filteredCategories.forEach(data => { %>
+                                            <li>
+                                                <a href="/collection/<%= data.cat_slug %>" class="menu-item">
+                                                    <%= data.cat_name %>
+                                                </a>
+                                            </li>
+                                        <% }) %>
+                                    </li>
+                                </ul>
+                                <%}) %>
+                            </div>
+ 
+                        </div>
+                    </li>
+                    <li class="position-relative alfa-menu-li d-none">
+                        <a href="/accessories" class="nav-item">Accessories <span class="icon-rotate"><i
+                                    class="fa-solid fa-angle-down"></i></span></a>
+                        <div class="dropdown-menu-wrapper">
+                            <ul>
+
+                                <% catData.filter(data=> !data.is_accessories).forEach(data => { %>
+                                    <li><a href="/accessories/<%= data.cat_slug %>" class="menu-item">
+                                            <%= data.cat_name %>
+                                        </a>
+                                    </li>
+                                    <% }) %>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="middle-header-wrapper">
+            <div class="alfa-logo">
+                <a href="/"> <img src="assets/images/alfa-logo.png" alt=""></a>
+            </div>
+        </div>
+        <div class="right-header-wrapper">
+
+            <div class="alfa-search">
+                <span><img src="assets/images/search.png" alt=""></span>
+                <input type="search" name="search" class="alfa-search-control" placeholder="Search for products"
+                    id="searchInput">
+                <div id="searchResults" class="dropdown-content"></div>
+            </div>
+
+            <div class="header-icons">
+                <ul>
+                    <li class="position-relative user-card-visible">
+                        <div class="alfa-icon-flex" id="onClickProfile">
+                            <img src="assets/images/profile.png" width="100%" alt="">
+                            <span>Profile</span>
+                        </div>
+                        <div class="user-profile-card" id="openProfileCard">
+                            <div class="user-pro-top">
+                                <div>
+
+                                    <div class="pro-title">
+                                        <% if (user) { %>
+                                            <h5>Welcome <%= user.name %>
+                                            </h5>
+                                            <% } %>
+                                                <p>To access account and manage orders</p>
+                                    </div>
+
+                                    <div class="profile-login-signup">
+
+                                        <% if (user) { %>
+                                            <a href="/logout">Logout</a>
+                                            <% } else { %>
+                                                <a href="/login">Login</a>
+                                                <span>/</span>
+                                                <a href="/signup">Signup</a>
+                                                <% } %>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-pro-links">
+                                <ul>
+                                    <li><a href="/user-orders">Orders</a></li>
+                                    <li><a href="/my-profile">My Profile</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="wishlist">
+                        <a href="my-wishlist">
+                            <div class="alfa-icon-flex position-relative">
+                                <img src="assets/images/heart.png" width="100%" alt="">
+                                <span class="product-count count-text" style="right: 5px;">
+                                    <%= typeof wishlistCount !=='undefined' ? wishlistCount : 0 %>
+                                </span>
+                                <span>Wishlist</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li id="cart">
+                        <a href="my-cart">
+                            <div class="alfa-icon-flex position-relative">
+                                <img src="assets/images/cart.png" width="100%" alt="">
+                                <span class="product-count">
+                                    <%= typeof cartCount !=='undefined' ? cartCount : 0 %>
+                                </span>
+                                <span>Cart</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Header -->
+<div>
+    <header class="mobile-header">
+        <div class="alfa-mobile-wrapper">
+            <div class="mobile-logo">
+                <a href="/"><img src="assets/images/alfa-logo.png" alt=""></a>
+            </div>
+            <div class="mobile-right-icons">
+                <div class="mobile-ul">
+                    <ul>
+                        <li>
+                            <div class="alfa-icon-flex" id="onClickProfiles">
+                                <img src="assets/images/profile.png" width="100%" alt="">
+                                <span>Profile</span>
+                            </div>
+                            <div class="user-profile-card" id="openProfileCards">
+                                <div class="user-pro-top">
+                                    <div>
+                                        <div class="pro-title">
+                                            <% if (user) { %>
+                                                <h5>Welcome <%= user.name %>
+                                                </h5>
+                                                <% } %>
+                                                    <p>To access account and manage orders</p>
+                                        </div>
+
+                                        <div class="profile-login-signup">
+                                            <% if (user) { %>
+                                                <a href="/logout">Logout</a>
+                                                <% } else { %>
+                                                    <a href="/login">Login</a>
+                                                    <span>/</span>
+                                                    <a href="/signup">Signup</a>
+                                                    <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="user-pro-links">
+                                    <ul>
+                                        <li><a href="/my-orders">Orders</a></li>
+                                        <li><a href="/my-wishlist">Wishlist</a></li>
+                                        <li><a href="/my-profile">My Profile</a></li>
+                                        <li><a href="">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="/my-wishlist">
+                                <div class="alfa-icon-flex">
+                                    <img src="assets/images/heart.png" width="100%" alt="">
+                                    <span class="product-count wishlist-cont">
+                                        <%= typeof wishlistCount !=='undefined' ? wishlistCount : 0 %>
+                                    </span>
+                                    <span>Wishlist</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/cart">
+                                <div class="alfa-icon-flex position-relative">
+                                    <span class="product-count">
+                                        <%= typeof cartCount !=='undefined' ? cartCount : 0 %>
+                                    </span>
+                                    <img src="assets/images/cart.png" width="100%" alt="">
+                                    <span>Cart</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="menu-icon">
+                    <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                        aria-controls="offcanvasExample"><img src="assets/images/menu.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<!-- Mobile Navbar -->
+<div class="offcanvas sidebar-offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+    aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel"><img src="assets/images/alfa-logo.png" width="50px"
+                alt=""></h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="mobile-navbar">
+            <ul class="m-nav">
+                <li><a href="/" class="m-item">Home</a></li>
+                <li><a href="/about-us" class="m-item">About Us</a></li>
+                <li><a href="/blogs" class="m-item">Blogs</a></li>
+                <li class="position-relative alfa-menu-lis" style="color: #000;">
+                    <a class="nav-item m-item">Shop <span class="icon-rotate"><i
+                                class="fa-solid fa-angle-down"></i></span></a>
+                    <div class="dropdown-menu-wrappers">
+                        <div class="type-cat-grid">
+                            <% typeData.forEach (typed =>{ %>
+                              <ul class="menu-ul-wrap" style="width: 50%;">
+                                  <a href="<%= typed.type_url %>" class="type-a" ><%= typed.i_type %></a>
+                                  
+                                  <% const filteredCategories = catData.filter(data => data.wear_type_id === typed.id); %>
+                                 
+                                      <% filteredCategories.forEach(data => { %>
+                                          <li>
+                                              <a href="/collection/<%= data.cat_slug %>" class="menu-item">
+                                                  <%= data.cat_name %>
+                                              </a>
+                                          </li>
+                                      <% }) %>
+                                  </li>
+                              </ul>
+                              <%}) %>
+                          </div>
+                    </div>
+                    
+                </li>
+                
+
+                <li><a href="/contact-us" class="m-item">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    var onClickProfile = document.getElementById("onClickProfiles");
+    var openProfileCards = document.getElementById("openProfileCards");
+    var cardOpen = true
+    onClickProfile.addEventListener("click", function () {
+        if (cardOpen) {
+            openProfileCards.style.display = "block";
+            cardOpen = false
+        }
+        else {
+            cardOpen = true
+            openProfileCards.style.display = "none";
+        }
+    })
+</script>

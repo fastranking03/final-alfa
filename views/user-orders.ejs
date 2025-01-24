@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alfa Meanswear | Orders</title>
+    <%- include('includes/head') %>
+</head>
+
+
+<body>
+    <div class="alfa-main-wraper">
+        <%- include('includes/header') %>
+            <div class="mt-100 mt-150">
+                <div class="checkout-wrapper margin-160">
+                    <div class="container">
+                        <div class="checkout-title text-center">
+                            <h3>Order History</h3>
+                         </div>
+                        <div class="containers mt-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alfa-cart-items cart-right-wrap">
+                                        <div class="cart-table">
+                                            <div class="order-history-wrapper">
+                                                <% if (orderData && orderData.length> 0) { %>
+                                                    <% orderData.forEach(order=> { %>
+                                                        <div class="history-wrappper position-relative">
+                                                            <div class="history-wrap">
+                                                                <div class="history-item">
+                                                                  
+                                                                            <div class="history-left-wrap">
+                                                                                
+
+                                                                                <div class="history-content">
+                                                                                    <div class="order-id">
+                                                                                        <a
+                                                                                            href="user-order-detail/<%= order.id %>">
+                                                                                            <span class="idtxt">Order
+                                                                                                ID:</span>
+                                                                                            <%= order.order_id %>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <h6>
+                                                                                        <%= order.payment_status %>
+                                                                                    </h6>
+                                                                                    
+                                                                                    <div class="order-status">
+                                                                                        <div class="sts">Status: <span
+                                                                                                class="status-type success">
+                                                                                                <%= order.status %>
+                                                                                            </span> </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                          
+                                                                                <div class="history-links">
+                                                                                    <a
+                                                                                        href="/user-order-detail/<%= order.id %>">Order
+                                                                                        Detail</a>
+                                                                                    <span>|</span>
+                                                                                    <a href="">Buy again</a>
+                                                                                </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <% }) %>
+                                                            <% } else { %>
+                                                                <p>No orders found.</p>
+                                                                <% } %>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <%- include('includes/footer') %>
+                <!-- End -->
+    </div>
+    <%- include('includes/foot') %>
+</body>
+
+</html>

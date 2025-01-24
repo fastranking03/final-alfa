@@ -1,0 +1,94 @@
+.size-button {
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    border: 1px solid #005d67;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .2s ease-in;
+  }
+ .item-size-button{
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+    border: 1px solid #005d67;
+    background-color: #fff;
+    font-size: 15px;
+  }
+  .size-button:hover{
+    background-color: #005d67;
+    color: #fff;
+  }
+  .size-button.size-disabled , .item-size-disabled{
+    background: #d7cccc;
+    border: 1px solid #d7cccc;
+    position: relative;
+    cursor: not-allowed;
+}
+
+.size-button.size-disabled::after,.item-size-disabled::after{
+  content: '';
+  width: 1px;
+  height: 54px;
+  background-color: #ffffff;
+  display: block;
+  top: -8px;
+  left: 18px;
+  transition: 50px 50px;
+  position: absolute;
+  transform: rotate(225deg);
+}
+.item-size-disabled::after{
+    top: -12px;
+    left: 17px;
+    height: 50px
+}
+
+.border-red-600{
+  border: 1px solid #005d67;
+}
+.bg-red-100{
+  background-color: #005d67;
+  color: #fff;
+}
+.increase-decrease{
+    border: 1px solid #005d67;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    align-items: center;
+  }
+  .increase-decrease .decrease, .increase-decrease .increase{
+     height: 35px;
+     display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+  .color-circle {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 5px;
+}
+.size-filter{
+  width: 30px;
+    height: 30px;
+    font-size: 13px;
+}
+.size-filter.active {
+  background-color: #005d67; /* Change to your desired active color */
+  color: white;
+}
+.no-products {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  color: #555;
+  margin: 50px;
+}

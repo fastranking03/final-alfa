@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alfa Meanswear | Products</title>
+  <meta name="robots" content="noindex">
+  <%- include('includes/head') %>
+</head>
+
+<body>
+  <!-- Loader -->
+  <div class="page-loader" id="loader">
+    <div class="spinner">
+      <div class="inner"></div>
+    </div>
+  </div>
+  <div class="alfa-main-wraper" id="web-content">
+    <%- include('includes/header') %>
+
+      <div class="mt-100 mt-700">
+        <div class="product-banner">
+          <div class="container">
+            <div class="hero-product-rows">
+              <div class="product-col-6">
+                <div class="breadcrubm-text">
+                  <h2>Shop</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Start -->
+        <section class="mt-50" style="margin-bottom: 145px">
+          <div class="product-wrapper">
+            <div class="custom-container">
+              <div class="product-row">
+                <div class="product-md-3">
+                  <div class="product-left-wrapper">
+
+                    <div class="product-search">
+                      <div class="search-title">
+                        <h4 class="product-h4">Search Products </h4>
+                      </div>
+                      <div class="product-search">
+                        <span class="p-s-icon"><img src="assets/images/search.png" alt=""></span>
+                        <input type="search" name="search" class="product-search-control" placeholder="Search for products" id="searchBar">
+                      </div>
+                       
+                    </div>
+                    <!-- Category -->
+                    <div class="product-category mt-4">
+                      <div class="cat-title">
+                        <h4 class="product-h4">Categories</h4>
+                      </div>
+                      <div class="product-cat-type">
+                        <ul class="product-cat-list">
+                           <% catData.filter(data=> !data.is_accessories).forEach(data => { %>
+                            <li>
+                              <a href="collection/shirts">
+                                <button class="cat-item">
+                                  <%= data.cat_name %>
+                                    <span class="cat-span"></span>
+                                </button></a>
+                            </li>
+                            <% }) %>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <!-- Colors Filter -->
+                    <div class="product-color">
+                      <div class="color-title">
+                        <h4 class="product-h4">Color</h4>
+                      </div>
+
+                      <div class="product-color-list">
+                        <ul>
+
+                          <li>
+                            <div class="prouduct-checkout">
+                              <input type="checkbox" class="cat-checkbox" id="whiteCheckbox" value="orchid">
+                              <a class="color-circle" style=" background-color: #DA70D6; "></a>
+                              <label for="whiteCheckbox" class="color-label"> Orchid </label>
+                            </div>
+                          </li>
+
+                          <li>
+                            <div class="prouduct-checkout">
+                              <input type="checkbox" class="cat-checkbox" id="blackCheckbox" value="rose">
+                              <a class="color-circle" style=" background-color: #FF007F;"></a>
+                              <label for="blackCheckbox" class="color-label">  Rose </label>
+                            </div>
+                          </li>
+
+                          <li>
+                            <div class="prouduct-checkout">
+                              <input type="checkbox" class="cat-checkbox" id="blueCheckbox" value="navy">
+                              <a class="color-circle" style=" background-color: #000080; "></a>
+                              <label for="blueCheckbox" class="color-label"> Navy </label>
+                            </div>
+                          </li>
+
+                          <li>
+                            <div class="prouduct-checkout">
+                              <input type="checkbox" class="cat-checkbox" id="purpleCheckbox" value="purple"
+                                data-colour="colour">
+                              <a class="color-circle" style=" background-color: #A020F0;"></a>
+                              <label for="purpleCheckbox" class="color-label"> purple </label>
+                            </div>
+                          </li>
+
+                        </ul>
+                      </div>
+                    </div>
+                    <!-- Sizes Filter -->
+                    <div class="product-size">
+                      <div class="filter-title">
+                        <h4 class="product-h4">Size </h4>
+                      </div>
+                      <div class="product-size-list product-size-list2">
+                        <ul class="flex gap-2">
+                          <li class="relative">
+                            <button class="size-button size-filter  bg-gray-100 "> S </button>
+                          </li>
+                          <li class="relative">
+                              <button class="size-button size-filter  bg-gray-100 "> M </button>
+                          </li>
+                          <li class="relative">
+                            <button class="size-button size-filter  bg-gray-100 "> L </button>
+                          </li>
+                          <li class="relative">
+                            <button class="size-button size-filter  bg-gray-100 "> XL </button>
+                          </li>
+                          <li class="relative">
+                            <button class="size-button  bg-gray-100 size-filter "> 2XL </button>
+                          </li>
+                          <li class="relative">
+                            <button class="size-button  bg-gray-100 size-filter "> 3XL </button>
+                          </li>
+                         </ul>
+                      </div>
+                       <hr>
+                     </div>
+
+                    <!-- Range Filter -->
+                    <div class="product-filter">
+                      <div class="filter-title">
+                        <h4 class="product-h4">Filter by price yes</h4>
+                      </div>
+                      <div class="price-range-wrapper">
+                        <div class="price-slider">
+                          <div class="price-range-slider">
+                            Price:
+                            <span class="rangeValues">£10 - £1000</span>
+                            <input value="10" min="10" max="1000" step="10" class="price-range-input" type="range">
+                            <input value="1000" min="10" max="1000" step="10" class="price-range-input" type="range">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Product List -->
+                <div class="product-md-9">
+                  <div class="product-right-wrapper">
+                    <div id="productGrid" class="product-grid product-grid-space-between">
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- End -->
+      </div>
+  </div>
+
+  <%- include('includes/foot') %>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchBar = document.getElementById("searchBar");
+      const colorFilters = document.querySelectorAll(".cat-checkbox");
+      const sizeFilters = document.querySelectorAll(".size-filter");
+      const priceInputs = document.querySelectorAll(".price-range-input");
+      const productGrid = document.getElementById("productGrid");
+      const rangeValues = document.querySelector(".rangeValues");
+
+      const products = <%- JSON.stringify(prodData) %>;
+      console.log(products)
+  
+      function filterProducts() {
+  const searchQuery = searchBar.value.toLowerCase();
+
+  // Get selected colors
+  const selectedColors = Array.from(colorFilters)
+    .filter((checkbox) => checkbox.checked)
+    .map((checkbox) => checkbox.value);
+
+  // Get selected sizes
+  const selectedSizes = Array.from(sizeFilters)
+    .filter((button) => button.classList.contains("active"))
+    .map((button) => button.textContent.trim());
+
+  // Get price range
+  const minPrice = Math.min(...Array.from(priceInputs).map((input) => +input.value));
+  const maxPrice = Math.max(...Array.from(priceInputs).map((input) => +input.value));
+
+  // Update range values
+  rangeValues.textContent = `£${minPrice} - £${maxPrice}`;
+
+  // Filter products based on selected criteria
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch = searchQuery === "" || product.p_name.toLowerCase().includes(searchQuery) ||  searchQuery === "" || product.brand.toLowerCase().includes(searchQuery) ;
+    const matchesColor = selectedColors.length === 0 || selectedColors.includes(product.colour.toLowerCase());
+    const matchesSize = selectedSizes.length === 0 || selectedSizes.includes(product.size);
+    const matchesPrice = product.p_main_price >= minPrice && product.p_main_price <= maxPrice;
+
+    return matchesSearch && matchesColor && matchesSize && matchesPrice;
+  });
+
+  // Render filtered products
+  renderProducts(filteredProducts);
+}
+
+function renderProducts(products) {
+  if (products.length === 0) {
+    productGrid.innerHTML = `
+      <div class="no-products">
+        <p>No products found matching your criteria.</p>
+      </div>
+    `;
+  } else {
+    productGrid.innerHTML = products
+      .map((product) => `
+        <div class="product-item">
+          <div class="produt-wrap">
+            <a href="/product-detail/${product.p_url}/${product.id}">
+              <img src="${product.p_image}" class="pro-img" alt="">
+            </a>
+          </div>
+          <div class="product-brand">
+            <span>${product.brand}</span>
+          </div>
+          <div class="product-details shop-content">
+            <div class="product-nameprice">
+              <a href="/product-detail/${product.p_url}/${product.id}">
+                <div class="product-name">
+                  <h2>${product.p_name}</h2>
+                </div>
+              </a>
+              <div class="product-price">
+                <h5>
+                  <span class="final-price">£${product.p_main_price}</span>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      `)
+      .join("");
+  }
+}
+
+  
+      // Event listeners for filters
+      colorFilters.forEach((checkbox) =>
+        checkbox.addEventListener("change", filterProducts)
+      );
+      sizeFilters.forEach((button) =>
+        button.addEventListener("click", function () {
+          button.classList.toggle("active");
+          filterProducts();
+        })
+      );
+      priceInputs.forEach((input) =>
+        input.addEventListener("input", filterProducts)
+      );
+      searchBar.addEventListener("input", filterProducts);
+       // Initial render
+      renderProducts(products);
+    });
+  </script>
+  
+
+</body>
+
+</html>

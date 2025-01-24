@@ -1,0 +1,283 @@
+<script src="assets/js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<script src="assets/js/custom.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/whislist.js"></script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
+<script>
+  document.getElementById('searchInput').addEventListener('input', function () {
+    const query = this.value;
+
+    if (query.length > 2) { //Only search if query is longer than 2 characters
+      fetch(`/search-products?query=${query}`)
+        .then(response => response.json())
+        .then(data => {
+          const dropdown = document.getElementById('searchResults');
+          dropdown.innerHTML = ''; // Clear previous results
+
+          if (data.length) {
+            data.forEach(product => {
+              const itemDiv = document.createElement('div');
+              itemDiv.classList.add('dropdown-item');
+              console.log(product.p_url)
+              itemDiv.innerHTML = ` 
+                <div class="product-info">
+                 <p>${product.name} <strong>- ${product.category}</strong>  </p> 
+                </div>
+              `;
+
+              const a = document.createElement('a');
+              a.href = `/product-detail/${product.p_url}/${product.id}`;
+              a.appendChild(itemDiv);
+
+              dropdown.appendChild(a);
+            });
+            dropdown.classList.add('show');
+          } else {
+            dropdown.innerHTML = '<div class="dropdown-item">No Products found</div>'; e
+            dropdown.classList.add('show');
+          }
+        });
+    } else {
+      document.getElementById('searchResults').classList.remove('show');
+    }
+  });
+
+</script>
+
+<script>
+  // Loader
+  document.addEventListener("DOMContentLoaded", function () {
+    var loader = document.getElementById('loader');
+    var content = document.getElementById('web-content');
+    setTimeout(function () {
+      loader.style.display = 'none';
+      content.style.display = 'block';
+    }, 2000);
+  });
+
+  var openProfileCard = document.getElementById("openProfileCard");
+  // Initial state (assuming the card is hidden by default)
+  var onClickProfile = document.getElementById("onClickProfile");
+  var isCardHidden = true;
+
+  onClickProfile.addEventListener("click", function () {
+    if (isCardHidden) {
+      // Open the card
+      openProfileCard.style.display = "block";
+      isCardHidden = false;
+    } else {
+      // Hide the card
+      openProfileCard.style.display = "none";
+      isCardHidden = true;
+    }
+  });
+
+  $(document).ready(function () {
+    $('#hero-carousel').owlCarousel({
+      loop: true,
+      margin: 20,
+      nav: true,
+      autoplay: false,
+      navText: ['<i class="fa-solid fa-angle-left"></i>', '<i class="fa-solid fa-angle-right"></i>'],
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 1
+        },
+        1000: {
+          items: 1
+        }
+      }
+    });
+  });
+  $(document).ready(function () {
+    $('#bestseller-carousel').owlCarousel({
+      loop: true,
+      margin: 20,
+      nav: true,
+      autoplay: false,
+      navText: ['<i class="fa-solid fa-angle-left"></i>', '<i class="fa-solid fa-angle-right"></i>'],
+      responsive: {
+        0: {
+          items: 1
+        },
+        350: {
+          items: 2
+        },
+        400: {
+          items: 2
+        },
+        600: {
+          items: 3
+        },
+        1000: {
+          items: 5
+        },
+        1200: {
+          items: 5
+        },
+        1400: {
+          items: 5
+        },
+        1600: {
+          items: 6
+        },
+      }
+    });
+  });
+  $(document).ready(function () {
+    $('#testimonial-carousel').owlCarousel({
+      loop: true,
+      margin: 20,
+      nav: true,
+      autoplay: true,
+      navText: ['<i class="fa-solid fa-angle-left"></i>', '<i class="fa-solid fa-angle-right"></i>'],
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 1
+        },
+        1000: {
+          items: 1
+        }
+      }
+    });
+  });
+
+  $(document).ready(function () {
+    $('#maylike-carousel').owlCarousel({
+      loop: true,
+      margin: 20,
+      nav: false,
+      autoplay: true,
+      navText: ['<i class="fa-solid fa-angle-left"></i>', '<i class="fa-solid fa-angle-right"></i>'],
+      responsive: {
+        0: {
+          items: 1
+        },
+        350: {
+          items: 2
+        },
+        400: {
+          items: 2
+        },
+        600: {
+          items: 3
+        },
+        1050: {
+          items: 4
+        },
+        1250: {
+          items: 5
+        }
+      }
+    });
+  });
+
+  $(document).ready(function () {
+    var $carousel = $('#product-detail-carousel').owlCarousel({
+      loop: true,
+      margin: 20,
+      nav: false,
+      autoplay: false,
+      navText: ['<i class="fa-solid fa-angle-left"></i>', '<i class="fa-solid fa-angle-right"></i>'],
+      responsive: {
+        0: {
+          items: 1
+        },
+        400: {
+          items: 1
+        },
+        600: {
+          items: 1
+        },
+        1000: {
+          items: 1
+        }
+      }
+    });
+  });
+
+  const accordionItemHeaders = document.querySelectorAll(".accordion-item-header");
+  accordionItemHeaders.forEach(accordionItemHeader => {
+    accordionItemHeader.addEventListener("click", event => {
+      accordionItemHeader.classList.toggle("active");
+      const accordionItemBody = accordionItemHeader.nextElementSibling;
+      if (accordionItemHeader.classList.contains("active")) {
+        accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
+      }
+      else {
+        accordionItemBody.style.maxHeight = 0;
+      }
+
+    });
+  });
+</script>
+
+<script>
+  function getVals() {
+    let parent = this.parentNode;
+    let slides = parent.getElementsByTagName('input');
+    let slide1 = parseFloat(slides[0].value);
+    let slide2 = parseFloat(slides[1].value);
+    if (slide1 > slide2) {
+      let tmp = slide2;
+      slide2 = slide1;
+      slide1 = tmp;
+    }
+    let displayElement = parent.getElementsByClassName('rangeValues')[0];
+    displayElement.innerHTML = '£' + slide1 + ' - £' + slide2;
+  }
+
+  window.onload = function () {
+    // Initialize Sliders
+    let sliderSections = document.getElementsByClassName('price-range-slider');
+    for (let x = 0; x < sliderSections.length; x++) {
+      let sliders = sliderSections[x].getElementsByTagName('input');
+      for (let y = 0; y < sliders.length; y++) {
+        if (sliders[y].type === 'range') {
+
+          sliders[y].oninput = getVals;
+          sliders[y].oninput();
+        }
+      }
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+        const emailInput = document.getElementById("emailInput");
+        const emailError = document.getElementById("emailError");
+        const loginForm = document.getElementById("loginForm");
+
+        emailInput.addEventListener("input", function () {
+            const emailValue = emailInput.value;
+            if (validateEmail(emailValue)) {
+                emailError.style.display = "none";
+                document.getElementById("login").classList.add("user-btn-primary")
+            } else {
+                emailError.style.display = "block";
+                document.getElementById("login").classList.remove("user-btn-primary")
+            }
+        });
+
+        loginForm.addEventListener("submit", function (event) {
+            const emailValue = emailInput.value;
+            if (!validateEmail(emailValue)) {
+                emailError.style.display = "block";
+                event.preventDefault();
+            }
+        });
+        function validateEmail(email) {
+            const emailPattern = /^[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}$/;
+            return emailPattern.test(email);
+        }
+    });
+</script>

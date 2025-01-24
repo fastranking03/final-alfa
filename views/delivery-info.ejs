@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfa Meanswear | Checkout</title>
+    <meta name="robots" content="noindex">
+    <%- include('includes/head') %>
+</head>
+
+<body>
+    <div class="alfa-main-wraper">
+        <%- include('includes/header') %>
+        
+        <div class="mt-100 mt-150">
+            <div class="checkout-wrapper margin-160">
+              <div class="container">
+              <form id="payForm" method="POST" action="/pay">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="alfa-checkout-address">
+                      <div class="address-t-wrapper">
+                        <div class="shiping-title">
+                          <h5>Select Delivery Address</h5>
+                        </div>
+                      </div>
+                      <div class="shipping-address">
+                        <% if (cu_address.length > 0) { %>
+                          <% cu_address.forEach((address, index)=> { %>
+                            <div class="shipping-address-display" style="display: block">
+                              <div class="alfa-defaul-wrapper">
+                                <h6>
+                                  <%= index===0 ? 'Default Address' : 'Address' %>
+                                </h6>
+                                <div class="alfa-action-warapper">
+                                  <!-- <a href="/remove-address/<%= address.id %>" class="add-action-btn">Remove</a> -->
+                                  <a href="/edit-address/<%= address.id %>" class="add-action-btn">Edit</a>
+                                </div>
+                              </div>
+                              <div class="address-content">
+                                <div class="shipper-name">
+                                  <%= address.full_name %>
+                                </div>
+                                <div class="address-type">
+                                  <input type="radio" id="address-<%= address.id %>" name="selectedAddress"
+                                    value="<%= address.id %>" class="radio-input" <%=index===0 ? 'checked' : '' %> />
+                                  <label for="address-<%= address.id %>">Home</label>
+                                </div>
+                                <div class="shipper-email">
+                                  <p>Email: <%= address.email %>
+                                  </p>
+                                  <p>Mobile: <%= address.mobile %>
+                                  </p>
+                                </div>
+                                <div class="shipper-address">
+                                  <%= address.address %>,   <%= address.address_2 %>, <%= address.city %>, <%= address.postcode %>, 
+                                           
+                                </div>
+                              </div>
+                            </div>
+                            <input type="hidden" id="address_id" value="<%= address.id %>" />
+                            <% }); %>
+                              <% } else { %>
+                                <p>No addresses found. Please add a new address.</p>
+                            <% } %>
+                      </div>
+                     
+                          <div class="new-adderss-wrapper">
+                            <a href="add-address" style="color: #000">
+                              <div class="add-address">
+                                <div class="shipping-text">
+                                  <span><i class="fa-solid fa-plus"></i></span>
+                                  Add New Address
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                         
+                    </div>
+                  </div>
+                 
+                  <div class="col-md-6">
+                
+                      <div class="checkout-item-wrapper mt-5">
+                        <div class="item-counts">
+                          <div class="counts">
+                            <h6>
+                              <%= cartCount %> Items
+                            </h6>
+                          </div>
+                        </div>
+                        <div class="checkout-cart-wrapper">
+                          <div class="checkout-wrapp">
+                            <% var total=0 %>
+                            <% cartData.forEach(item=> { %>
+                                <% total +=(item.product_price * item.quantity); %>
+                              <div class="check-item">
+                                <div class="check-item-left">
+                                  <div class="check-item-image">
+                                    <img src="<%= item.product_image %>" class="check-image" alt="">
+                                  </div>
+                                  <!-- <h2>119</h2> -->
+                                  <div class="checkout-cont">
+                                    <h4>
+                                        <%= item.product_name %>
+                                    </h4>
+                                    <div class="checkout-rest-cont">
+                                      <p>Colour : white
+                                      </p>
+                                      <p>Size : <%= item.product_size %>
+                                      </p>
+                                      <p>Qty : <%= item.quantity %>
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="check-item-right">
+                                  <div class="check-price">
+                                    <h5>
+                                      <span class="final-price">£<%= item.product_price %></span>
+                                      <span class="mrp-price">£89.95</span>
+                                    </h5>
+                                  </div>
+                                </div>
+                              </div>
+                             
+                              <% }) %>
+                          </div>
+                          <div class="alfa-cart-total">
+                            <ul>
+                              <li>
+                                <div class="alfa-text">Total MRP</div>
+                                <div class="alfa-price">£<%=total.toFixed(2) %>
+                                </div>
+                              </li>
+    
+                              <li>
+                                <div class="alfa-text">Discount on MRP </div>
+                                <div class="alfa-price">- £0.00
+                                </div>
+                              </li>
+    
+                              <li>
+                                <div class="alfa-text">Sub Total</div>
+                                <div class="alfa-price"> £<%=total.toFixed(2) %>
+                                </div>
+                              </li>
+     
+    
+                                  <li>
+                                    <div class="alfa-text">Vat ( 20% )</div>
+    
+                                    <div class="alfa-price">£<%= vat.toFixed(2) %>
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="alfa-text">Delivery Fee</div>
+    
+                                    <div class="alfa-price">
+                                      <% if (deliveryFee === 0) { %>
+                                          <span id="Delivery-ajax" style="color: rgb(97, 93, 93);font-size: 15px;">Free Delivery</span>
+                                      <% } else { %>
+                                          <span id="Delivery-ajax"> £<%= deliveryFee.toFixed(2) %></span>
+                                      <% } %>
+                                  </div>
+                                  </li>
+                            </ul>
+                          </div>
+                          <div class="alfa-cart-total">
+                            <ul>
+                              <li>
+                                <div class="alfa-text">Total Cost</div>
+                                <div class="alfa-price">£<%= (total + deliveryFee + vat).toFixed(2) %>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                          <input type="hidden" id="user_id" name="user_id" value="<%=user.id %>" />
+                          <input type="hidden" id="totalCost" value="<%= total %>">
+    
+                          <div class="alfa-checkout-wrapper">
+                            <button type="submit" class="checkout-btn"> Pay Now </button>
+                          </div>
+                    
+                        </div>
+                      </div>
+                       <input type="hidden" name="cartItemsInStock" value="<%= JSON.stringify(cartData) %>" id="cartItemsInStockInput">
+                
+                    </div>
+                 </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+            <!-- Footer -->
+            <%- include('includes/footer') %>
+                <!-- End -->
+    </div>
+    <%- include('includes/foot') %>
+    <script>
+  
+       const cartItemsInStock = <%= JSON.stringify(cartData) %>;
+        document.getElementById('payForm').addEventListener('submit', function(e) {
+          document.getElementById('cartItemsInStockInput').value = JSON.stringify(cartItemsInStock);
+      });
+  </script>
+</body>
+
+</html>

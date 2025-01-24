@@ -1,0 +1,81 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfa Mens | Order List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <%- include('includes/head') %>
+</head>
+
+<body>
+    <div>
+        <div class="flex">
+            <%- include('includes/side-bar') %>
+
+                <div class="pages">
+                    <div>
+                        <%- include('includes/header') %>
+                    </div>
+                    <!-- Page Content -->
+                    <div class="p-5 mt-5">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-2xl font-bold">Order List</h3>
+                                <div>
+                                    <a href="/admin/add-size" class="p-3 pl-3 bg-sky-400 rounded-[10px] text-white"></a>
+                                </div>
+                            </div>
+                            <div class="mt-8">
+                                <div>
+                                    <table class="w-[100%]">
+                                        <thead class="bg-gray-100  border-b-[2px]">
+                                            <tr>
+                                                <th class="p-3 text-left">Sr No</th>
+                                                <th class="p-3 text-left">Order ID</th>
+                                                <th class="p-3 text-left">Name</th>
+                                                <th class="p-3 text-left">Address</th>
+                                                <th class="p-3 text-left">Total Price</th> 
+                                                <th class="p-3 text-left">Payment Status</th>
+                                                <th class="p-3 text-left">Order Status</th>
+                                                <th class="p-3 text-left">Action</th>
+                                             </tr>
+                                        </thead>
+                                         
+                                        <tbody id="order-tbody">
+                                            <% orderData.forEach((order, index) => { %>
+                                              <tr class="shadow">
+                                               
+                                                <td class="p-3 px-3"> <%= index + 1 %> </td>
+                                                <td class="p-3 px-3"> <a href="order-details/<%= order.id %>" style="color: #38bdf8; font-weight: 500;
+                                                    text-decoration: underline;"><%= order.order_id %></a> </td>
+                                                <td class="p-3 px-3"> <%= order.name %> </td>
+                                                <td class="p-3 px-3"> <%= order.address %> </td>
+                                                <td class="p-3 px-3"> <%= order.total_price %> </td>
+                                                <td class="p-3 px-3"> <%= order.payment_status %> </td>
+                                                 <td class="p-3 px-3">
+                                                  <div class="order-status-wrapper">
+                                                    <span class="order-status success"><%= order.status %></span>
+                                                  </div>
+                                                </td>
+                                                <td class="p-3 px-3">
+                                                  <div class="table-icons">
+                                                    <a href="order-details/<%= order.id %>" class="anchor-color">
+                                                      <span><i class="fa-regular fa-eye"></i></span>
+                                                    </a>
+                                                  </div>
+                                                </td>
+                                              </tr>
+                                            <% }); %>
+                                          </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>
+
+</html>
