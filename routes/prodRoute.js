@@ -7,7 +7,8 @@ const router = express.Router();
 router.get('/collection/:cat_slug',disByCategory)
 router.get('/product', viewProduct);
 router.get('/product-detail/:p_seo/:product_id', viewProductDetail);
-router.get('/:type_url' ,dispTypeWiseProduct);
+router.get('/products/:type_url' ,dispTypeWiseProduct);
+
 router.get('/search-products', async (req, res) => {
     const query = req.query.query;
 

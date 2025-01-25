@@ -23,7 +23,7 @@
                             <div class="type-cat-grid">
                               <% typeData.forEach (typed =>{ %>
                                 <ul class="menu-ul-wrap" style="width: 50%;">
-                                    <a href="<%= typed.type_url %>" class="type-a" ><%= typed.i_type %></a>
+                                    <a href="/products/<%= typed.type_url %>" class="type-a" ><%= typed.i_type %></a>
                                     
                                     <% const filteredCategories = catData.filter(data => data.wear_type_id === typed.id); %>
                                    

@@ -3121,7 +3121,7 @@ font-size: 14px;
       height: auto;
       max-height: 350px;
       scroll-behavior: smooth;
-      overflow-x: scroll;
+      overflow-x: hidden;
     }
 
     .dropdown-content a {

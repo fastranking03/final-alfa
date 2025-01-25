@@ -59,19 +59,8 @@ app.use((req, res, next) => {
 });
 
 
-app.use('/admin', authenticateAdmin,(req,res) =>{
-    res.render('admin/index')
-})
- 
-// Admin Routes
-app.use('/admin/',adminLoginRoute);
-app.use('/admin/',authenticateAdmin,categoryRoute);
-app.use('/admin/', authenticateAdmin, productRoute);
-app.use('/admin/', authenticateAdmin, typeRoute);
-app.use('/admin/', authenticateAdmin, sizeRoute);
-app.use('/admin/', authenticateAdmin, orderRoute);
-
 // Routes
+app.use('/', prodRoute);
 app.use('/', accessoriesRoute);
 app.use('/', commonRoute);
 app.use('/',loginRoute) ;
@@ -81,7 +70,18 @@ app.use('/', paypalRoute);
 app.use("/" , frontOrderRoute);
 app.use("/",newsRoute);
 app.use('/',blogRoute)
-app.use('/', prodRoute);
+
+app.use('/admin', authenticateAdmin,(req,res) =>{
+    res.render('admin/index')
+})
+ 
+// Admin Routes
+app.use('/admin/',adminLoginRoute);
+app.use('/admin/', authenticateAdmin, categoryRoute);
+app.use('/admin/', authenticateAdmin, productRoute);
+app.use('/admin/', authenticateAdmin, typeRoute);
+app.use('/admin/', authenticateAdmin, sizeRoute);
+app.use('/admin/', authenticateAdmin, orderRoute);
 
 
 

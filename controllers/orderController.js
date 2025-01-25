@@ -1,5 +1,6 @@
 import connect from "../db/connect.js";
 import { getAllCategory } from "../services/admin/catService.js";
+import { disAllType } from "../services/admin/typeService.js";
 
 export const generateReturnOrderId = async () => {
   const prefix = 'ALFARETURN';
@@ -32,8 +33,9 @@ export const displayOrderSuccess = async (req, res) => {
           WHERE u.id = ?
         `;
         const [orderList] = await connect.execute(query,[user.id]);
+        const typeData = await disAllType();
         const catData = await getAllCategory();
-        res.render('user-orders', { orderData: orderList ,catData});
+        res.render('user-orders', { orderData: orderList ,catData,typeData});
     } catch (e) {
         console.log(e);
         res.status(500).send('Internal Server Error');
@@ -65,6 +67,7 @@ export const displayUserOrders = async (req, res) => {
 
       const [orderDetails] = await connect.execute(query, [order_id]);
       const order = orderDetails[0];
+      const typeData = await disAllType()
 
       // Query to fetch order items and their return statuses
       const orderItemsQuery = `
@@ -96,7 +99,8 @@ export const displayUserOrders = async (req, res) => {
           totalCost,
           deliveryFee,
           vat,
-          catData
+          catData,
+          typeData
       });
   } catch (e) {
       console.error(e);

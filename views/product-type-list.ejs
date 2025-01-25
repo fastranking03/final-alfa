@@ -379,9 +379,15 @@ function renderProducts(products) {
               <img src="${product.p_image}" class="pro-img" alt="">
             </a>
           </div>
+         ${
+            product.brand
+              ? `
           <div class="product-brand">
             <span>${product.brand}</span>
           </div>
+          `
+              : ""
+          }
           <div class="product-details shop-content">
             <div class="product-nameprice">
               <a href="/product-detail/${product.p_url}/${product.id}">
@@ -402,7 +408,6 @@ function renderProducts(products) {
   }
 }
 
-  
       // Event listeners for filters
       colorFilters.forEach((checkbox) =>
         checkbox.addEventListener("change", filterProducts)

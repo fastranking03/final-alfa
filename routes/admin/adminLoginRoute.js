@@ -29,7 +29,7 @@ router.post('/admin-login', async(req,res) =>{
                     type:user.type,
                     token:token
                 }
-                const redirectTo = req.session.redirectTo || '/admin/index';
+                const redirectTo = req.session.redirectTo || '/admin';
                 delete req.session.redirectTo; 
                 res.redirect(redirectTo);
                 
@@ -47,13 +47,15 @@ router.get('/admin-logout', async (req, res) => {
                 return res.status(500).send('Error logging out.');
             }
             console.log('Session destroyed successfully.');
-            res.redirect('/admin/login');
+            res.clearCookie('connect.sid'); // Clear session cookie
+            return res.redirect('/admin/login');
         });
     } catch (e) {
         console.error('Error during logout:', e);
-        res.status(500).send('Internal Server Error');
+        return res.status(500).send('Internal Server Error');
     }
 });
+
 
 
 

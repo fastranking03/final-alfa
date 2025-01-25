@@ -1,3 +1,15 @@
+export const authenticateAdmin = (req, res, next) => {
+  if (req.session && req.session.user) {
+    // Check if the user is an admin
+    if (req.session.user.type === 'admin') {
+      next(); 
+    } else {
+      res.status(403).json({ success: false, message: 'Access forbidden: Admins only' });
+    }
+  } else {
+    return res.redirect('/admin/login');
+  }
+};
 
 export const ensureAuthenticated = (req, res, next) => {
   if (!req.session.user) {
@@ -17,15 +29,4 @@ export const authencateUser = (req, res, next) => {
 };
 
 
-export const authenticateAdmin = (req, res, next) => {
-  if (req.session && req.session.user) {
-    // Check if the user is an admin
-    if (req.session.user.type === 'admin') {
-      next(); 
-    } else {
-      res.status(403).json({ success: false, message: 'Access forbidden: Admins only' });
-    }
-  } else {
-    return res.redirect('/admin/login');
-  }
-};
+

@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 import { getAllCategory } from "../services/admin/catService.js";
 import { getCartData } from "../services/cartService.js";
 import { getWishlistData } from "../services/wishlistService.js";
+import { disAllType } from "../services/admin/typeService.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -143,16 +144,18 @@ export const loginUser = async (req,res) =>{
     try{
       const {email,password } = req.body;
       const [userData] = await connect.execute("SELECT * FROM alfa_users WHERE email = ?",[email]);
-
+      const typeData = await disAllType()
+      const catData = await getAllCategory()
       if(userData.length === 0){
-        return res.render('login',{error:"User not found"})
+        return res.render('login',{error:"User not found",typeData,catData})
 
     }
 
       const user = userData[0]
       const match = await bcrypt.compare(password,user.password);
+      
       if(!match){
-        return res.render("login",{error:"Incorrect password"})
+        return res.render("login",{error:"Incorrect password",typeData,catData})
       }
       
       const token = await JWT.sign({email:user.email}, process.env.TOKEN_KEY,{ expiresIn: "1h" })
@@ -192,9 +195,7 @@ export const loginUser = async (req,res) =>{
         // Clear session cart after migrating to the database
         delete req.session.cart;
     }
-
  
-
     const redirectTo = req.session.redirectTo || '/';
     delete req.session.redirectTo; 
     res.redirect(redirectTo);
@@ -292,9 +293,10 @@ export const disProfile = async (req,res) =>{
             [userId]
           );
           const catData = await getAllCategory();
+          const typeData = await disAllType()
             const {cartData,cartCount } = await getCartData(req);
             const {whislistData, wishlistCount} = await getWishlistData(req)
-          return res.render('my-profile', { user: userDetails[0], catData,cartData,cartCount,whislistData, wishlistCount });
+          return res.render('my-profile', { user: userDetails[0], catData,cartData,cartCount,whislistData, wishlistCount ,typeData });
         }
     }catch(e){
         console.log(e)
