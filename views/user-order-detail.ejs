@@ -223,8 +223,8 @@
                               </div>
                               <form action="/return-submit" method="post">
                                 <div class="modal-body">
-                                  <input type="text" name="order_item_id" value="<%= product.id %>">
-                                  <input type="text" name="order_id" value="<%= product.orders_id %>">
+                                  <input type="hidden" name="order_item_id" value="<%= product.id %>">
+                                  <input type="hidden" name="order_id" value="<%= product.orders_id %>">
                                   <div>
                                     <h2 class="return-m-text">Why are you returning?</h2>
                                     <p class="return-para">Please choose the correct option for return. This information

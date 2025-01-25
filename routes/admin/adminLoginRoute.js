@@ -47,8 +47,7 @@ router.get('/admin-logout', async (req, res) => {
                 return res.status(500).send('Error logging out.');
             }
             console.log('Session destroyed successfully.');
-            res.clearCookie('connect.sid'); // Clear session cookie
-            return res.redirect('/admin/login');
+             return res.redirect('/admin/login');
         });
     } catch (e) {
         console.error('Error during logout:', e);

@@ -1,12 +1,13 @@
 export const authenticateAdmin = (req, res, next) => {
+  // Check if user is logged in and is an admin
   if (req.session && req.session.user) {
-    // Check if the user is an admin
     if (req.session.user.type === 'admin') {
-      next(); 
+      return next(); // User is an admin, proceed to the next middleware or route
     } else {
-      res.status(403).json({ success: false, message: 'Access forbidden: Admins only' });
+      return res.status(403).json({ success: false, message: 'Access forbidden: Admins only' });
     }
   } else {
+    // User is not logged in, redirect to login page
     return res.redirect('/admin/login');
   }
 };
