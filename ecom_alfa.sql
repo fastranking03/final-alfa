@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jan 25, 2025 at 05:45 PM
--- Server version: 8.0.40-0ubuntu0.22.04.1
--- PHP Version: 8.1.31
+-- Host: 127.0.0.1
+-- Generation Time: Jan 27, 2025 at 06:51 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Alfa`
+-- Database: `ecom_alfa`
 --
 
 -- --------------------------------------------------------
@@ -28,15 +28,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `alfa_cart` (
-  `id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `product_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `product_size` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `product_price` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `quantity` int NOT NULL,
-  `product_image` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(100) NOT NULL,
+  `product_size` varchar(20) NOT NULL,
+  `product_price` varchar(50) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `product_image` varchar(250) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -44,11 +44,7 @@ CREATE TABLE `alfa_cart` (
 --
 
 INSERT INTO `alfa_cart` (`id`, `user_id`, `product_id`, `product_name`, `product_size`, `product_price`, `quantity`, `product_image`, `created_at`) VALUES
-(9, 3, 11, 'Cavani Alvari Trousers ', '30R', '74.99 ', 1, 'https://res.cloudinary.com/dj7wogsju/image/upload/v1737716613/test-product-images/tnaxjbwswz1j3hmtul7z.jpg', '2025-01-24 17:16:39'),
-(10, 3, 16, 'Giordano Big Paisley ', 'M', '89.95 ', 4, 'https://res.cloudinary.com/dj7wogsju/image/upload/v1737732199/product-images/nnrskmccwjszvzzmli6g.png', '2025-01-24 16:50:09'),
-(11, 3, 12, 'Cavani Artega Charcoal ', 'S', '99.95 ', 1, 'https://res.cloudinary.com/dj7wogsju/image/upload/v1737717370/test-product-images/ygcxehymhjua3w7hijog.jpg', '2025-01-24 17:16:33'),
-(13, 3, 23, 'Giordano Floral Cuff ', '40', '89.95 ', 1, 'https://res.cloudinary.com/dj7wogsju/image/upload/v1737731147/test-product-images/blu5f2c5qnuhe58wluyp.jpg', '2025-01-25 15:03:35'),
-(14, 2, 16, 'Giordano Big Paisley ', 'M', '89.95 ', 1, 'https://res.cloudinary.com/dj7wogsju/image/upload/v1737732199/product-images/nnrskmccwjszvzzmli6g.png', '2025-01-25 16:26:16');
+(29, 2, 14, 'Cavani Elliot Jeans ', ' 38S', '89.95 ', 1, 'https://res.cloudinary.com/dj7wogsju/image/upload/v1737720106/test-product-images/dqglvjthlzoomrewawtt.jpg', '2025-01-27 17:32:37');
 
 -- --------------------------------------------------------
 
@@ -57,15 +53,15 @@ INSERT INTO `alfa_cart` (`id`, `user_id`, `product_id`, `product_name`, `product
 --
 
 CREATE TABLE `alfa_users` (
-  `id` int NOT NULL,
-  `name` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `status` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
-  `otp` int NOT NULL,
-  `otp_expiry` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `status` varchar(11) NOT NULL,
+  `otp` int(11) NOT NULL,
+  `otp_expiry` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -74,7 +70,7 @@ CREATE TABLE `alfa_users` (
 
 INSERT INTO `alfa_users` (`id`, `name`, `email`, `password`, `type`, `status`, `otp`, `otp_expiry`, `created_at`) VALUES
 (2, 'Arif Khan', 'fastranking03@gmail.com', '$2b$10$dfrd.PnNwlkSvox5qH8Q9.WJDH1vaIGVrPLHtaejQeupzUpOGqNM.', '', '0', 0, '', '2025-01-22 15:05:43'),
-(3, 'Alfa Mens', 'alfamens@gmail.com', '$2b$10$dfrd.PnNwlkSvox5qH8Q9.WJDH1vaIGVrPLHtaejQeupzUpOGqNM.', 'admin', '', 0, '', '2025-01-23 09:27:27');
+(3, 'Alfa Mens', 'alfamens@gmail.com', '$2b$10$dfrd.PnNwlkSvox5qH8Q9.WJDH1vaIGVrPLHtaejQeupzUpOGqNM.', 'admin', '0', 0, '', '2025-01-25 17:34:04');
 
 -- --------------------------------------------------------
 
@@ -83,16 +79,46 @@ INSERT INTO `alfa_users` (`id`, `name`, `email`, `password`, `type`, `status`, `
 --
 
 CREATE TABLE `alfa_whislist` (
-  `id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `product_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `product_size` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `product_price` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `quantity` int NOT NULL,
-  `product_image` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(100) NOT NULL,
+  `product_size` varchar(20) NOT NULL,
+  `product_price` varchar(50) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `product_image` varchar(250) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `alfa_whislist`
+--
+
+INSERT INTO `alfa_whislist` (`id`, `user_id`, `product_id`, `product_name`, `product_size`, `product_price`, `quantity`, `product_image`, `created_at`) VALUES
+(6, 3, 11, 'Cavani Alvari Trousers ', '36R', '74.99 ', 1, 'https://res.cloudinary.com/dj7wogsju/image/upload/v1737716613/test-product-images/tnaxjbwswz1j3hmtul7z.jpg', '2025-01-27 09:53:26'),
+(17, 2, 22, 'Giordano Floral Cuff ', '40', '89.95 ', 1, 'https://res.cloudinary.com/dj7wogsju/image/upload/v1737730949/test-product-images/p2qg8hkucb7wdifhuvbp.jpg', '2025-01-27 14:04:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `id` int(11) NOT NULL,
+  `tag` varchar(100) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `slug_name` varchar(100) NOT NULL,
+  `content` varchar(4000) DEFAULT NULL,
+  `image_path` varchar(50) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` varchar(100) DEFAULT NULL,
+  `profession` varchar(100) DEFAULT NULL,
+  `instagram_link` varchar(150) DEFAULT NULL,
+  `facebook_link` varchar(150) DEFAULT NULL,
+  `linkedin_link` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -101,13 +127,13 @@ CREATE TABLE `alfa_whislist` (
 --
 
 CREATE TABLE `category` (
-  `id` int NOT NULL,
-  `wear_type_id` int NOT NULL,
-  `cat_name` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
-  `cat_slug` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `is_accessories` int NOT NULL,
-  `status` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `wear_type_id` int(11) NOT NULL,
+  `cat_name` varchar(80) NOT NULL,
+  `cat_slug` varchar(100) NOT NULL,
+  `is_accessories` int(11) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -133,27 +159,28 @@ INSERT INTO `category` (`id`, `wear_type_id`, `cat_name`, `cat_slug`, `is_access
 --
 
 CREATE TABLE `customer_address` (
-  `id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `full_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `mobile` int NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `address` varchar(120) COLLATE utf8mb4_general_ci NOT NULL,
-  `address_2` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `city` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `address_type` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
-  `postcode` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
-  `status` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `full_name` varchar(100) NOT NULL,
+  `mobile` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `address` varchar(120) NOT NULL,
+  `address_2` varchar(150) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `address_type` varchar(30) NOT NULL,
+  `default_address` varchar(20) NOT NULL,
+  `postcode` varchar(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customer_address`
 --
 
-INSERT INTO `customer_address` (`id`, `user_id`, `full_name`, `mobile`, `email`, `address`, `address_2`, `city`, `address_type`, `postcode`, `status`, `created_at`) VALUES
-(2, 2, 'John', 2147483647, 'divjonny58@gmail.com', 'New Delhi', 'London', 'Delhi', 'Personal', '110085', 0, '2025-01-21 20:02:08'),
-(3, 2, 'John', 2147483647, 'fastranking03@gmail.com', 'Lotus', 'sdfrsd', 'uk', 'Personal', 'SW12 8NX', 0, '2025-01-22 09:50:04');
+INSERT INTO `customer_address` (`id`, `user_id`, `full_name`, `mobile`, `email`, `address`, `address_2`, `city`, `address_type`, `default_address`, `postcode`, `status`, `created_at`) VALUES
+(3, 2, 'John', 2147483647, 'fastranking03@gmail.com', 'Lotus', 'sdfrsd', 'uk', 'Commercial', 'no', 'SW12 8NX', 0, '2025-01-27 17:04:12'),
+(4, 2, 'Vani Mendiratta', 1050505005, 'vani.mendiratta@fastranking.tech', 'dsa', '', 'Uk', 'Commercial', 'yes', 'lu33qb', 0, '2025-01-27 15:00:54');
 
 -- --------------------------------------------------------
 
@@ -162,11 +189,11 @@ INSERT INTO `customer_address` (`id`, `user_id`, `full_name`, `mobile`, `email`,
 --
 
 CREATE TABLE `inventory_type` (
-  `id` int NOT NULL,
-  `i_type` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
-  `type_url` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
-  `status` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `i_type` varchar(60) NOT NULL,
+  `type_url` varchar(60) NOT NULL,
+  `status` varchar(30) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -186,10 +213,10 @@ INSERT INTO `inventory_type` (`id`, `i_type`, `type_url`, `status`, `created_at`
 --
 
 CREATE TABLE `newsletter` (
-  `id` int NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `status` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -206,17 +233,17 @@ INSERT INTO `newsletter` (`id`, `email`, `status`, `created_at`) VALUES
 --
 
 CREATE TABLE `new_order` (
-  `id` int NOT NULL,
-  `paypal_id` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `order_id` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
-  `user_id` int NOT NULL,
-  `address_id` int NOT NULL,
-  `total_price` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `payment_method` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `payment_type` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
-  `status` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `payment_status` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id` int(11) NOT NULL,
+  `paypal_id` varchar(50) NOT NULL,
+  `order_id` varchar(80) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `address_id` int(11) NOT NULL,
+  `total_price` varchar(50) NOT NULL,
+  `payment_method` varchar(50) NOT NULL,
+  `payment_type` varchar(80) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `payment_status` varchar(40) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -225,12 +252,10 @@ CREATE TABLE `new_order` (
 --
 
 INSERT INTO `new_order` (`id`, `paypal_id`, `order_id`, `user_id`, `address_id`, `total_price`, `payment_method`, `payment_type`, `status`, `payment_status`, `created_at`, `updated_at`) VALUES
-(94, '37Y20895E9021541P', 'ALFA0001', 2, 2, '89.95', 'Paypal', '', 'ORDER PLACED', 'PENDING', '2025-01-22 12:03:49', '2025-01-22 10:25:00'),
-(95, '4T43555558283364K', 'ALFA0002', 2, 2, '89.95', 'Paypal', '', 'ORDER PLACED', 'PENDING', '2025-01-22 12:10:41', '2025-01-22 12:10:41'),
-(96, '2Y157921XA7393305', 'ALFA0003', 2, 2, '449.75', 'Paypal', '', 'ORDER PLACED', 'PENDING', '2025-01-22 18:08:17', '2025-01-22 18:08:17'),
-(97, '6YV02833LX924470J', 'ALFA0004', 2, 2, '89.95', 'Paypal', '', 'ORDER PLACED', 'PENDING', '2025-01-23 16:25:30', '2025-01-23 16:25:30'),
-(98, '5U32052549144500J', 'ALFA0005', 2, 2, '99.95', 'Paypal', '', 'ORDER PLACED', 'PENDING', '2025-01-24 17:18:39', '2025-01-24 17:18:39'),
-(99, '8H189371HH113701C', 'ALFA0006', 2, 2, '89.95', 'Paypal', '', 'ORDER PLACED', 'PENDING', '2025-01-25 16:26:24', '2025-01-25 16:26:24');
+(98, '5U32052549144500J', 'ALFA0005', 2, 2, '99.95', 'Paypal', '', 'CANCELLED', 'PENDING', '2025-01-25 17:13:50', '2025-01-24 17:18:39'),
+(99, '8H189371HH113701C', 'ALFA0006', 2, 2, '89.95', 'Paypal', '', 'DELIVERED', 'PENDING', '2025-01-25 17:39:14', '2025-01-25 16:26:24'),
+(100, '68B0045159850061R', 'ALFA0007', 2, 3, '89.95', 'Paypal', '', 'ORDER PLACED', 'PENDING', '2025-01-27 14:45:21', '2025-01-27 14:45:21'),
+(101, '43U86284G4012784S', 'ALFA0008', 2, 4, '89.95', 'Paypal', '', 'ORDER PLACED', 'PENDING', '2025-01-27 17:04:15', '2025-01-27 17:04:15');
 
 -- --------------------------------------------------------
 
@@ -239,11 +264,11 @@ INSERT INTO `new_order` (`id`, `paypal_id`, `order_id`, `user_id`, `address_id`,
 --
 
 CREATE TABLE `new_order_itemsss` (
-  `id` int NOT NULL,
-  `orders_id` int NOT NULL,
-  `product_id` int DEFAULT NULL,
-  `quantity` int DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `orders_id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -251,13 +276,11 @@ CREATE TABLE `new_order_itemsss` (
 --
 
 INSERT INTO `new_order_itemsss` (`id`, `orders_id`, `product_id`, `quantity`, `created_at`) VALUES
-(136, 94, 4, 1, '2025-01-22 10:25:00'),
-(137, 95, 4, 1, '2025-01-22 12:10:41'),
-(138, 96, 4, 4, '2025-01-22 18:08:17'),
-(139, 96, 9, 1, '2025-01-22 18:08:17'),
 (140, 97, 4, 1, '2025-01-23 16:25:30'),
 (141, 98, 12, 1, '2025-01-24 17:18:39'),
-(142, 99, 16, 1, '2025-01-25 16:26:24');
+(142, 99, 16, 1, '2025-01-25 16:26:24'),
+(143, 100, 14, 1, '2025-01-27 14:45:21'),
+(144, 101, 14, 1, '2025-01-27 17:04:15');
 
 -- --------------------------------------------------------
 
@@ -266,15 +289,15 @@ INSERT INTO `new_order_itemsss` (`id`, `orders_id`, `product_id`, `quantity`, `c
 --
 
 CREATE TABLE `orders` (
-  `id` int NOT NULL,
-  `order_id` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `user_id` int NOT NULL,
-  `address_id` int NOT NULL,
-  `total_price` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `order_status` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `payment_status` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `payment_type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `order_id` varchar(100) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `address_id` int(11) NOT NULL,
+  `total_price` varchar(50) NOT NULL,
+  `order_status` varchar(50) NOT NULL,
+  `payment_status` varchar(50) NOT NULL,
+  `payment_type` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -284,14 +307,14 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `order_details` (
-  `id` int NOT NULL,
-  `order_id` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `user_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `product_size` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `price` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
-  `quantity` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `order_id` varchar(100) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_size` varchar(20) NOT NULL,
+  `price` varchar(40) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -301,29 +324,29 @@ CREATE TABLE `order_details` (
 --
 
 CREATE TABLE `products` (
-  `id` int NOT NULL,
-  `wear_type_id` int NOT NULL,
-  `cat_id` int NOT NULL,
-  `p_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `p_price` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
-  `discount` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
-  `p_main_price` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
-  `p_url` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `p_title` varchar(120) COLLATE utf8mb4_general_ci NOT NULL,
-  `similar_product` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `p_image` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `p_desc` text COLLATE utf8mb4_general_ci NOT NULL,
-  `p_key_features` text COLLATE utf8mb4_general_ci NOT NULL,
-  `tags` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `brand` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `sku` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `barcode` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
-  `colour` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
-  `new_arrival` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `best_seller` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `position` int NOT NULL,
-  `status` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `wear_type_id` int(11) NOT NULL,
+  `cat_id` int(11) NOT NULL,
+  `p_name` varchar(100) NOT NULL,
+  `p_price` varchar(11) NOT NULL,
+  `discount` varchar(11) NOT NULL,
+  `p_main_price` varchar(11) NOT NULL,
+  `p_url` varchar(150) NOT NULL,
+  `p_title` varchar(120) NOT NULL,
+  `similar_product` varchar(100) NOT NULL,
+  `p_image` varchar(150) NOT NULL,
+  `p_desc` text NOT NULL,
+  `p_key_features` text NOT NULL,
+  `tags` varchar(100) NOT NULL,
+  `brand` varchar(50) NOT NULL,
+  `sku` varchar(20) NOT NULL,
+  `barcode` varchar(40) NOT NULL,
+  `colour` varchar(30) NOT NULL,
+  `new_arrival` varchar(20) NOT NULL,
+  `best_seller` varchar(20) NOT NULL,
+  `position` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -386,11 +409,11 @@ INSERT INTO `products` (`id`, `wear_type_id`, `cat_id`, `p_name`, `p_price`, `di
 --
 
 CREATE TABLE `product_images` (
-  `id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `product_image` varchar(120) COLLATE utf8mb4_general_ci NOT NULL,
-  `status` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_image` varchar(120) NOT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -400,9 +423,9 @@ CREATE TABLE `product_images` (
 --
 
 CREATE TABLE `pro_images` (
-  `id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `p_images` varchar(250) COLLATE utf8mb4_general_ci NOT NULL
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `p_images` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -487,10 +510,10 @@ INSERT INTO `pro_images` (`id`, `product_id`, `p_images`) VALUES
 --
 
 CREATE TABLE `p_colour` (
-  `id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `size` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
-  `status` int NOT NULL
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `size` varchar(30) NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -500,11 +523,11 @@ CREATE TABLE `p_colour` (
 --
 
 CREATE TABLE `p_size` (
-  `id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `size` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `quantity` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `size` varchar(50) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -528,18 +551,11 @@ INSERT INTO `p_size` (`id`, `product_id`, `size`, `quantity`, `created_at`) VALU
 (110, 12, 'S', 1, '2025-01-24 11:16:13'),
 (111, 12, 'XL', 8, '2025-01-24 11:16:13'),
 (112, 13, '30R', 1, '2025-01-24 11:21:55'),
-(120, 14, '30R', 0, '2025-01-24 12:01:48'),
-(121, 14, '32L', 0, '2025-01-24 12:01:48'),
 (122, 14, '32R', 1, '2025-01-24 12:01:48'),
 (123, 14, '32S ', 1, '2025-01-24 12:01:48'),
-(124, 14, '34L', 0, '2025-01-24 12:01:48'),
 (125, 14, '34R', 1, '2025-01-24 12:01:48'),
 (126, 14, '34S', 2, '2025-01-24 12:01:48'),
 (127, 14, '36L', 1, '2025-01-24 12:01:48'),
-(128, 14, '36R', 0, '2025-01-24 12:01:48'),
-(129, 14, '36S', -1, '2025-01-24 12:01:48'),
-(130, 14, ' 38L', 0, '2025-01-24 12:01:48'),
-(131, 14, ' 38R ', 0, '2025-01-24 12:01:48'),
 (132, 14, ' 38S', 1, '2025-01-24 12:01:48'),
 (133, 14, '40R ', 1, '2025-01-24 12:01:48'),
 (134, 15, '30R', 1, '2025-01-24 12:11:52'),
@@ -681,7 +697,6 @@ INSERT INTO `p_size` (`id`, `product_id`, `size`, `quantity`, `created_at`) VALU
 (282, 35, '2XL', 1, '2025-01-25 09:41:38'),
 (283, 27, '38R', 1, '2025-01-25 09:47:53'),
 (284, 14, '38L', 0, '2025-01-25 10:02:28'),
-(285, 14, '38R', 0, '2025-01-25 10:02:28'),
 (286, 14, '38S', 1, '2025-01-25 10:02:28'),
 (287, 36, '30R', 1, '2025-01-25 10:14:00'),
 (288, 36, '32R', 2, '2025-01-25 10:14:00'),
@@ -909,15 +924,23 @@ INSERT INTO `p_size` (`id`, `product_id`, `size`, `quantity`, `created_at`) VALU
 --
 
 CREATE TABLE `return_order` (
-  `id` int NOT NULL,
-  `order_item_id` int NOT NULL,
-  `return_order_id` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
-  `reason` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `by_cs` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
-  `comment` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `r_status` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `order_item_id` int(11) NOT NULL,
+  `return_order_id` varchar(60) NOT NULL,
+  `reason` varchar(100) NOT NULL,
+  `by_cs` varchar(80) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `r_status` varchar(60) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `return_order`
+--
+
+INSERT INTO `return_order` (`id`, `order_id`, `order_item_id`, `return_order_id`, `reason`, `by_cs`, `comment`, `r_status`, `created_at`) VALUES
+(24, 99, 142, 'ALFARETURN0001', 'Not as expected', 'Return by Courier', 'dsafd', 'PENDING', '2025-01-27 14:19:53');
 
 -- --------------------------------------------------------
 
@@ -926,10 +949,10 @@ CREATE TABLE `return_order` (
 --
 
 CREATE TABLE `size` (
-  `id` int NOT NULL,
-  `size_name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `status` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `size_name` varchar(50) NOT NULL,
+  `status` varchar(30) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -1012,12 +1035,12 @@ INSERT INTO `size` (`id`, `size_name`, `status`, `created_at`) VALUES
 --
 
 CREATE TABLE `sizes_fits` (
-  `id` int NOT NULL,
-  `size_id` int NOT NULL,
-  `fit_name` varchar(70) COLLATE utf8mb4_general_ci NOT NULL,
-  `f_quantity` int NOT NULL,
-  `status` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `size_id` int(11) NOT NULL,
+  `fit_name` varchar(70) NOT NULL,
+  `f_quantity` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -1040,6 +1063,12 @@ ALTER TABLE `alfa_users`
 -- Indexes for table `alfa_whislist`
 --
 ALTER TABLE `alfa_whislist`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1146,115 +1175,121 @@ ALTER TABLE `sizes_fits`
 -- AUTO_INCREMENT for table `alfa_cart`
 --
 ALTER TABLE `alfa_cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `alfa_users`
 --
 ALTER TABLE `alfa_users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `alfa_whislist`
 --
 ALTER TABLE `alfa_whislist`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `customer_address`
 --
 ALTER TABLE `customer_address`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `inventory_type`
 --
 ALTER TABLE `inventory_type`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `newsletter`
 --
 ALTER TABLE `newsletter`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `new_order`
 --
 ALTER TABLE `new_order`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `new_order_itemsss`
 --
 ALTER TABLE `new_order_itemsss`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pro_images`
 --
 ALTER TABLE `pro_images`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `p_colour`
 --
 ALTER TABLE `p_colour`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `p_size`
 --
 ALTER TABLE `p_size`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=513;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=513;
 
 --
 -- AUTO_INCREMENT for table `return_order`
 --
 ALTER TABLE `return_order`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `size`
 --
 ALTER TABLE `size`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `sizes_fits`
 --
 ALTER TABLE `sizes_fits`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
