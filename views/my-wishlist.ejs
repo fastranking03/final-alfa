@@ -1,121 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alfa Meanswear | My  Whishlist</title>
-    <%- include('includes/head') %>
-  </head>
- 
-    <div class="alfa-main-wraper">
-      <%- include('includes/header') %>
-      <div class="mt-100 mt-150">
-        <div class="checkout-wrapper margin-160">
-          <div class="container">
-            <div class="checkout-title">
-              <h3>Shoping Cart</h3>
-            </div>
-            <div class="containers mt-3">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="alfa-cart-items cart-right-wrap">
-                    <div class="cart-table">
-                      <div class="cart-tbody">
-                        <% if (whislistData.length > 0) { %> <%
-                          whislistData.forEach(item => { %>
 
-                             <div class="cart-tr cart-b-tr">
-                                 <input type="hidden" name="product_id" value="<%=item.id  %>">
-                                <div class="cart-td">
-                                  <div class="cart-items-left">
-                                <div class="cart-delete" data-product-id="1" >
-                                      <a href="delete-from-wishlist/<%=item.id%>" class="delete-product" ><span><i
-                                            class="fa-regular fa-circle-xmark"></i></span ></a>
-                                    </div>  
-                                     <div class="cart-image">
-                                      <img src="<%=item.product_image %>" class="cart-img" alt="">
-                                    </div>
-                                    <div class="pro-cart-contents">
-                                      <div class="pro-cart-title">
-                                        <h3><%=item.product_name %></h3>
-                                      </div>
-                                      <div class="product-size-list">
-                                        <span class="cart-short-text">Select Size</span>
-                                        <ul class="flex gap-3 mt-1">
-                                          <% (sizesMap[item.product_id] || []).forEach(size=> { %>
-                                            <li class="relative">
-                                              <button
-                                                class="item-size-button   text-[14px] font-[600] w-[35px] h-[35px] border-[1px] rounded-full 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alfa Meanswear | My Whishlist</title>
+  <%- include('includes/head') %>
+</head>
+<div class="comman-message">
+  <div class="message-alert">
+    <h6 class="showss" id="productAddedInCart"></h6>
+  </div>
+</div>
+<div class="alfa-main-wraper">
+  <%- include('includes/header') %>
+    <div class="mt-100 mt-150">
+      <div class="checkout-wrapper margin-160">
+        <div class="container">
+          <div class="checkout-title">
+            <h3>My Wishlist</h3>
+          </div>
+          <div class="containers mt-3">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="alfa-cart-items cart-right-wrap">
+                  <div class="cart-table">
+                    <div class="cart-tbody">
+                      <% if (whislistData.length> 0) { %> <% whislistData.forEach(item=> { %>
+                          <div class="cart-tr cart-b-tr">
+                            <input type="hidden" name="product_id" value="<%=item.id  %>">
+                            <div class="cart-td">
+                              <div class="cart-items-left">
+                                <div class="cart-delete" data-product-id="1">
+                                  <a id="<%= item.id %>" class="delete-product" style="cursor: pointer;"><span><i
+                                        class="fa-regular fa-circle-xmark"></i></span></a>
+                                </div>
+                                <div class="cart-image">
+                                  <img src="<%=item.product_image %>" class="cart-img" alt="">
+                                </div>
+                                <div class="pro-cart-contents">
+                                  <div class="pro-cart-title">
+                                    <h3>
+                                      <%=item.product_name %>
+                                    </h3>
+                                  </div>
+                                  <div class="product-size-list">
+                                    <span class="cart-short-text">Select Size</span>
+                                    <ul class="flex gap-3 mt-1">
+                                      <% (sizesMap[item.product_id] || []).forEach(size=> { %>
+                                        <li class="relative">
+                                          <button
+                                            class="item-size-button text-[14px] font-[600] w-[35px] h-[35px] border-[1px] rounded-full 
                                                       <% if (size.quantity === 0) { %> item-size-disabled <% } else { %> bg-gray-100 hover:border-red-600 <% } %>
                                                       <% if (item.product_size === size.size) { %> bg-red-100 border-red-600 <% } %>"
-                                                data-size="<%= size.size %>" data-product-id="<%= item.product_id %>"
-                                                data-quantity="<%= size.quantity %>"
-                                                data-selected="<%= item.product_size === size.size %>" <% if
-                                                (size.quantity===0) { %> disabled <% } %>>
-                                                  <%= size.size %>
-                                              </button>
-                                            </li>
-                                            <% }); %>
-                                        </ul>
+                                            data-size="<%= size.size %>" data-product-id="<%= item.product_id %>"
+                                            data-quantity="<%= size.quantity %>"
+                                            data-selected="<%= item.product_size === size.size %>" <% if
+                                            (size.quantity===0) { %> disabled <% } %>>
+                                              <%= size.size %>
+                                          </button>
+                                        </li>
+                                        <% }); %>
+                                    </ul>
 
-                                        <input type="hidden" id="selected-size" name="selected_size" value="">
-                                      </div>
-                                      <div class="new-cart-quantity">
-                                        <span class="cart-short-text">Quantity :
-                                          <span id="quantity-display-108">
-                                            <!-- <%= item.quantity %> -->
-                                          </span></span>
-                                        <div class="increase-decrease">
-                                          <span class="decrease" data-product-id="<%= item.product_id %>">-</span>
-                                          <span class="quantity w-[30%]" data-product-id="<%= item.product_id %>">
-                                            <%= parseInt(item.quantity) %>
-                                          </span>
-                                          <span class="increase" data-product-id="<%= item.product_id %>">+</span>
-                                        </div>
-                                        <div class="product-limit-msg">
-                                          <span>Maximum quantity reached </span>
-                                        </div>
-                                      </div>
-                                     </div>
+                                    <input type="hidden" id="selected-sizes" name="selected_size" value="<%= item.product_size %>">
+                                  </div>
+                                  <div class="new-cart-quantity">
+                                    <span class="cart-short-text">Quantity :
+                                      <span id="quantity-display-108">
+                                        <!-- <%= item.quantity %> -->
+                                      </span></span>
+                                    <div class="increase-decrease">
+                                      <span class="decrease" data-product-id="<%= item.product_id %>">-</span>
+                                      <span class="quantity w-[30%]" data-product-id="<%= item.product_id %>">
+                                        <%= parseInt(item.quantity) %>
+                                      </span>
+                                      <span class="increase" data-product-id="<%= item.product_id %>">+</span>
+                                    </div>
+                                    <div class="product-limit-msg">
+                                      <span>Maximum quantity reached </span>
+                                    </div>
                                   </div>
                                 </div>
-                               
-                                <div class="cart-td position-relative">
-                                  <div class="pro-cart-price wishlist-cart-price">
-                                    <h5>
-                                        <span class="mrp-price whishlist-p">
-                                          £<%=item.p_price %></span
-                                        >
-                                        <span class="final-prices"
-                                          > 
-                                        </span>
-                                        <span class="discount-text whishlist-p"  >
-                                           </span>
-                                      </h5>
-                                  </div>
-                                  <div class="move-to-wishlisst">
-                                    <button  class="cart-btn add-to-cart wishlist-addcart" id="addToCart">
-                                        <span><i class="fa-solid fa-cart-shopping"></i></span>
-                                        Add to Cart
-                                      </button>
-                                  </div>
-                                </div>
-                               </div>
-                               <input type="hidden" name="product_id" value="<%= item.product_id %> ">
-                                <input type="hidden" name="product_name" value="<%= item.product_name %> ">
-                                <input type="hidden" name="product_price" value="<%= item.product_price %> ">
-                                <input type="hidden" name="quantity" value="1">
-                                <input type="hidden" name="product_image" value="<%= item.product_image %>">
-                              
-                        <% }) %> <% } else { %>
-                        <div class="wishlist-tr wishlist-b-tr">
-                          <div class="wishlist-td" colspan="3">
-                            <p>Your wishlist is empty.</p>
+                              </div>
+                            </div>
+
+                            <div class="cart-td position-relative">
+                              <div class="pro-cart-price wishlist-cart-price">
+                                <h5>
+                                  <span class="mrp-price whishlist-p">
+                                    £<%=item.p_price %></span>
+                                  <span class="final-prices">
+                                  </span>
+                                  <span class="discount-text whishlist-p">
+                                  </span>
+                                </h5>
+                              </div>
+                              <div class="move-to-wishlisst">
+                                <button class="cart-btn add-to-cart wishlist-addcart"
+                                  data-product-id="<%= item.product_id %>" data-product-name="<%= item.product_name %>"
+                                  data-product-price="<%= item.product_price %>"
+                                  data-product-image="<%= item.product_image %>">
+                                  <span><i class="fa-solid fa-cart-shopping"></i></span>
+                                  Add to Cart
+                                </button>
+
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <% } %>
-                        
-                      </div>
+                          <% }) %>
+                            <% } else { %>
+                              <div class="wishlist-tr wishlist-b-tr">
+                                <div class="wishlist-td" colspan="3">
+                                  <p>Your wishlist is empty.</p>
+                                </div>
+                              </div>
+                              <% } %>
                     </div>
                   </div>
                 </div>
@@ -124,12 +124,108 @@
           </div>
         </div>
       </div>
-      <!-- Footer -->
-      <%- include('includes/footer') %>
-      <!-- End -->
     </div>
-    <%- include('includes/foot') %>
- 
-    
+    <!-- Footer -->
+    <%- include('includes/footer') %>
+      <!-- End -->
+</div>
+<%- include('includes/foot') %>
+  <script src="assets/js/whislist.js"></script>
+  <script>
+    // Handle size selection
+    const sizeButtons = document.querySelectorAll('.item-size-button');
+    sizeButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        console.log(button)
+        if (button.getAttribute('data-selected') === 'true') {
+          return;
+        }
+        sizeButtons.forEach(btn => {
+          btn.setAttribute('data-selected', 'false');
+          btn.classList.remove('border-red-600', 'bg-red-100');
+        });
+        button.setAttribute('data-selected', 'true');
+        button.classList.add('border-red-600', 'bg-red-100');
+        document.getElementById('selected-sizes').value = button.getAttribute('data-size');
+      });
+    });
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+      button.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const selectedSize = document.getElementById('selected-sizes').value;
+        var message = document.getElementById("productAddedInCart");
+        if (!selectedSize) {
+          message.textContent = "Select product size.";
+          message.style.display = "block";
+          setTimeout(() => {
+            message.style.display = "none";
+          }, 4000);
+          return;
+        }
+
+        // Get product-specific data from the button's dataset
+        const productData = {
+          product_id: button.getAttribute('data-product-id'),
+          product_name: button.getAttribute('data-product-name'),
+          product_price: button.getAttribute('data-product-price'),
+          product_image: button.getAttribute('data-product-image'),
+          quantity: 1, // Default quantity is 1
+          product_size: selectedSize
+        };
+
+        fetch('/add-to-cart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(productData)
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              window.location.href = '/my-cart';
+            } else {
+              alert('Failed to add product to cart.');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      });
+    });
+
+    $(document).on("click", ".delete-product", function (e) {
+        e.preventDefault();
+        var cart_id = $(this).attr("id");
+        console.log(cart_id)
+         alertify.confirm("Are You Sure Want to Delete this Item?")
+          .set("onok", function (closeEvent) {
+            // Make the AJAX call
+            $.ajax({
+              type: "POST",
+              url: "/api/delete-wishlist",
+              contentType: "application/json",
+              data: JSON.stringify({ cart_id: cart_id }),
+              success: function (response) {
+                alertify.set("notifier", "position", "top-center");
+                alertify.success(response.message);
+                setTimeout(function () {
+                  window.location.reload();
+                }, 1000);
+              },
+              error: function (xhr) {
+                alertify.error("An error occurred while deleting the item.");
+                console.error(xhr.responseText);
+              }
+            });
+          })
+          .set({
+            title: "Delete Wishlist Item"
+          });
+      });
+  </script>
+
   </body>
+
 </html>

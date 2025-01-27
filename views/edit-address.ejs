@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="<%= baseURL %>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alfa Meanswear | Add Address</title>
+    <title>Alfa Meanswear | Edit Address</title>
     <meta name="robots" content="noindex">
     <%- include('includes/head') %>
 </head>
@@ -18,7 +19,7 @@
 
                     <div class="address-wrapper">
                         <div class="address-form">
-                            <form action="add-address" method="post" id="loginForm">
+                            <form action="edit-address" method="post">
                                         <div class="row">
                                             <div class="address-form-title">
                                                 <h4>Contact Details</h4>
@@ -26,7 +27,7 @@
                                             <div class="col-md-12">
                                                 <div class="address-form-group">
                                                     <label for="Name" class="address-label">Name*</label>
-                                                    <input type="text" name="full_name" value="" class="address-input" placeholder="Enter Name" required>
+                                                    <input type="text" name="full_name" value="<%= addressData.full_name %>" class="address-input" placeholder="Enter Name" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -34,14 +35,14 @@
                                                     <div class="ad-md-3">
                                                         <div class="address-form-group position-relative">
                                                             <span class="alfa-uk-flag"><img src="assets/images/ukflag.png" alt=""></span>
-                                                            <input type="text" value="+44" readonly="" name="mb" class="address-input mobile-input" >
+                                                            <input type="text" value="+44" readonly="" name="mb" class="address-input mobile-input">
                                                         </div>
                                                     </div>
                                                     <div class="ad-md-9">
                                                         <div class="address-form-group">
-                                                            <label for="Name" class="address-label">Phone Number*</label>
-                                                            <input type="text" name="mobile"  class="address-input" id="phoneInput"  placeholder="Enter Phone" required>
-                                                            <div id="phoneError" style="color: red; display: none;">Please enter a valid phone number.</div>
+                                                            <label for="Name" class="address-label">Phone
+                                                                Number*</label>
+                                                            <input type="text" name="mobile" value="<%= addressData.mobile %>" class="address-input" placeholder="Enter Phone"required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -49,9 +50,7 @@
                                             <div class="col-md-12">
                                                 <div class="address-form-group">
                                                     <label for="Name" class="address-label">Email Address*</label>
-                                                    <input type="text" name="email" class="address-input" id="emailInput" placeholder="Enter Email" required>
-                                                    <div id="emailError" style="color: red; display: none;">Please enter
-                                                        a valid email address.</div>
+                                                    <input type="text" name="email" value="<%= addressData.email %>" class="address-input" placeholder="Enter Email" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -62,19 +61,19 @@
                                             <div class="col-md-12">
                                                 <div class="address-form-group">
                                                     <label for="Name" class="address-label">Post Code*</label>
-                                                    <input type="text" name="postcode" class="address-input" placeholder="Post Code " required>
+                                                    <input type="text" name="postcode" value="<%= addressData.postcode %>" class="address-input" placeholder="Post Code" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="address-form-group">
                                                     <label for="Name" class="address-label">Address 1*</label>
-                                                    <input type="text" name="address" class="address-input" placeholder="Enter Address 2" required>
+                                                    <input type="text" name="address" value="<%= addressData.address %>" class="address-input" placeholder="Enter Address 2" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="address-form-group">
                                                     <label for="Name" class="address-label">Address 2*</label>
-                                                    <input type="text" name="address_2" class="address-input" placeholder="Enter Address 2" required>
+                                                    <input type="text" name="address_2" value="<%= addressData.address_2 %>" class="address-input" placeholder="Enter Address 2" required>
                                                 </div>
                                             </div>
                                              <div class="col-md-12">
@@ -82,7 +81,7 @@
                                                     <div class="col-md-12">
                                                         <div class="address-form-group">
                                                             <label for="Name" class="address-label">City*</label>
-                                                            <input type="text" name="city" class="address-input" placeholder="Enter City" required>
+                                                            <input type="text" name="city" value="<%= addressData.city %>" class="address-input" placeholder="Enter City" required>
                                                         </div>
                                                     </div>
                                                     
@@ -98,26 +97,32 @@
                                             
                                                 <div class="address-radio-flex">
                                                     <div class="input-radio">
-                                                        <input type="radio" class="radio-input" id="radio1" name="address_type" value="Personal" required>
+                                                        <input type="radio" class="radio-input" id="radio1" name="address_type" 
+                                                        <% if(addressData.address_type == "Personal") { %> checked <% } %> 
+                                                        value="Personal">
+                                                      
                                                         <label for="radio1">Personal</label>
                                                     </div>
                                                     <div class="input-radio">
-                                                        <input type="radio" class="radio-input" id="radio2" name="address_type" value="Commercial">
+                                                        <input type="radio" class="radio-input" id="radio2" name="address_type" 
+                                                        <% if(addressData.address_type == "Commercial") { %> checked <% } %> 
+                                                        value="Commercial">
                                                         <label for="radio2">Commercial</label>
                                                     </div>
                                                 </div>
                                         </div>
                                         <div class="col-md-12 mt-4">
                                             <div class="address-form-group">
-                                                <input type="checkbox" name="default_address" class="checkbox-inputs">
+                                                <input type="checkbox" name="default_address" class="checkbox-inputs"  <% if(addressData.default_address == "yes") { %> checked <% } %> >
                                                 <label for="Name" class="address-checkbox-label" style="color: #000;">Make this my default address</label>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="address_id" value="<%= addressData.id %> ">
                                         <div class="col-md-12 mt-5">
                                             <div class="add-address-button">
                                                 <button class="address-btn">Change</button>
                                                 <button class="address-btn address-black">
-                                                    Submit
+                                                    Update
                                                 </button>
                                             </div>
                                         </div>
@@ -133,66 +138,6 @@
             <%- include('includes/footer') %>
                 <!-- End -->
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-    const emailInput = document.getElementById("emailInput");
-    const emailError = document.getElementById("emailError");
-    const phoneInput = document.getElementById("phoneInput");
-    const phoneError = document.getElementById("phoneError");
-    const loginForm = document.getElementById("loginForm");
-
-    // Email Validation
-    emailInput.addEventListener("input", function () {
-        const emailValue = emailInput.value;
-        if (validateEmail(emailValue)) {
-            emailError.style.display = "none";
-            document.getElementById("login").classList.add("user-btn-primary");
-        } else {
-            emailError.style.display = "block";
-            document.getElementById("login").classList.remove("user-btn-primary");
-        }
-    });
-
-    // Phone Validation
-    phoneInput.addEventListener("input", function () {
-        const phoneValue = phoneInput.value;
-        if (validatePhone(phoneValue)) {
-            phoneError.style.display = "none";
-        } else {
-            phoneError.style.display = "block";
-        }
-    });
-
-    // Form Submit Validation
-    loginForm.addEventListener("submit", function (event) {
-        const emailValue = emailInput.value;
-        const phoneValue = phoneInput.value;
-
-        if (!validateEmail(emailValue)) {
-            emailError.style.display = "block";
-            event.preventDefault();
-        }
-
-        if (!validatePhone(phoneValue)) {
-            phoneError.style.display = "block";
-            event.preventDefault();
-        }
-    });
-
-    // Email Validation Function
-    function validateEmail(email) {
-        const emailPattern = /^[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}$/;
-        return emailPattern.test(email);
-    }
-
-    // Phone Validation Function
-    function validatePhone(phone) {
-        const phonePattern = /^[0-9]{10}$/; // For UK 10-digit phone number
-        return phonePattern.test(phone);
-    }
-});
-
- </script>
     <%- include('includes/foot') %>
 </body>
 

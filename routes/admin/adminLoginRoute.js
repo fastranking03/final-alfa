@@ -3,16 +3,21 @@ import bcrypt from "bcrypt"
 const router = express.Router();
 import JWT from "jsonwebtoken";
 import connect from "../../db/connect.js";
+import { disAllType } from "../../services/admin/typeService.js";
+import { getAllCategory } from "../../services/admin/catService.js";
 router.get('/login', async (req,res) =>{
-    res.render('admin/login')
+    const typeData = await disAllType()
+    res.render('admin/login',{typeData})
 })
 
 router.post('/admin-login', async(req,res) =>{
     try{
         const {email,password } = req.body;
         const [userData] = await connect.execute("SELECT * FROM alfa_users WHERE email = ?",[email]);
+        const typeData = await disAllType()
+        const catData = await getAllCategory()
         if(userData.length === 0){
-            return res.render('login',{error:"User not found"})
+            return res.render('login',{error:"User not found",typeData,catData})
     
         }
             const user = userData[0]
@@ -46,6 +51,7 @@ router.get('/admin-logout', async (req, res) => {
                 console.error('Error destroying session:', err);
                 return res.status(500).send('Error logging out.');
             }
+           
             console.log('Session destroyed successfully.');
              return res.redirect('/admin/login');
         });

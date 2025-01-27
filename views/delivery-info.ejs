@@ -30,10 +30,10 @@
                             <div class="shipping-address-display" style="display: block">
                               <div class="alfa-defaul-wrapper">
                                 <h6>
-                                  <%= index===0 ? 'Default Address' : 'Address' %>
+                                  <%= address.default_address==='yes' ? 'Default Address' : 'Address' %>
                                 </h6>
                                 <div class="alfa-action-warapper">
-                                  <!-- <a href="/remove-address/<%= address.id %>" class="add-action-btn">Remove</a> -->
+                                  <a  style="cursor: pointer;" id="<%= address.id %>" class="add-action-btn delete-address">Remove</a>
                                   <a href="/edit-address/<%= address.id %>" class="add-action-btn">Edit</a>
                                 </div>
                               </div>
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="address-type">
                                   <input type="radio" id="address-<%= address.id %>" name="selectedAddress"
-                                    value="<%= address.id %>" class="radio-input" <%=index===0 ? 'checked' : '' %> />
+                                    value="<%= address.id %>" class="radio-input" <%= address.default_address==='yes' ? 'checked' : '' %> />
                                   <label for="address-<%= address.id %>">Home</label>
                                 </div>
                                 <div class="shipper-email">
@@ -199,10 +199,39 @@
     </div>
     <%- include('includes/foot') %>
     <script>
-  
-       const cartItemsInStock = <%= JSON.stringify(cartData) %>;
+        const cartItemsInStock = <%= JSON.stringify(cartData) %>;
         document.getElementById('payForm').addEventListener('submit', function(e) {
           document.getElementById('cartItemsInStockInput').value = JSON.stringify(cartItemsInStock);
+      });
+  </script>
+  <script>
+     $(document).on("click", ".delete-address", function (e) {
+        e.preventDefault();
+        var address_id = $(this).attr("id");
+         alertify.confirm("Are You Sure Want to Delete this Address?")
+          .set("onok", function (closeEvent) {
+            // Make the AJAX call
+            $.ajax({
+              type: "POST",
+              url: "/api/delete-address",
+              contentType: "application/json",
+              data: JSON.stringify({ address_id: address_id }),
+              success: function (response) {
+                alertify.set("notifier", "position", "top-center");
+                alertify.success(response.message);
+                setTimeout(function () {
+                  window.location.reload();
+                }, 1000);
+              },
+              error: function (xhr) {
+                alertify.error("An error occurred while deleting the item.");
+                console.error(xhr.responseText);
+              }
+            });
+          })
+          .set({
+            title: "Delete Address"
+          });
       });
   </script>
 </body>

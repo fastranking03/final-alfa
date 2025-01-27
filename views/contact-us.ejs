@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,121 +11,201 @@
 <body>
     <div class="alfa-main-wraper">
         <%- include('includes/header') %>
-        
-        <div class="mt-100 mt-700">
-            <div class="product-banner">
-                <div class="container">
-                    <div class="hero-product-rows">
-                        <div class="product-col-6">
-                            <div class="breadcrubm-text">
-                                <h2>Contact Us</h2>
-                                <p></p>
+
+            <div class="mt-100 mt-700">
+                <div class="product-banner">
+                    <div class="container">
+                        <div class="hero-product-rows">
+                            <div class="product-col-6">
+                                <div class="breadcrubm-text">
+                                    <h2>Contact Us</h2>
+                                    <p></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="checkout-wrapper margin-160 margin-190">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="contact-info">
-                                <div class="checkout-title">
-                                    <h2>Contact Info</h2>
-                                    <p>Let’s get in touch. We’re here to help!</p>
-                                </div>
-                                <ul class="contact-ul">
-                                    <li><span class="c-span"><i class="fa-solid fa-phone"></i>
-                                        </span> +44 1202 292 895
-                                    </li>
-                                    <li><span class="c-span"><i class="fa-regular fa-envelope"></i></span>
-                                        info@alfamenswear.com
-                                    </li>
-                                    <li><span class="c-span"><i class="fa-solid fa-location-dot"></i></span>
-                                        Alfa Menswear, 33 Westover Road, Bournemouth, Dorset, BH12BZ, United
-Kingdom
-                                    </li>
-                                </ul>
-                                <div class="footer-social-media">
+                <div class="checkout-wrapper margin-160 margin-190">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="contact-info">
                                     <div class="checkout-title">
-                                        <h3>More Ways to Get in Touch</h3>
+                                        <h2>Contact Info</h2>
+                                        <p>Let’s get in touch. We’re here to help!</p>
                                     </div>
-                                    <ul class="comman-ul contact-media-ul">
-                                        <li><a href="#"><span class="social-icon contact-icon"></span><i class="fa-brands fa-instagram social-icon-f"></i></a></li>
-                                        <li><a href="#"><span class="social-icon contact-icon"></span><i class="fa-brands fa-facebook social-icon-f"></i></a></li>
-                                        
+                                    <ul class="contact-ul">
+                                        <li><span class="c-span"><i class="fa-solid fa-phone"></i>
+                                            </span> <a href="tel:1202 292 895" style="color: #fff;">+44 1202 292 895</a>
+                                        </li>
+                                        <li><span class="c-span"><i class="fa-regular fa-envelope"></i></span>
+                                            <a href="mailto:info@alfamenswear.com" style="color: #fff;">info@alfamenswear.com</a>
+                                        </li>
+                                        <li><span class="c-span"><i class="fa-solid fa-location-dot"></i></span>
+                                          <a href="" style="color: #fff;">  Alfa Menswear, 33 Westover Road, Bournemouth, Dorset, BH12BZ, United
+                                            Kingdom</a>
+                                        </li>
                                     </ul>
-                                    <div>
-                                        <p style="font-size: 13px;">Stay ahead with the latest product updates, announcements, news, and amazing content. Follow us on our social media channels!</p>
+                                    <div class="footer-social-media">
+                                        <div class="checkout-title">
+                                            <h3>More Ways to Get in Touch</h3>
+                                        </div>
+                                        <ul class="comman-ul contact-media-ul">
+                                            <li><a href="#"><span class="social-icon contact-icon"></span><i
+                                                        class="fa-brands fa-instagram social-icon-f"></i></a></li>
+                                            <li><a href="#"><span class="social-icon contact-icon"></span><i
+                                                        class="fa-brands fa-facebook social-icon-f"></i></a></li>
+
+                                        </ul>
+                                        <div>
+                                            <p style="font-size: 13px;">Stay ahead with the latest product updates,
+                                                announcements, news, and amazing content. Follow us on our social media
+                                                channels!</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="contact-us-wrapper">
-                                <div class="checkout-title ">
-                                    <h2>Get In Touch With Us</h2>
-                                    <p>If you wish to directly reach us, Please fill out the form below.</p>
-                                </div>
-                                <div class="contact-form-wrapper">
-                                    <form action="get-in-touch-with-us" method="post">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group contact-form-group">
-                                                    <label for="Name">Full Name</label>
-                                                    <input type="text" name="name" class="form-control contact-form-control" placeholder="Enter Full Name">
+                            <div class="col-md-6">
+                                <div class="contact-us-wrapper">
+                                    <div class="checkout-title ">
+                                        <h2>Get In Touch With Us</h2>
+                                        <p>If you wish to directly reach us, Please fill out the form below.</p>
+                                    </div>
+                                    <div class="contact-form-wrapper">
+                                        <form action="get-in-touch-with-us" method="post" id="loginForm">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group contact-form-group">
+                                                        <label for="Name">Full Name</label>
+                                                        <input type="text" name="name"
+                                                            class="form-control contact-form-control"
+                                                            placeholder="Enter Full Name" required>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group contact-form-group">
-                                                    <label for="Email">Email ID</label>
-                                                    <input type="text" name="email" class="form-control contact-form-control" placeholder="Enter Email ID">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group contact-form-group">
+                                                        <label for="Email">Email ID</label>
+                                                        <input type="text" name="email"
+                                                            class="form-control contact-form-control" id="phoneInput"
+                                                            placeholder="Enter Email ID">
+                                                        <div id="phoneError" style="color: red; display: none;">Please
+                                                            enter a valid phone number.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group contact-form-group">
+                                                        <label for="Email">Contact</label>
+                                                        <input type="text" name="contact"
+                                                            class="form-control contact-form-control" id="emailInput"
+                                                            placeholder="Enter Contact">
+                                                        <div id="emailError" style="color: red; display: none;">Please
+                                                            enter
+                                                            a valid email address.</div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group contact-form-group">
-                                                    <label for="Email">Contact</label>
-                                                    <input type="text" name="contact" class="form-control contact-form-control" placeholder="Enter Contact">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group contact-form-group">
+                                                        <label for="Name">Subject</label>
+                                                        <input type="text" name="subject"
+                                                            class="form-control contact-form-control"
+                                                            placeholder="Enter Subject">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group contact-form-group">
-                                                    <label for="Name">Subject</label>
-                                                    <input type="text" name="subject" class="form-control contact-form-control" placeholder="Enter Subject">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group contact-form-group">
+                                                        <label for="Name">Message</label>
+                                                        <textarea name="message" id=""
+                                                            class="form-control contact-form-control"
+                                                            style="height: 150px;"
+                                                            placeholder="Enter Message"></textarea>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group contact-form-group">
-                                                    <label for="Name">Message</label>
-                                                    <textarea name="message" id="" class="form-control contact-form-control" style="height: 150px;" placeholder="Enter Message"></textarea>
+                                            <div class="row mt-3">
+                                                <div class="contact-submit">
+                                                    <button class="wishlist-btn submit-btn w-25">Submit</button>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="contact-submit">
-                                                <button class="wishlist-btn submit-btn w-25">Submit</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-       
+
             <!-- Footer -->
             <%- include('includes/footer') %>
                 <!-- End -->
     </div>
     <%- include('includes/foot') %>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const emailInput = document.getElementById("emailInput");
+                const emailError = document.getElementById("emailError");
+                const phoneInput = document.getElementById("phoneInput");
+                const phoneError = document.getElementById("phoneError");
+                const loginForm = document.getElementById("loginForm");
+
+                // Email Validation
+                emailInput.addEventListener("input", function () {
+                    const emailValue = emailInput.value;
+                    if (validateEmail(emailValue)) {
+                        emailError.style.display = "none";
+                        document.getElementById("login").classList.add("user-btn-primary");
+                    } else {
+                        emailError.style.display = "block";
+                        document.getElementById("login").classList.remove("user-btn-primary");
+                    }
+                });
+
+                // Phone Validation
+                phoneInput.addEventListener("input", function () {
+                    const phoneValue = phoneInput.value;
+                    if (validatePhone(phoneValue)) {
+                        phoneError.style.display = "none";
+                    } else {
+                        phoneError.style.display = "block";
+                    }
+                });
+
+                // Form Submit Validation
+                loginForm.addEventListener("submit", function (event) {
+                    const emailValue = emailInput.value;
+                    const phoneValue = phoneInput.value;
+
+                    if (!validateEmail(emailValue)) {
+                        emailError.style.display = "block";
+                        event.preventDefault();
+                    }
+
+                    if (!validatePhone(phoneValue)) {
+                        phoneError.style.display = "block";
+                        event.preventDefault();
+                    }
+                });
+
+                // Email Validation Function
+                function validateEmail(email) {
+                    const emailPattern = /^[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}$/;
+                    return emailPattern.test(email);
+                }
+
+                // Phone Validation Function
+                function validatePhone(phone) {
+                    const phonePattern = /^[0-9]{10}$/; // For UK 10-digit phone number
+                    return phonePattern.test(phone);
+                }
+            });
+
+        </script>
 </body>
 
 </html>

@@ -2,6 +2,7 @@ import connect from "../db/connect.js";
 import { getAllCategory } from "../services/admin/catService.js";
 import { disAllType } from "../services/admin/typeService.js";
 import { getCartData } from "../services/cartService.js";
+import { getWishlistData } from "../services/wishlistService.js";
 
 export const addToCart = async (req, res) => {
     const productData = req.body;
@@ -29,6 +30,12 @@ export const addToCart = async (req, res) => {
                     [userId, product_id, product_name, product_size, product_price, quantity, product_image]
                 );
             }
+             // Delete the product from the wishlist after adding it to the cart
+                await connect.execute(
+                    'DELETE FROM alfa_whislist WHERE user_id = ? AND product_id = ? AND product_size = ?',
+                    [userId, product_id, product_size]
+                );
+
 
             res.json({ success: true, message: 'Product added to cart.' });
         } catch (err) {
@@ -218,7 +225,8 @@ export const disCart = async (req, res, next) => {
     try {
         const { cartData, cartCount } = await getCartData(req);
         const catData = await getAllCategory();
-       const typeData = await disAllType()
+        const typeData = await disAllType();
+        const {whislistData, wishlistCount} = await getWishlistData(req)
         const sizePromises = cartData.map(async (item) => {
             const [sizesData] = await connect.execute(
                 "SELECT size, quantity FROM p_size WHERE product_id = ?",
@@ -247,7 +255,9 @@ export const disCart = async (req, res, next) => {
             total,
             deliveryFee,
             catData,
-            typeData
+            typeData,
+            whislistData, 
+            wishlistCount
         });
     } catch (err) {
         console.error(err);
@@ -258,8 +268,9 @@ export const disCart = async (req, res, next) => {
 export const addAddress = async (req, res) => {
     try {
         const userId = req.session.user.id
-        const { full_name, mobile, email, address, address_2, city, postcode, address_type } = req.body
-        await connect.execute("INSERT INTO customer_address (user_id, full_name, mobile ,email, address,address_2, city, postcode,address_type,created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())", [userId, full_name, mobile, email, address, address_2, city, postcode, address_type])
+        const { full_name, mobile, email, address, address_2, city, postcode, address_type ,default_address } = req.body;
+        const defaultAddressValue = default_address ? 'yes' : 'no';
+        await connect.execute("INSERT INTO customer_address (user_id, full_name, mobile ,email, address,address_2, city, postcode,address_type,default_address,created_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())", [userId, full_name, mobile, email, address, address_2, city, postcode, address_type,defaultAddressValue])
         res.redirect('/delivery-info')
     } catch (e) {
         console.log(e)
@@ -273,7 +284,7 @@ export const disAddress = async (req, res) => {
         const { cartData, cartCount } = await getCartData(req);
         const catData = await getAllCategory();
         const typeData = await disAllType()
-        const [cu_address] = await connect.execute("SELECT * FROM customer_address WHERE user_id = ?", [userId]);
+        const [cu_address] = await connect.execute("SELECT * FROM customer_address WHERE user_id = ? order by default_address desc", [userId]);
 
         // Calculate total price and delivery fee
         const total = cartData.reduce((sum, item) => {
@@ -288,5 +299,22 @@ export const disAddress = async (req, res) => {
     } catch (e) {
         console.log(e)
         res.render('delivery-info', { cartData: [], cartCount: 0 });
+    }
+}
+
+// Update Address
+export const updateAddress = async (req, res) =>{
+    try {
+
+        const { address_id, full_name, mobile, email, address, address_2, city, postcode, address_type ,default_address } = req.body;
+        const defaultAddressValue = default_address ? 'yes' : 'no';
+        await connect.execute(
+            "UPDATE customer_address SET full_name = ?, mobile = ?, email = ?, address = ?, address_2 = ?, city = ?, postcode = ?, address_type = ?, default_address = ? WHERE id = ?",
+            [full_name, mobile, email, address, address_2, city, postcode, address_type, defaultAddressValue, address_id]
+        );
+        res.redirect('/delivery-info')
+    }catch(e) {
+        console.log(e)
+        res.render('delivery-info', { message: "Something wrong in query" })
     }
 }

@@ -3407,14 +3407,16 @@ li a:hover .open-icon-main {
 }
 .size-popup{
   position: absolute;
-    background: #005d67;
-    color: #fff;
-    font-size: 12px;
-    width: 52px;
-    height: 17px;
-    padding: 0px 0;
-    text-align: center;
-    border-radius: 4px;
-    left: -3px;
-    top: 32px;
+  background: #ffd100;
+  border: 1px solid #005d67;
+  color: #000;
+  font-size: 12px;
+  font-weight: 600;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  left: -1px;
+  top: 40px;
 }

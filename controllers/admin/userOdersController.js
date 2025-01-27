@@ -11,6 +11,7 @@ export const displayOrder = async (req, res) => {
       FROM new_order o
       LEFT JOIN alfa_users u ON o.user_id = u.id 
       LEFT JOIN customer_address a ON o.address_id = a.id
+      ORDER BY o.created_at DESC
     `;
 
     const [orderList] = await connect.execute(query);
