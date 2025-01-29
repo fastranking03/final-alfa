@@ -4,6 +4,7 @@ import { getAllCategory } from "../services/admin/catService.js";
 import { newArrival } from "../controllers/prodController.js";
 import { getWishlistData } from "../services/wishlistService.js";
 import { disAllType } from "../services/admin/typeService.js";
+import { addtoContact } from "../controllers/contentController.js";
 const router = express.Router()
 
 router.get('/', newArrival, async(req,res) =>{
@@ -28,6 +29,8 @@ router.get('/contact-us', async(req,res) =>{
     const catData = await getAllCategory()
     res.render('contact-us', {cartData,cartCount,catData,whislistData, wishlistCount,typeData})
 });
+
+router.post('/contact-us', addtoContact);
  
 router.get('/term-condition', async(req,res) =>{
     const {cartData,cartCount } = await getCartData(req)

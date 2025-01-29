@@ -75,11 +75,13 @@
     border-radius: 50%;
     background-color: #ccc;
     margin-right: 5px;
+    border: 1px solid #eee;
 }
 .size-filter{
-  width: 30px;
+    width: 30px;
     height: 30px;
     font-size: 13px;
+    padding: 0;
 }
 .size-filter.active {
   background-color: #005d67; /* Change to your desired active color */

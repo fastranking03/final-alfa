@@ -25,7 +25,7 @@ import blogRoute from "./routes/blogRoute.js"
 const app = express();
 app.use(cors())
 dotenv.config()
-app.locals.baseURL = "http://localhost:8090/"
+app.locals.baseURL = "http://localhost:9090/"
 
 app.use(session({
     secret: process.env.SESSION_KEY,
@@ -70,8 +70,6 @@ app.use("/" , frontOrderRoute);
 app.use("/",newsRoute);
 app.use('/',blogRoute)
 
-
-
 // Admin Routes
 app.use('/admin/', adminLoginRoute);
 app.use('/admin/',categoryRoute);
@@ -84,7 +82,7 @@ app.use('/admin', authenticateAdmin,(req,res) =>{
     res.render('admin/index')
 })
  
-const PORT = 8090
+const PORT = 9090
 
 app.listen(PORT,() =>{
     console.log(`Server is running on port ${PORT}`)

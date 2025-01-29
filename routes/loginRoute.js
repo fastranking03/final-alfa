@@ -26,11 +26,13 @@ router.get('/login', async(req,res) =>{
 router.get('/forget-password',(req,res)=>{
     res.render('forget-password')
 })
+ 
 router.post('/request-otp', requesOtp)
 
 router.get('/verify-otp',(req,res)=>{
     res.render('verify-otp')
 })
+
 router.post('/verify-otp',verifyOtp)
 
 router.get('/update-password',(req,res) =>{

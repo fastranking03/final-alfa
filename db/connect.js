@@ -4,7 +4,7 @@ const connect = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'ecom_alfa',
+  database: 'ecom_alfasss',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0

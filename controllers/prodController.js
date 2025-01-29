@@ -3,6 +3,7 @@ import { getAllCategory, getAllTypeCategory } from "../services/admin/catService
 import { getAllProduct } from "../services/admin/prouctService.js"
 import { disAllType } from "../services/admin/typeService.js";
 import { getCartData } from "../services/cartService.js";
+import { disAllColour } from "../services/ColourService.js";
 import { getWishlistData } from "../services/wishlistService.js";
 
 export const disByCategory = async (req, res) => {
@@ -42,7 +43,8 @@ export const disByCategory = async (req, res) => {
         // Fetch cart and type data
         const { cartData, cartCount } = await getCartData(req);
         const typeData = await disAllType();
-        const {whislistData, wishlistCount} = await getWishlistData(req)
+        const {whislistData, wishlistCount} = await getWishlistData(req);
+        const colourData = await disAllColour();
 
         // Render the template with all data
         res.render("collection", {
@@ -52,7 +54,8 @@ export const disByCategory = async (req, res) => {
             typeData,
             catData: allCategories,
             selectedCategory: selectedCategory[0],
-            whislistData, wishlistCount
+            whislistData, wishlistCount,
+            colourData
         });
     } catch (e) {
         console.error("Error fetching product details:", e);
@@ -67,8 +70,9 @@ export const viewProduct = async (req,res) =>{
        const catData = await getAllCategory();
        const typeData = await disAllType();
        const {cartData,cartCount } = await getCartData(req);
-       const {whislistData, wishlistCount} = await getWishlistData(req)
-       res.render('product', {prodData,cartData,cartCount,typeData,catData,whislistData, wishlistCount});
+       const {whislistData, wishlistCount} = await getWishlistData(req);
+       const colourData = await disAllColour()
+       res.render('product', {prodData,cartData,cartCount,typeData,catData,whislistData, wishlistCount,colourData});
     }catch(e){
         console.log(e)
     }
@@ -143,9 +147,10 @@ export const dispTypeWiseProduct = async (req, res) => {
      const catData = await getAllCategory();
      const typeData = await disAllType();
      const {cartData,cartCount } = await getCartData(req);
-     const {whislistData, wishlistCount} = await getWishlistData(req)
+     const {whislistData, wishlistCount} = await getWishlistData(req);
+     const colourData = await disAllColour();
       // Render the view with the fetched products
-      res.render('product-type-list', { prodData ,catData,typeData,cartData,cartCount ,whislistData, wishlistCount});
+      res.render('product-type-list', { prodData ,catData,typeData,cartData,cartCount ,whislistData, wishlistCount,colourData});
     } catch (e) {
       console.error(e);
       res.status(500).send('An error occurred while fetching products.');

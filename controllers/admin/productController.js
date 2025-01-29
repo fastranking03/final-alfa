@@ -1,5 +1,6 @@
 import connect from "../../db/connect.js";
 import { getAllCategory } from "../../services/admin/catService.js"
+import { disAllSizes } from "../../services/admin/sizeServices.js";
 import { disAllType } from "../../services/admin/typeService.js";
 import cloudinary from "cloudinary";
 import fs from 'fs';
@@ -98,11 +99,12 @@ export const editProduct = async (req, res) => {
         const { id } = req.params;
         const [editProduct] = await connect.execute("SELECT * FROM products WHERE id = ?", [id])
         const catData = await getAllCategory();
+        const sizeData = await disAllSizes()
         const typeData = await disAllType();
         const [proSize] = await connect.execute("select * from p_size where product_id = ?", [id]);
         const [proImage] = await connect.execute("select * from pro_images where product_id = ?", [id]);
         
-        res.render('admin/edit-product', { catData, proSize, proImage, editProduct: editProduct[0] ,typeData })
+        res.render('admin/edit-product', { catData, proSize, proImage, editProduct: editProduct[0] ,typeData ,sizeData })
     } catch (e) {
         console.log(e)
     }
@@ -224,58 +226,57 @@ export const updateProduct = async (req, res) => {
         }
  
         if (Array.isArray(size) && Array.isArray(quantity)) {
+            // Get existing sizes for this product
+            const [existingSizes] = await connect.execute(
+                "SELECT * FROM p_size WHERE product_id = ?",
+                [id]
+            );
+        
+            const existingSizeMap = new Map(existingSizes.map(s => [s.size, s.id])); // Store existing size names and IDs
+        
             for (let i = 0; i < size.length; i++) {
                 const sizeValue = size[i]?.trim();
                 const quantityValue = quantity[i]?.trim();
         
-                // Skip empty inputs
                 if (!sizeValue || !quantityValue) continue;
         
-                // Check if size already exists
-                const [existingSize] = await connect.execute(
-                    "SELECT * FROM p_size WHERE product_id = ? AND size = ?",
-                    [id, sizeValue]
-                );
-        
-                if (existingSize.length > 0) {
+                if (existingSizeMap.has(sizeValue)) {
                     // Update existing size and quantity
                     await connect.execute(
                         "UPDATE p_size SET quantity = ? WHERE product_id = ? AND size = ?",
                         [quantityValue, id, sizeValue]
                     );
                 } else {
-                    // Insert new size and quantity if it does not exist
-                    await connect.execute(
-                        "INSERT INTO p_size (product_id, size, quantity) VALUES (?, ?, ?)",
-                        [id, sizeValue, quantityValue]
-                    );
+                    // Check if the size exists but was changed
+                    const oldSize = existingSizes[i]?.size;
+                    if (oldSize && oldSize !== sizeValue) {
+                        // Update the size instead of inserting a new row
+                        await connect.execute(
+                            "UPDATE p_size SET size = ?, quantity = ? WHERE product_id = ? AND size = ?",
+                            [sizeValue, quantityValue, id, oldSize]
+                        );
+                    } else {
+                        // Insert new size and quantity if it does not exist
+                        await connect.execute(
+                            "INSERT INTO p_size (product_id, size, quantity) VALUES (?, ?, ?)",
+                            [id, sizeValue, quantityValue]
+                        );
+                    }
                 }
             }
-        } else if (size && quantity) {
-            const sizeValue = size.trim();
-            const quantityValue = quantity.trim();
         
-            if (sizeValue && quantityValue) {
-                const [existingSize] = await connect.execute(
-                    "SELECT * FROM p_size WHERE product_id = ? AND size = ?",
-                    [id, sizeValue]
-                );
-        
-                if (existingSize.length > 0) {
-                    // Update existing size and quantity
+            // Delete sizes that were removed
+            const formSizes = new Set(size.map(s => s.trim()));
+            for (const existingSize of existingSizes) {
+                if (!formSizes.has(existingSize.size)) {
                     await connect.execute(
-                        "UPDATE p_size SET quantity = ? WHERE product_id = ? AND size = ?",
-                        [quantityValue, id, sizeValue]
-                    );
-                } else {
-                    // Insert new size and quantity if it does not exist
-                    await connect.execute(
-                        "INSERT INTO p_size (product_id, size, quantity) VALUES (?, ?, ?)",
-                        [id, sizeValue, quantityValue]
+                        "DELETE FROM p_size WHERE product_id = ? AND size = ?",
+                        [id, existingSize.size]
                     );
                 }
             }
         }
+        
     
         res.redirect('/admin/product-list');
     } catch (e) {
@@ -283,3 +284,12 @@ export const updateProduct = async (req, res) => {
         res.status(500).send("An error occurred.");
     }
 };
+
+// Delete Product
+export const deteteProduct = async (req,res) =>{
+    try{
+
+    }catch(e){
+        console.log(e)
+    }
+}

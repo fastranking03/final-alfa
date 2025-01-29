@@ -44,54 +44,8 @@
                                       <%=item.product_name %>
                                     </h3>
                                   </div>
-                                  <div class="product-size-list">
-                                    <span class="cart-short-text">Select Size</span>
-                                    <ul class="flex gap-3 mt-1">
-                                      <% (sizesMap[item.product_id] || []).forEach(size=> { %>
-                                        <li class="relative">
-                                          <!-- <button
-                                            class="item-size-button text-[14px] font-[600] w-[35px] h-[35px] border-[1px] rounded-full 
-                                                      <% if (size.quantity === 0) { %> item-size-disabled <% } else { %> bg-gray-100 hover:border-red-600 <% } %>
-                                                      <% if (item.product_size === size.size) { %> bg-red-100 border-red-600 <% } %>"
-                                                      
-                                            data-size="<%= size.size %>" data-product-id="<%= item.product_id %>"
-                                            data-quantity="<%= size.quantity %>"
-                                            data-selected="<%= item.product_size === size.size %>" <% if
-                                            (size.quantity===0) { %> disabled <% } %>>
-                                              <%= size.size %>
-                                          </button> -->
-                                          <button
-  class="item-size-button text-[14px] font-[600] border-[1px] rounded-full 
-         <% if (size.quantity === 0) { %> item-size-disabled <% } else { %> bg-gray-100 hover:border-red-600 <% } %>
-         <% if (item.product_size === size.size) { %> bg-red-100 border-red-600 <% } %>"
-  style="<% if (size.size.length > 2) { %> width: 100%; <% } else { %> width: 35px; height: 35px; <% } %>"
-  data-size="<%= size.size %>" data-product-id="<%= item.product_id %>"
-  data-quantity="<%= size.quantity %>"
-  data-selected="<%= item.product_size === size.size %>" <% if (size.quantity === 0) { %> disabled <% } %>>
-  <%= size.size %>
-</button>
-
-                                        </li>
-                                        <% }); %>
-                                    </ul>
-
-                                    <input type="hidden" id="selected-sizes" name="selected_size" value="<%= item.product_size %>">
-                                  </div>
-                                  <div class="new-cart-quantity">
-                                    <span class="cart-short-text">Quantity :
-                                      <span id="quantity-display-108">
-                                        <!-- <%= item.quantity %> -->
-                                      </span></span>
-                                    <div class="increase-decrease">
-                                      <span class="decrease" data-product-id="<%= item.product_id %>">-</span>
-                                      <span class="quantity w-[30%]" data-product-id="<%= item.product_id %>">
-                                        <%= parseInt(item.quantity) %>
-                                      </span>
-                                      <span class="increase" data-product-id="<%= item.product_id %>">+</span>
-                                    </div>
-                                    <div class="product-limit-msg">
-                                      <span>Maximum quantity reached </span>
-                                    </div>
+                                  <div class="pro-cart-price">
+                                    <h5> <span class=""> £<%=item.product_price %></span></h5>
                                   </div>
                                 </div>
                               </div>
@@ -144,38 +98,11 @@
 <%- include('includes/foot') %>
   <script src="assets/js/whislist.js"></script>
   <script>
-    // Handle size selection
-    const sizeButtons = document.querySelectorAll('.item-size-button');
-    sizeButtons.forEach(button => {
-      button.addEventListener('click', function () {
-        console.log(button)
-        if (button.getAttribute('data-selected') === 'true') {
-          return;
-        }
-        sizeButtons.forEach(btn => {
-          btn.setAttribute('data-selected', 'false');
-          btn.classList.remove('border-red-600', 'bg-red-100');
-        });
-        button.setAttribute('data-selected', 'true');
-        button.classList.add('border-red-600', 'bg-red-100');
-        document.getElementById('selected-sizes').value = button.getAttribute('data-size');
-      });
-    });
+    
     document.querySelectorAll('.add-to-cart').forEach(button => {
       button.addEventListener('click', function (e) {
         e.preventDefault();
-
-        const selectedSize = document.getElementById('selected-sizes').value;
-        var message = document.getElementById("productAddedInCart");
-        if (!selectedSize) {
-          message.textContent = "Select product size.";
-          message.style.display = "block";
-          setTimeout(() => {
-            message.style.display = "none";
-          }, 4000);
-          return;
-        }
-
+          
         // Get product-specific data from the button's dataset
         const productData = {
           product_id: button.getAttribute('data-product-id'),
@@ -183,7 +110,7 @@
           product_price: button.getAttribute('data-product-price'),
           product_image: button.getAttribute('data-product-image'),
           quantity: 1, // Default quantity is 1
-          product_size: selectedSize
+          product_size: ""
         };
 
         fetch('/add-to-cart', {

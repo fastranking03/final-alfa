@@ -10,37 +10,37 @@ export const addToWishList = async (req, res) => {
     if (req.session.user) {
         try {
             const userId = req.session.user.id;
-            const { product_id, product_name, product_size, product_price, quantity, product_image } = productData;
+            const { product_id, product_name, product_price, quantity, product_image } = productData;
 
             const [existingProduct] = await connect.execute(
-                'SELECT quantity FROM alfa_whislist WHERE user_id = ? AND product_id = ? AND product_size = ?',
-                [userId, product_id, product_size]
+                'SELECT quantity FROM alfa_whislist WHERE user_id = ? AND product_id = ?',
+                [userId, product_id]
             );
 
             if (existingProduct.length > 0) {
-
                 await connect.execute(
-                    'UPDATE alfa_whislist SET quantity = quantity + ? WHERE user_id = ? AND product_id = ? AND product_size = ?',
-                    [quantity, userId, product_id ,product_size]
+                    'UPDATE alfa_whislist SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?',
+                    [quantity, userId, product_id]
                 );
             } else {
-
                 await connect.execute(
-                    'INSERT INTO alfa_whislist (user_id, product_id, product_name, product_size, product_price, quantity, product_image, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())',
-                    [userId, product_id, product_name, product_size, product_price, quantity, product_image]
+                    'INSERT INTO alfa_whislist (user_id, product_id, product_name, product_price, quantity, product_image, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())',
+                    [userId, product_id, product_name, product_price, quantity, product_image]
                 );
             }
-            // Delete the product from the wishlist after adding it to the cart
+
+            // Remove the product from cart after adding to wishlist
             await connect.execute(
-                'DELETE FROM alfa_cart WHERE user_id = ? AND product_id = ? AND product_size = ?',
-                [userId, product_id, product_size]
+                'DELETE FROM alfa_cart WHERE user_id = ? AND product_id = ?',
+                [userId, product_id]
             );
-            res.json({ success: true, message: 'Product added to cart.' });
+
+            res.json({ success: true, message: 'Product added to wishlist.' });
         } catch (err) {
             console.error(err);
-            res.json({ success: false, message: 'Failed to add product to cart.' });
+            res.json({ success: false, message: 'Failed to add product to wishlist.' });
         }
-    }  
+    }
 };
 
 export const disWishList = async (req ,res) =>{

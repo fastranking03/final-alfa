@@ -78,40 +78,15 @@
 
                       <div class="product-color-list">
                         <ul>
-
+                        <% colourData.forEach(data => { %> 
                           <li>
                             <div class="prouduct-checkout">
-                              <input type="checkbox" class="cat-checkbox" id="whiteCheckbox" value="orchid">
-                              <a class="color-circle" style=" background-color: #DA70D6; "></a>
-                              <label for="whiteCheckbox" class="color-label"> Orchid </label>
+                              <input type="checkbox" class="cat-checkbox" id="whiteCheckbox" value="<%= data.colour_name %>">
+                              <a class="color-circle" style=" background-color:  <%= data.colour_code %>; "></a>
+                              <label for="whiteCheckbox" class="color-label"> <%= data.colour_name %> </label>
                             </div>
                           </li>
-
-                          <li>
-                            <div class="prouduct-checkout">
-                              <input type="checkbox" class="cat-checkbox" id="blackCheckbox" value="rose">
-                              <a class="color-circle" style=" background-color: #FF007F;"></a>
-                              <label for="blackCheckbox" class="color-label">  Rose </label>
-                            </div>
-                          </li>
-
-                          <li>
-                            <div class="prouduct-checkout">
-                              <input type="checkbox" class="cat-checkbox" id="blueCheckbox" value="navy">
-                              <a class="color-circle" style=" background-color: #000080; "></a>
-                              <label for="blueCheckbox" class="color-label"> Navy </label>
-                            </div>
-                          </li>
-
-                          <li>
-                            <div class="prouduct-checkout">
-                              <input type="checkbox" class="cat-checkbox" id="purpleCheckbox" value="purple"
-                                data-colour="colour">
-                              <a class="color-circle" style=" background-color: #A020F0;"></a>
-                              <label for="purpleCheckbox" class="color-label"> purple </label>
-                            </div>
-                          </li>
-
+                          <% }) %>
                         </ul>
                       </div>
                     </div>
@@ -122,6 +97,9 @@
                       </div>
                       <div class="product-size-list product-size-list2">
                         <ul class="flex gap-2">
+                          <li class="relative">
+                            <button class="size-button size-filter  bg-gray-100 "> XS </button>
+                          </li>
                           <li class="relative">
                             <button class="size-button size-filter  bg-gray-100 "> S </button>
                           </li>
@@ -140,9 +118,20 @@
                           <li class="relative">
                             <button class="size-button  bg-gray-100 size-filter "> 3XL </button>
                           </li>
+                          <li class="relative">
+                            <button class="size-button  bg-gray-100 size-filter "> 36 </button>
+                          </li>
+                          <li class="relative">
+                            <button class="size-button  bg-gray-100 size-filter "> 38 </button>
+                          </li>
+                          <li class="relative">
+                            <button class="size-button  bg-gray-100 size-filter "> 40 </button>
+                          </li>
+                          <li class="relative">
+                            <button class="size-button  bg-gray-100 size-filter "> 46 </button>
+                          </li>
                          </ul>
-                          
-                      </div>
+                       </div>
                        <hr>
                      </div>
 
@@ -227,41 +216,16 @@
 
             <div class="product-color-list">
               <ul>
-
-                <li>
-                  <div class="prouduct-checkout">
-                    <input type="checkbox" class="cat-checkbox" id="whiteCheckbox" value="orchid">
-                    <a class="color-circle" style=" background-color: #DA70D6; "></a>
-                    <label for="whiteCheckbox" class="color-label"> Orchid </label>
-                  </div>
-                </li>
-
-                <li>
-                  <div class="prouduct-checkout">
-                    <input type="checkbox" class="cat-checkbox" id="blackCheckbox" value="rose">
-                    <a class="color-circle" style=" background-color: #FF007F;"></a>
-                    <label for="blackCheckbox" class="color-label">  Rose </label>
-                  </div>
-                </li>
-
-                <li>
-                  <div class="prouduct-checkout">
-                    <input type="checkbox" class="cat-checkbox" id="blueCheckbox" value="navy">
-                    <a class="color-circle" style=" background-color: #000080; "></a>
-                    <label for="blueCheckbox" class="color-label"> Navy </label>
-                  </div>
-                </li>
-
-                <li>
-                  <div class="prouduct-checkout">
-                    <input type="checkbox" class="cat-checkbox" id="purpleCheckbox" value="purple"
-                      data-colour="colour">
-                    <a class="color-circle" style=" background-color: #A020F0;"></a>
-                    <label for="purpleCheckbox" class="color-label"> purple </label>
-                  </div>
-                </li>
-
-              </ul>
+                <% colourData.forEach(data => { %> 
+                  <li>
+                    <div class="prouduct-checkout">
+                      <input type="checkbox" class="cat-checkbox" id="whiteCheckbox" value="<%= data.colour_name %>">
+                      <a class="color-circle" style=" background-color: <%= data.colour_code %>"></a>
+                      <label for="whiteCheckbox" class="color-label"> <%= data.colour_name %> </label>
+                    </div>
+                  </li>
+                  <% }) %>
+               </ul>
             </div>
           </div>
 
@@ -271,6 +235,9 @@
             </div>
             <div class="product-size-list mobile-product-sl">
               <ul class="flex gap-2">
+                <li class="relative">
+                  <button class="size-button size-filter  bg-gray-100 "> XS </button>
+                </li>
                 <li class="relative">
                   <button class="size-button size-filter  bg-gray-100 "> S </button>
                 </li>
@@ -288,6 +255,18 @@
                 </li>
                 <li class="relative">
                   <button class="size-button  bg-gray-100 size-filter "> 3XL </button>
+                </li>
+                <li class="relative">
+                  <button class="size-button  bg-gray-100 size-filter "> 36 </button>
+                </li>
+                <li class="relative">
+                  <button class="size-button  bg-gray-100 size-filter "> 38 </button>
+                </li>
+                <li class="relative">
+                  <button class="size-button  bg-gray-100 size-filter "> 40 </button>
+                </li>
+                <li class="relative">
+                  <button class="size-button  bg-gray-100 size-filter "> 46 </button>
                 </li>
                </ul>
             </div>
@@ -331,6 +310,11 @@
   
       function filterProducts() {
       const searchQuery = searchBar.value.toLowerCase();
+      // Get price range
+      const minPrice = Math.min(...Array.from(priceInputs).map((input) => +input.value));
+      const maxPrice = Math.max(...Array.from(priceInputs).map((input) => +input.value));
+      // Update range values
+       rangeValues.textContent = `£${minPrice} - £${maxPrice}`;
 
   // Get selected colors
   const selectedColors = Array.from(colorFilters)
@@ -341,18 +325,19 @@
   const selectedSizes = Array.from(sizeFilters)
     .filter((button) => button.classList.contains("active"))
     .map((button) => button.textContent.trim());
-  // Get price range
-  const minPrice = Math.min(...Array.from(priceInputs).map((input) => +input.value));
-  const maxPrice = Math.max(...Array.from(priceInputs).map((input) => +input.value));
+   
 
-  // Update range values
-  rangeValues.textContent = `£${minPrice} - £${maxPrice}`;
+
+
 
   // Filter products based on selected criteria
   const filteredProducts = products.filter((product) => {
     const matchesSearch = searchQuery === "" || product.p_name.toLowerCase().includes(searchQuery) ||  searchQuery === "" || product.brand.toLowerCase().includes(searchQuery) ;
     const matchesColor = selectedColors.length === 0 || selectedColors.includes(product.colour.toLowerCase());
-    const matchesSize = selectedSizes.length === 0 || selectedSizes.includes(product.size);
+    console.log(product)
+
+    const matchesSize = selectedSizes.length === 0 || selectedSizes.includes(product.size.toLowerCase());
+    console.log(matchesSize)
     const matchesPrice = product.p_main_price >= minPrice && product.p_main_price <= maxPrice;
 
     return matchesSearch && matchesColor && matchesSize && matchesPrice;
@@ -399,6 +384,15 @@ function renderProducts(products) {
                   <span class="final-price">£${product.p_main_price}</span>
                 </h5>
               </div>
+              <div class="pro-whishlist">
+                 <button type='button' class="add-to-favorites move-to-cart" 
+                    data-product-id="${product.id}" 
+                    data-product-name="${product.p_name}"
+                    data-product-price="${product.p_price}"
+                    data-product-image="${product.p_image}">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                </div>
             </div>
           </div>
         </div>
@@ -426,7 +420,48 @@ function renderProducts(products) {
       renderProducts(products);
     });
   </script>
-  
+  <script>
+     // Move to Wishlist
+       document.addEventListener('click', async (e) => {
+        const button = e.target.closest('.move-to-cart');  
+        if (button) {
+          e.preventDefault();
+
+          // Get product data
+          const productData = {
+            product_id: button.getAttribute('data-product-id'),
+            product_name: button.getAttribute('data-product-name'),
+            product_price: button.getAttribute('data-product-price'), // Ensure correct price variable
+            product_image: button.getAttribute('data-product-image'),
+            quantity: 1, 
+            product_size: "",
+          };
+
+          console.log('Adding to wishlist:', productData);
+
+          try {
+            const response = await fetch('/add-to-wishlist', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(productData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+              window.location.href = '/my-wishlist';
+            } else {
+              alert(data.message || 'Failed to move product to wishlist.');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        }
+      });
+
+  </script>
 
 </body>
 

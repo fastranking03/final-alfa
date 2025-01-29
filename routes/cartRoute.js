@@ -21,7 +21,7 @@ router.get('/add-address',ensureAuthenticated, async (req,res) =>{
    const {cartData,cartCount } = await getCartData(req);
     const catData = await getAllCategory();
     const typeData = await disAllType()
-    res.render('add-address',{cartData,cartCount,catData,typeData})
+    res.render('add-address',{cartData,cartCount,catData,typeData});
 });
 
 router.get('/edit-address/:id',ensureAuthenticated, async (req,res) =>{

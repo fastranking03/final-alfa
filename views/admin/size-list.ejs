@@ -28,7 +28,7 @@
                             </div>
                             <div class="mt-8">
                                 <div>
-                                    <table class="w-[100%]">
+                                    <table id="dataTable" class="w-[100%]">
                                         <thead class="bg-gray-100  border-b-[2px]">
                                             <tr>
                                                 <th class="p-3 text-left">Sr.No</th>
@@ -37,7 +37,7 @@
                                                 <th class="p-3 text-left">Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>      
+                                       
                                             <tbody>
                                                 <% sizeData.forEach((data, index) => { %>          
                                                 <tr class="shadow">
@@ -51,8 +51,7 @@
                                                 </tr>
                                                 <% }) %>
                                             </tbody>
-                                            
-                                         </tbody>
+                                          
                                     </table>
                                 </div>
                             </div>
@@ -61,6 +60,16 @@
                 </div>
         </div>
     </div>
+    <%- include('includes/foot') %>
+    <script>
+        $(document).ready(function () {
+           $('#dataTable').DataTable({
+                language: {
+               search: "", 
+               },
+           });
+           });
+   </script>
 </body>
 
 </html>

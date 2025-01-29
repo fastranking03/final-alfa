@@ -419,24 +419,13 @@
      document.getElementById('addToWishList').addEventListener('click', function (e) {
     e.preventDefault();
 
-    const selectedSize = document.getElementById('selected-size').value;
-    const message = document.getElementById("productAddedInCart");
-
-    if (!selectedSize) {
-        message.textContent = "Select product size.";
-        message.style.display = "block";
-        setTimeout(() => {
-            message.style.display = "none";
-        }, 4000);
-        return;
-    }
 
     let productData = {
         product_id: document.querySelector('input[name="product_id"]').value,
         product_name: document.querySelector('input[name="product_name"]').value,
         product_price: document.querySelector('input[name="product_price"]').value,
         quantity: document.querySelector('input[name="quantity"]').value,
-        product_size: selectedSize,
+
         product_image: document.querySelector('input[name="product_image"]').value,
     };
 

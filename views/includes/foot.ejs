@@ -9,7 +9,7 @@
   document.getElementById('searchInput').addEventListener('input', function () {
     const query = this.value;
 
-    if (query.length > 2) { //Only search if query is longer than 2 characters
+    if (query.length > 1) { //Only search if query is longer than 2 characters
       fetch(`/search-products?query=${query}`)
         .then(response => response.json())
         .then(data => {
@@ -35,7 +35,7 @@
             });
             dropdown.classList.add('show');
           } else {
-            dropdown.innerHTML = '<div class="dropdown-item">No Products found</div>'; e
+            dropdown.innerHTML = '<div class="dropdown-item">No Products found</div>';
             dropdown.classList.add('show');
           }
         });

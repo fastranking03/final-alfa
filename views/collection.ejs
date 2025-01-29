@@ -79,40 +79,15 @@
 
                       <div class="product-color-list">
                         <ul>
-
-                          <li>
-                            <div class="prouduct-checkout">
-                              <input type="checkbox" class="cat-checkbox" id="whiteCheckbox" value="orchid">
-                              <a class="color-circle" style=" background-color: #DA70D6; "></a>
-                              <label for="whiteCheckbox" class="color-label"> Orchid </label>
-                            </div>
-                          </li>
-
-                          <li>
-                            <div class="prouduct-checkout">
-                              <input type="checkbox" class="cat-checkbox" id="blackCheckbox" value="rose">
-                              <a class="color-circle" style=" background-color: #FF007F;"></a>
-                              <label for="blackCheckbox" class="color-label">  Rose </label>
-                            </div>
-                          </li>
-
-                          <li>
-                            <div class="prouduct-checkout">
-                              <input type="checkbox" class="cat-checkbox" id="blueCheckbox" value="navy">
-                              <a class="color-circle" style=" background-color: #000080; "></a>
-                              <label for="blueCheckbox" class="color-label"> Navy </label>
-                            </div>
-                          </li>
-
-                          <li>
-                            <div class="prouduct-checkout">
-                              <input type="checkbox" class="cat-checkbox" id="purpleCheckbox" value="purple"
-                                data-colour="colour">
-                              <a class="color-circle" style=" background-color: #A020F0;"></a>
-                              <label for="purpleCheckbox" class="color-label"> purple </label>
-                            </div>
-                          </li>
-
+                          <% colourData.forEach(data => { %> 
+                            <li>
+                              <div class="prouduct-checkout">
+                                <input type="checkbox" class="cat-checkbox" id="whiteCheckbox" value="<%= data.colour_name %>">
+                                <a class="color-circle" style=" background-color:  <%= data.colour_code %>; "></a>
+                                <label for="whiteCheckbox" class="color-label"> <%= data.colour_name %> </label>
+                              </div>
+                            </li>
+                            <% }) %>
                         </ul>
                       </div>
                     </div>
@@ -228,41 +203,16 @@
   
               <div class="product-color-list">
                 <ul>
-  
-                  <li>
-                    <div class="prouduct-checkout">
-                      <input type="checkbox" class="cat-checkbox" id="whiteCheckbox" value="orchid">
-                      <a class="color-circle" style=" background-color: #DA70D6; "></a>
-                      <label for="whiteCheckbox" class="color-label"> Orchid </label>
-                    </div>
-                  </li>
-  
-                  <li>
-                    <div class="prouduct-checkout">
-                      <input type="checkbox" class="cat-checkbox" id="blackCheckbox" value="rose">
-                      <a class="color-circle" style=" background-color: #FF007F;"></a>
-                      <label for="blackCheckbox" class="color-label">  Rose </label>
-                    </div>
-                  </li>
-  
-                  <li>
-                    <div class="prouduct-checkout">
-                      <input type="checkbox" class="cat-checkbox" id="blueCheckbox" value="navy">
-                      <a class="color-circle" style=" background-color: #000080; "></a>
-                      <label for="blueCheckbox" class="color-label"> Navy </label>
-                    </div>
-                  </li>
-  
-                  <li>
-                    <div class="prouduct-checkout">
-                      <input type="checkbox" class="cat-checkbox" id="purpleCheckbox" value="purple"
-                        data-colour="colour">
-                      <a class="color-circle" style=" background-color: #A020F0;"></a>
-                      <label for="purpleCheckbox" class="color-label"> purple </label>
-                    </div>
-                  </li>
-  
-                </ul>
+                  <% colourData.forEach(data => { %> 
+                    <li>
+                      <div class="prouduct-checkout">
+                        <input type="checkbox" class="cat-checkbox" id="whiteCheckbox" value="<%= data.colour_name %>">
+                        <a class="color-circle" style=" background-color: <%= data.colour_code %>"></a>
+                        <label for="whiteCheckbox" class="color-label"> <%= data.colour_name %> </label>
+                      </div>
+                    </li>
+                    <% }) %>
+                 </ul>
               </div>
             </div>
   

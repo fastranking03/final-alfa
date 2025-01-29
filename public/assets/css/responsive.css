@@ -174,6 +174,13 @@
     .product-search-control {
         width: 100%;
     }
+    .product-color-list ul, .product-size-list ul {
+        flex-wrap: wrap;
+        gap: 3px;
+        column-gap: 4px;
+        row-gap: 0;
+        display: flex;
+    }
 }
 
 @media screen and (max-width:999px) {
@@ -275,6 +282,7 @@
         gap: 3px;
         column-gap: 4px;
         row-gap: 0;
+        display: flex;
     }
 
     .price-range-input {
@@ -393,7 +401,9 @@
     .mt-700 {
         top: 70px !important;
     }
-
+    .banner-bottom {
+        margin: 0 0 100px;
+    }
     .owl-dots {
         display: none;
     }
@@ -688,16 +698,19 @@
     }
 
     .offer-left-wrap .offer-images .offer-circle {
-        width: 150px;
-        height: 150px;
+        width: 100%;
+        height: 100%;
     }
-
+    .offer-left-wrap{
+        display: block;
+    }
     .offer-combo .combo-img {
-        width: 150px;
+        width: 100%;
     }
 
     .offer-wrapper {
         gap: 5px;
+        display: block;
     }
 
     .offer-left-wrap .offer-images {
@@ -705,9 +718,9 @@
     }
 
     .offer-wrapper .offer-wrap {
-        width: 65%;
-        height: 235px;
-        padding: 29px 16px 58px;
+        width: 100%;
+        height: auto;
+        padding: 29px 60px 30px;
     }
 
     .offer-left-wrap .offer-images .offer-combo {
@@ -716,29 +729,31 @@
     }
 
     .offer-wrap-right {
-        width: 34%;
-        height: 235px;
+        width: 100%;
+        height: auto;
+        padding-bottom: 20px;
     }
 
     .offer-item-name h2 {
-        font-size: 23px;
+        font-size: 40px;
         letter-spacing: 13px;
     }
-
+    .offer-text-wrap {
+        text-align: center;
+    }
     .offer-content p {
         font-size: 14px;
     }
 
     .offer-item-name {
-        bottom: 58px;
-        left: -30px;
+        position: static;
+        transform: none;
     }
-
     .offer-content {
-        top: 69px;
-        right: 6px;
+        top: 82px;
+        right: 0px !important;
     }
-
+    
     .offer-right-text a {
         width: 105px;
         height: 32px;
@@ -976,6 +991,7 @@
         column-gap: 2px;
         row-gap: 4px;
         flex-direction: row;
+        display: flex;
         align-items: center;
     }
 
@@ -1318,6 +1334,9 @@
     }
     .alfa-main-title h1{
         font-size: 40px;
+    }
+    .alfa-banners.alfa-banners2 .alfa-main-image {
+        top: 5px;
     }
 }
 

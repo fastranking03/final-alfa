@@ -59,15 +59,14 @@
                                           <% (sizesMap[item.product_id] || []).forEach(size=> { %>
                                             <li class="relative">
                                               <button
-                                                class="item-size-button text-[14px] font-[600] w-[35px] h-[35px] border-[1px] rounded-full 
-                                                      <% if (size.quantity === 0) { %> item-size-disabled <% } else { %> bg-gray-100 hover:border-red-600 <% } %>
-                                                      <% if (item.product_size === size.size) { %> bg-red-100 border-red-600 <% } %>"
-                                                data-size="<%= size.size %>" data-product-id="<%= item.product_id %>"
-                                                data-quantity="<%= size.quantity %>"
-                                                data-selected="<%= item.product_size === size.size %>" <% if
-                                                (size.quantity===0) { %> disabled <% } %>>
-                                                  <%= size.size %>
-                                              </button>
+                                              class="item-size-button text-[14px] font-[600] border-[1px] rounded-full 
+                                                    <% if (size.quantity === 0) { %> item-size-disabled <% } else { %> bg-gray-100 hover:border-red-600 <% } %>
+                                                    <% if (item.product_size === size.size) { %> bg-red-100 border-red-600 <% } %>"
+                                              style="<% if (size.size.length > 2) { %> width: 100%; <% } else { %> width: 35px; height: 35px; <% } %>"
+                                              data-size="<%= size.size %>" data-product-id="<%= item.product_id %>"
+                                              data-quantity="<%= size.quantity %>"
+                                              data-selected="<%= item.product_size === size.size %>" <% if (size.quantity === 0) { %> disabled <% } %>>
+                                              <%= size.size %>
                                             </li>
                                             <% }); %>
                                         </ul>
@@ -98,7 +97,7 @@
                                   <div class="pro-cart-price">
                                     <h5>
                                       <span class="mrp-price cart-mrp">£89.95</span>
-                                      <span class="final-prices cart-final">£89.95</span>
+                                      <span class="final-prices cart-final"> £<%= item.product_price %></span>
                                     </h5>
                                     <div class="move-to-wishlist">
                                       <button type="button" class="move-to-cart move-cart-css"  data-product-id="<%= item.product_id %>" data-product-name="<%= item.product_name %>"
@@ -244,17 +243,6 @@
   document.addEventListener('click', async (e) => {
     if (e.target.classList.contains('move-to-cart')) {
       e.preventDefault();
-
-      const message = document.getElementById('productAddedInCart');
-      if (!selectedSize) {
-        message.textContent = 'Select product size.';
-        message.style.display = 'block';
-        setTimeout(() => {
-          message.style.display = 'none';
-        }, 4000);
-        return;
-      }
-
       // Get product data
       const button = e.target;
       const productData = {
@@ -263,7 +251,7 @@
         product_price: button.getAttribute('data-product-price'),
         product_image: button.getAttribute('data-product-image'),
         quantity: 1, // Default quantity
-        product_size: selectedSize,
+        product_size: "",
       };
 
       try {

@@ -982,12 +982,14 @@ a {
   top: 12px;
   right: 10px;
 }
-.pro-whishlist a{
+.pro-whishlist button{
   font-size: 16px;
   color: var(--primaryColor);
   position: absolute;
   top: 10px;
   right: 15px;
+  border: none;
+  background: none;
 }
 .pro-whishlist a:hover{
    color: var(--primaryColor);
@@ -1350,8 +1352,12 @@ a {
   margin: 25px auto;
 }
 .product-size-list ul {
-  display: flex;
-  gap: 8px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto;
+    justify-content: start;
+}
+.product-size-list.product-size-list2 ul{
+  grid-template-columns: auto auto auto auto auto auto auto;
 }
 .product-color-list ul{
     gap: 5px;
