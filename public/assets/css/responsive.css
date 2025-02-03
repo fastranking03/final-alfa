@@ -82,7 +82,7 @@
         font-size: 14px;
     }
     .alfa-pro-detail-wrapper .d-item img {
-        height: 520px;
+        /* height: 520px; */
      }
      .image-item .d-img {
         width: 60px;
@@ -188,7 +188,7 @@
         margin: 0 50px;
     }
     .alfa-pro-detail-wrapper .d-item img {
-        height: 370px;
+        /* height: 370px; */
         object-fit: scale-down;
     }
     .image-item .d-img {
@@ -553,6 +553,11 @@
 
     .pro-detail-size-ul .size-item {
         display: flex !important;
+    }
+    .item-size-button {
+        width: 28px;
+        height: 28px !important;
+        font-size: 13px !important;
     }
 }
 
@@ -997,11 +1002,10 @@
     .product-size-list ul {
         flex-wrap: wrap;
         gap: 3px;
-        column-gap: 2px;
+        column-gap: 7px;
         row-gap: 4px;
         flex-direction: row;
         display: flex;
-        align-items: center;
     }
 
     .product-size-list.mobile-product-sl ul {
@@ -1009,7 +1013,7 @@
     }
 
     .final-prices {
-        font-size: 18px;
+        font-size: 20px !important;
     }
 
     .prod-dd {
@@ -1087,7 +1091,7 @@
 
     .pro-cart-title h3,
     .pro-cart-price h3 {
-        font-size: 17px;
+        font-size: 15px;
     }
    .pro-cart-price h5{
     margin: 0;
@@ -1125,7 +1129,7 @@
     }
 
     .alfa-pro-detail-wrapper .d-item img {
-        height: 500px;
+        /* height: 500px; */
         object-position: top;
     }
 
@@ -1354,8 +1358,49 @@
     .alfa-testimonila .owl-nav{
         display: none !important;
     }
+  .features-content{
+    margin-top:10px
 }
-
+.item-size-button {
+    width: 26px;
+    height: 26px !important;
+    font-size: 12px !important;
+    padding: 2px;
+}
+.increase-decrease .decrease, .increase-decrease .increase {
+    height: 30px;
+    padding: 5px 7px 0 8px;
+}
+.d-title h1 {
+    font-size: 22px;
+}
+.product-detail-feat ul .product-feat-point {
+    gap: 55px;
+}
+.size-button {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 12px;
+}
+.size-popup {
+    position: relative;
+    font-size: 12px;
+    width: 40px;
+    top: -5px;
+}
+.size-button.size-disabled::after, .item-size-disabled::after {
+    top: -14px;
+}
+.product-size-list ul li {
+    margin: 0 0 0px;
+}
+.pro--text {
+    margin: 14px 0 12px;
+}
+.image-item{
+    flex:none
+}
+}
 @media screen and (max-width:376px) {
     .final-price {
         font-size: 15px;

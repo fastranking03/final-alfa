@@ -1355,6 +1355,10 @@ a {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto auto;
     justify-content: start;
+    gap: 15px;
+}
+.product-size-list ul li{
+  margin: 0 0 18px;
 }
 .product-size-list.product-size-list2 ul{
    grid-template-columns: auto auto auto auto auto auto auto;
@@ -1499,7 +1503,7 @@ a {
 }
 .new-cart-quantity{
   position: relative;
-  top: -8px;
+  top: -9px;
   width: 100px;
 }
 .product-limit-msg span{
@@ -3421,11 +3425,10 @@ li a:hover .open-icon-main {
   color: #000;
   font-size: 12px;
   font-weight: 600;
-  width: 49px;
+  width: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  left: -2px;
   top: 40px;
 }
