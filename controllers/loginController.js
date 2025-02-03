@@ -114,7 +114,7 @@ export const verifyOtpAndRegister = async (req, res) => {
         const passHash = await bcrypt.hash(password, saltRounds);
 
         const [result] = await connect.execute(
-            "INSERT INTO alfa_users (name, email, password, status, created_at) VALUES (?, ?, ?, 0, NOW())",
+            "INSERT INTO alfa_users (name, email, password, status ,type, created_at) VALUES (?, ?, ?, 0, 'user', NOW())",
             [name, email, passHash]
         );
         const userId = result.insertId;

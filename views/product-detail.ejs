@@ -10,7 +10,15 @@
   <%- include('includes/head') %>
 
 </head>
-
+<style>
+  .in-wishlist {
+    background-color: #9e9e9e  !important; /* Orange */
+    color: white !important;
+    border: 1px solid #9e9e9e;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+</style>
 <body>
   <!-- Loader -->
   <div class="page-loader" id="loader">
@@ -77,22 +85,18 @@
                   </div>
                   <div class="product-detail-feat">
                     <ul>
-                      <li>
+                       <li>
                         <div class="product-feat-point">
                           <h6 class="feat-sku">SKU</h6>
-                          <span>:</span>
-                          <h6>
-                            <%= proDetailData.sku %>
-                          </h6>
+                            <span>: <%= proDetailData.sku %></span>
+                          
                         </div>
                       </li>
                       <li>
                         <div class="product-feat-point">
                           <h6 class="feat-sku">Category</h6>
-                          <span>:</span>
-                          <h6>
-
-                          </h6>
+                            <span>: <%= proDetailData.cat_name %></span>
+                          
                         </div>
                       </li>
                     </ul>
@@ -186,7 +190,7 @@
                         Add to Cart
                       </button>
 
-                      <button type="button" class="cart-btn buy-now" id="addToWishList">
+                      <button type="button" class="cart-btn buy-now" id="addToWishList" >
                         Add to Wishlist
                       </button>
 
@@ -227,14 +231,12 @@
                 <div class="accordion-item-header">Return Policy</div>
                 <div class="accordion-item-body">
                   <div class="accordion-item-body-content">
-
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <!-- End -->
-
           <!-- Review -->
           <div class="container">
             <div class="review-warapper position-relative">
@@ -336,9 +338,7 @@
                         </span>
                       </div>
                     </div>
-
                   </div>
-
                 </div>
                 <hr>
                 <div class="review-content-wrapper">
@@ -347,8 +347,6 @@
                   </div>
                   <div class="rivew-row mt-3">
                     <!-- Display individual reviews -->
-
-
                   </div>
                 </div>
               </div>
@@ -379,6 +377,7 @@
                               <span class="final-price">£<%= product.p_main_price %></span>
                               <span class="discount-text"> </span>
                             </div>
+                            
                             <div class="product-rating d-none">
                               <ul>
                                 <li>
@@ -393,9 +392,14 @@
                           </div>
                           <div class="product-btn">
                             <div class="pro-whishlist">
-                              <a class="add-to-favorites" data-product-id="<%= product.id %>">
+                              <button type="button" class="add-to-favorites  move-to-cart"
+                               data-product-id="<%= product.id %>"
+                               data-product-name="<%= product.p_name %>"
+                               data-product-price="<%= product.p_price %>"
+                               data-product-image="<%= product.p_image %>"
+                               >
                                 <i class="fa-regular fa-heart"></i>
-                              </a>
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -414,45 +418,63 @@
   </div>
 
   <%- include('includes/foot') %>
+  
   <script src="assets/js/cart.js"></script>
     <script>
-     document.getElementById('addToWishList').addEventListener('click', function (e) {
-    e.preventDefault();
+    document.addEventListener("DOMContentLoaded", async function () {
+    const addToWishListBtn = document.getElementById("addToWishList");
+    const productId = document.querySelector('input[name="product_id"]').value;
+    
+    try {
+        // Fetch to check if product is already in wishlist
+        const response = await fetch(`/check-wishlist?product_id=${productId}`);
+        const data = await response.json();
 
+        if (data.exists) {
+            addToWishListBtn.classList.add("in-wishlist");
+             addToWishListBtn.disabled = true;  
+        }
+    } catch (error) {
+        console.error("Error checking wishlist status:", error);
+    }
 
-    let productData = {
-        product_id: document.querySelector('input[name="product_id"]').value,
-        product_name: document.querySelector('input[name="product_name"]').value,
-        product_price: document.querySelector('input[name="product_price"]').value,
-        quantity: document.querySelector('input[name="quantity"]').value,
-
-        product_image: document.querySelector('input[name="product_image"]').value,
-    };
+    addToWishListBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        
+        let productData = {
+            product_id: document.querySelector('input[name="product_id"]').value,
+            product_name: document.querySelector('input[name="product_name"]').value,
+            product_price: document.querySelector('input[name="product_price"]').value,
+            quantity: document.querySelector('input[name="quantity"]').value,
+            product_image: document.querySelector('input[name="product_image"]').value,
+        };
 
         fetch('/add-to-wishlist', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(productData),
         })
-            .then((response) => {
-                if (response.status === 401) {
-                    window.location.href = '/login';
-                    return;
-                }
-                return response.json();
-            })
-            .then((data) => {
-                if (data.success) {
-                    window.location.href = '/my-wishlist';
-                } else {
-                    alert('Failed to add product to wishlist.');
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        .then((response) => {
+            if (response.status === 401) {
+                window.location.href = '/login';
+                return;
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (data && data.success) {
+                addToWishListBtn.classList.add("in-wishlist");
+                addToWishListBtn.disabled = true;
+                window.location.href = '/my-wishlist';
+            } else {
+                alert(data.message || 'Failed to add product to wishlist.');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     });
-
+});
     </script>
 
     <script>
@@ -515,6 +537,55 @@
       });
 
     </script>
+
+<script>
+  // Move to Wishlist
+    document.addEventListener('click', async (e) => {
+     const button = e.target.closest('.move-to-cart');  
+     if (button) {
+       e.preventDefault();
+
+       // Get product data
+       const productData = {
+         product_id: button.getAttribute('data-product-id'),
+         product_name: button.getAttribute('data-product-name'),
+         product_price: button.getAttribute('data-product-price'), // Ensure correct price variable
+         product_image: button.getAttribute('data-product-image'),
+         quantity: 1, 
+         product_size: "",
+       };
+
+       console.log('Adding to wishlist:', productData);
+
+       fetch('/add-to-wishlist', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify(productData),
+     })
+     .then((response) => {
+         if (response.status === 401) {
+             // If user is not authenticated, redirect to login page
+             window.location.href = '/login';
+             return;
+         }
+         return response.json();
+     })
+     .then((data) => {
+         if (data && data.success) {
+             window.location.href = '/my-wishlist';
+         } else {
+             alert(data.message || 'Failed to add product to wishlist.');
+         }
+     })
+     .catch((error) => {
+         console.error('Error:', error);
+     });
+        
+     }
+   });
+
+</script>
+
 
 </body>
 

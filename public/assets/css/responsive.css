@@ -573,11 +573,16 @@
     #hero-carousel .owl-nav .owl-next {
         bottom: 253px;
     }
-
+    #hero-carousel .owl-nav {
+        display: none !important;
+     }
     .alfa-hero-left-wrapper {
         padding: 24px 10px;
+        text-align: center;
     }
-
+    .alfa-text span{
+        display: none;
+    }
     .alfa-form-warpper {
         width: 100%;
     }
@@ -605,6 +610,7 @@
         width: 135px;
         height: 36px;
         font-size: 14px;
+        margin: auto;
     }
 
     .hero-sec-items {
@@ -652,12 +658,14 @@
     }
 
     .features-row .feature-box {
-        gap: 5px;
-        padding: 12px 6px 8px;
+        padding: 12px 1px 8px;
+        display: block;
+        text-align: center;
+        border: none;
     }
 
     .feature-icon img {
-        width: 30px;
+        width: 45px;
     }
 
     .features-content h5 {
@@ -797,6 +805,7 @@
 
     .bestseller-wrapper .owl-nav {
         top: -38px;
+        display: none !important;
     }
 
     .testimonial-content h4 {
@@ -1297,12 +1306,16 @@
     .dropdown-menu-wrappers ul a{
         width: 100%;
         display: inline-block;
-        height: 45px;
+        height: 35px;
         font-size: 15px;
         padding: 11px 15px;
         color: var(--blackColor);
-        border-bottom: 1px solid #eee;
         margin: 1px auto;
+    }
+    .menu-ul-wrap .type-a{
+        color: #07626b;
+        font-size: 15px;
+        font-weight: 600;
     }
     .alfa-menu-lis:hover .dropdown-menu-wrappers{
         display: block;
@@ -1338,11 +1351,14 @@
     .alfa-banners.alfa-banners2 .alfa-main-image {
         top: 5px;
     }
+    .alfa-testimonila .owl-nav{
+        display: none !important;
+    }
 }
 
 @media screen and (max-width:376px) {
     .final-price {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .mrp-price {
@@ -1355,6 +1371,9 @@
 
     .shop-content {
         padding: 0 3px;
+    }
+    .product-details h2 {
+        font-size: 13px;
     }
 }
 

@@ -1,5 +1,5 @@
 import express from "express"
-import { disProduct,addProduct, editProduct, deleteImage, deleteSize,updateProduct,deteteProduct} from "../../controllers/admin/productController.js";
+import { disProduct,addProduct, editProduct, deleteImage, deleteSize,updateProduct} from "../../controllers/admin/productController.js";
 import { getAllCategory } from "../../services/admin/catService.js";
 import { upload } from "../../multer-config.js";
 import { disAllType } from "../../services/admin/typeService.js";
@@ -22,7 +22,6 @@ router.post('/add-product',upload.fields([
 router.get('/edit-product/:id', editProduct);
 router.delete('/delete-image/:id',deleteImage);
 router.delete('/delete-size/:id', deleteSize)
-router.post('/api/deleteproduct',deteteProduct)
 
 router.post('/edit-product',upload.fields([
     { name: 'p_image', maxCount: 1 },

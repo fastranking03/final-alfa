@@ -1,14 +1,14 @@
 import express from "express";
-import { addToWishList ,disWishList} from "../controllers/whislistController.js";
-import { ensureAuthenticated ,authencateUser} from "../middleware/authMiddleware.js";
+import { addToWishList ,disWishList,checkWishlist} from "../controllers/whislistController.js";
+import { ensureAuthenticated ,authencateUser } from "../middleware/authMiddleware.js";
 import connect from "../db/connect.js";
  
 
 const router = express.Router();
 
 router.get('/my-wishlist', ensureAuthenticated, disWishList);
-
 router.post('/add-to-wishlist', authencateUser, addToWishList);
+router.get('/check-wishlist', checkWishlist);
 
 router.post("/api/delete-wishlist", async (req, res) => {
     const user = req.session.user;

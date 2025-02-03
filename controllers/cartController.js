@@ -75,22 +75,11 @@ export const updateCartQuantity = async (req, res) => {
                 [userId, product_id]
             );
 
-            const [stock] = await connect.execute(
-                'SELECT quantity FROM p_size WHERE product_id = ?',
-                [product_id]
-            );
-
-            if (product.length > 0 && stock.length > 0) {
+            if (product.length > 0) {
                 let newQuantity = product[0].quantity;
                 const productPrice = product[0].product_price;
-                const availableStock = stock[0].quantity;
-                console.log(availableStock)
 
                 if (action === 'increase') {
-                    if (newQuantity >= availableStock) {
-                        return res.json({ success: false, message: 'You cannot add more than available stock.' });
-                    }
-                  
                     newQuantity += 1;
                 } else if (action === 'decrease' && newQuantity > 1) {
                     newQuantity -= 1;
@@ -237,13 +226,11 @@ export const disCart = async (req, res, next) => {
         const { cartData, cartCount } = await getCartData(req);
         const catData = await getAllCategory();
         const typeData = await disAllType();
-        const {whislistData, wishlistCount} = await getWishlistData(req)
-
-        if(cartData.length === 0){
+        const {whislistData, wishlistCount} = await getWishlistData(req);
+      if(cartData.length === 0){
              // Redirect to another page if cartItems is empty
              return res.render('empty-cart-page',{typeData,catData});
         }
-
         const sizePromises = cartData.map(async (item) => {
             const [sizesData] = await connect.execute(
                 "SELECT size, quantity FROM p_size WHERE product_id = ?",

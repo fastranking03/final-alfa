@@ -44,7 +44,7 @@
                                 <div class="address-type">
                                   <input type="radio" id="address-<%= address.id %>" name="selectedAddress"
                                     value="<%= address.id %>" class="radio-input" <%= address.default_address==='yes' ? 'checked' : '' %> />
-                                  <label for="address-<%= address.id %>">Home</label>
+                                  <label for="address-<%= address.id %>"><%= address.address_type %></label>
                                 </div>
                                 <div class="shipper-email">
                                   <p>Email: <%= address.email %>
@@ -184,7 +184,7 @@
                     
                         </div>
                       </div>
-                       <input type="text" name="cartItemsInStock" value="<%= JSON.stringify(cartData) %>" id="cartItemsInStockInput">
+                       <input type="hidden" name="cartItemsInStock" value="<%= JSON.stringify(cartData) %>" id="cartItemsInStockInput">
                 
                     </div>
                  </div>

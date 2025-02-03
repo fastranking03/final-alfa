@@ -28,7 +28,7 @@
                             </div>
                             <div class="mt-8">
                                 <div>
-                                    <table id="dataTable" class="w-[100%]">
+                                    <table class="w-[100%]">
                                         <thead class="bg-gray-100  border-b-[2px]">
                                             <tr>
                                                 <th class="p-3 text-left">Sr.No</th>
@@ -39,7 +39,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>      
-                                            
+                                            <tbody>
                                                 <% catData.forEach((data, index) => { %>          
                                                 <tr class="shadow">
                                                     <td class="p-3 px-3"><%= index + 1 %></td>
@@ -53,7 +53,8 @@
                                                 </tr>
                                                 <% }) %>
                                             </tbody>
-                                         
+                                            
+                                         </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -62,15 +63,6 @@
                 </div>
         </div>
     </div>
-    <%- include('includes/foot') %>
-    <script>
-         $(document).ready(function () {
-            $('#dataTable').DataTable({
-                 language: {
-                search: "", 
-                },
-            });
-            });
-    </script>
 </body>
+
 </html>

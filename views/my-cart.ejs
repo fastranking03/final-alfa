@@ -243,6 +243,17 @@
   document.addEventListener('click', async (e) => {
     if (e.target.classList.contains('move-to-cart')) {
       e.preventDefault();
+
+      const message = document.getElementById('productAddedInCart');
+      if (!selectedSize) {
+        message.textContent = 'Select product size.';
+        message.style.display = 'block';
+        setTimeout(() => {
+          message.style.display = 'none';
+        }, 4000);
+        return;
+      }
+
       // Get product data
       const button = e.target;
       const productData = {
@@ -251,7 +262,7 @@
         product_price: button.getAttribute('data-product-price'),
         product_image: button.getAttribute('data-product-image'),
         quantity: 1, // Default quantity
-        product_size: "",
+        product_size: selectedSize,
       };
 
       try {

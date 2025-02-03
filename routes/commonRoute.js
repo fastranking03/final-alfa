@@ -31,7 +31,7 @@ router.get('/contact-us', async(req,res) =>{
 });
 
 router.post('/contact-us', addtoContact);
- 
+
 router.get('/term-condition', async(req,res) =>{
     const {cartData,cartCount } = await getCartData(req)
     const {whislistData, wishlistCount} = await getWishlistData(req)

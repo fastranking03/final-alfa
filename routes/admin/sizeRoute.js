@@ -1,5 +1,5 @@
 import express from "express";
-import { addSize, deleteSize, displaySize,editSize,updateSize } from "../../controllers/admin/sizeController.js";
+import { addSize, displaySize,editSize,updateSize } from "../../controllers/admin/sizeController.js";
 
 const router = express.Router();
 
@@ -9,9 +9,8 @@ const router = express.Router();
  ])
 
  router.post('/add-size', addSize);
- router.get('/edit-size/:id', editSize)
- router.post('/edit-size',updateSize)
- router.delete('/delete-sizes/:id', deleteSize);
 
+ router.get('/edit-size/:id', editSize)
+ router.post('edit-size',updateSize)
 
 export default router

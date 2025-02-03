@@ -12,24 +12,23 @@ export const addToWishList = async (req, res) => {
             const userId = req.session.user.id;
             const { product_id, product_name, product_price, quantity, product_image } = productData;
 
+            // Check if the product already exists in the wishlist
             const [existingProduct] = await connect.execute(
-                'SELECT quantity FROM alfa_whislist WHERE user_id = ? AND product_id = ?',
+                'SELECT * FROM alfa_whislist WHERE user_id = ? AND product_id = ?',
                 [userId, product_id]
             );
 
             if (existingProduct.length > 0) {
-                await connect.execute(
-                    'UPDATE alfa_whislist SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?',
-                    [quantity, userId, product_id]
-                );
-            } else {
-                await connect.execute(
-                    'INSERT INTO alfa_whislist (user_id, product_id, product_name, product_price, quantity, product_image, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())',
-                    [userId, product_id, product_name, product_price, quantity, product_image]
-                );
-            }
+                return res.json({ success: false, message: 'Product is already in your wishlist.' });
+            } 
 
-            // Remove the product from cart after adding to wishlist
+            // Insert the product into the wishlist
+            await connect.execute(
+                'INSERT INTO alfa_whislist (user_id, product_id, product_name, product_price, quantity, product_image, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())',
+                [userId, product_id, product_name, product_price, quantity, product_image]
+            );
+
+            // Remove the product from the cart after adding to wishlist
             await connect.execute(
                 'DELETE FROM alfa_cart WHERE user_id = ? AND product_id = ?',
                 [userId, product_id]
@@ -40,8 +39,36 @@ export const addToWishList = async (req, res) => {
             console.error(err);
             res.json({ success: false, message: 'Failed to add product to wishlist.' });
         }
+    } else {
+        res.json({ success: false, message: 'User not logged in.' });
     }
 };
+
+export const checkWishlist = async (req, res) => {
+    if (req.session.user) {
+        try {
+            const userId = req.session.user.id;
+            const { product_id } = req.query;
+
+            const [existingProduct] = await connect.execute(
+                'SELECT * FROM alfa_whislist WHERE user_id = ? AND product_id = ?',
+                [userId, product_id]
+            );
+
+            if (existingProduct.length > 0) {
+                return res.json({ exists: true });
+            } else {
+                return res.json({ exists: false });
+            }
+        } catch (err) {
+            console.error(err);
+            res.json({ success: false, message: 'Error checking wishlist status.' });
+        }
+    } else {
+        res.json({ success: false, message: 'User not logged in.' });
+    }
+};
+
 
 export const disWishList = async (req ,res) =>{
     try {

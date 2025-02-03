@@ -983,13 +983,13 @@ a {
   right: 10px;
 }
 .pro-whishlist button{
-  font-size: 16px;
-  color: var(--primaryColor);
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  border: none;
-  background: none;
+    font-size: 16px;
+    color: var(--primaryColor);
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    border: none;
+    background: none;
 }
 .pro-whishlist a:hover{
    color: var(--primaryColor);
@@ -1317,7 +1317,7 @@ a {
   opacity: .8;
 }
 .address-form-group input[type=checkbox]{
-  height: 19px;
+    height: 19px;
 	width: 19px;
 }
 .prouduct-checkout input[type=checkbox]:hover ,.address-form-group input[type=checkbox]:hover {
@@ -1325,8 +1325,8 @@ a {
 }
 
 .prouduct-checkout input[type=checkbox]:checked, .address-form-group input[type=checkbox]:checked{
-  background-color: var(--primaryColor);
-  opacity: 1;
+   background-color: var(--primaryColor);
+   opacity: 1;
 }
 .prouduct-checkout input[type=checkbox]:before ,.address-form-group input[type=checkbox]::before {
   content: '';
@@ -1357,8 +1357,9 @@ a {
     justify-content: start;
 }
 .product-size-list.product-size-list2 ul{
-  grid-template-columns: auto auto auto auto auto auto auto;
-}
+   grid-template-columns: auto auto auto auto auto auto auto;
+   justify-content: start;
+ }
 .product-color-list ul{
     gap: 5px;
     display: flex;
@@ -2310,10 +2311,12 @@ a {
     margin: 10px auto;
     opacity: 0;
     visibility: hidden;
-    top: 18px;
+    top: 52px;
     padding: 0;
     transition: .3s ease;
     z-index: 999;
+    border: 1px solid #eee;
+    border-top: 0;
 }
 .dropdown-menu-wrapper ul{
     display: flex;
@@ -2332,7 +2335,7 @@ a {
     width: 100px;
     display: inline-block;
     height: 30px;
-    padding: 7px 10px 0;
+    padding: 7px 3px 0;
     margin: 0 0 1px;
     text-transform: capitalize;
 }
@@ -3418,11 +3421,11 @@ li a:hover .open-icon-main {
   color: #000;
   font-size: 12px;
   font-weight: 600;
-  width: 48px;
+  width: 49px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  left: -1px;
+  left: -2px;
   top: 40px;
 }

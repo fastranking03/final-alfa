@@ -9,7 +9,6 @@ import { getWishlistData } from "../services/wishlistService.js";
 export const disByCategory = async (req, res) => {
     try {
         const { cat_slug } = req.params;
-
         // Fetch all categories with their associated wear types
         const [allCategories] = await connect.execute(`
             SELECT c.*, 
@@ -84,11 +83,15 @@ export const viewProductDetail = async (req, res) => {
         if (!product_id || !p_seo) {
             return res.status(400).send("Invalid product ID or URL.");
         }
+        // Fetch product details with category name
         const [proDetailData] = await connect.execute(
-            "SELECT * FROM products WHERE id = ? AND p_url = ?", 
+            `SELECT p.*, c.cat_name 
+             FROM products p 
+             LEFT JOIN category c ON p.cat_id = c.id 
+             WHERE p.id = ? AND p.p_url = ?`, 
             [product_id, p_seo]
         );
-      console.log(proDetailData)
+      
       // Fetch best seller products
         const [bestSellerData] = await connect.execute('SELECT * FROM products WHERE best_seller = "yes"');
 

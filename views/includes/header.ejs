@@ -1,3 +1,12 @@
+<style>
+    .icon-rotate i {
+    transition: transform 0.3s ease-in-out;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+</style>
 <header class="header">
     <div class="header-container">
         <div class="left-header-wrapper">
@@ -183,10 +192,10 @@
                                 </div>
                                 <div class="user-pro-links">
                                     <ul>
-                                        <li><a href="/my-orders">Orders</a></li>
-                                        <li><a href="/my-wishlist">Wishlist</a></li>
+                                        <li><a href="/user-orders">Orders</a></li>
+                                       
                                         <li><a href="/my-profile">My Profile</a></li>
-                                        <li><a href="">Contact Us</a></li>
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -203,7 +212,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/cart">
+                            <a href="/my-cart">
                                 <div class="alfa-icon-flex position-relative">
                                     <span class="product-count">
                                         <%= typeof cartCount !=='undefined' ? cartCount : 0 %>
@@ -239,32 +248,31 @@
                 <li><a href="/about-us" class="m-item">About Us</a></li>
                 <li><a href="/blogs" class="m-item">Blogs</a></li>
                 <li class="position-relative alfa-menu-lis" style="color: #000;">
-                    <a class="nav-item m-item">Shop <span class="icon-rotate"><i
-                                class="fa-solid fa-angle-down"></i></span></a>
-                    <div class="dropdown-menu-wrappers">
+                    <a class="nav-item m-item" id="shopToggle">
+                        Shop 
+                        <span class="icon-rotate"><i class="fa-solid fa-angle-down"></i></span>
+                    </a>
+                    <div class="dropdown-menu-wrappers" style="display: none;">
                         <div class="type-cat-grid">
-                            <% typeData.forEach (typed =>{ %>
-                              <ul class="menu-ul-wrap" style="width: 50%;">
-                                  <a href="<%= typed.type_url %>" class="type-a" ><%= typed.i_type %></a>
-                                  
-                                  <% const filteredCategories = catData.filter(data => data.wear_type_id === typed.id); %>
-                                 
-                                      <% filteredCategories.forEach(data => { %>
-                                          <li>
-                                              <a href="/collection/<%= data.cat_slug %>" class="menu-item">
-                                                  <%= data.cat_name %>
-                                              </a>
-                                          </li>
-                                      <% }) %>
-                                  </li>
-                              </ul>
-                              <%}) %>
-                          </div>
-                    </div>
-                    
-                </li>
+                            <% typeData.forEach(typed => { %>
+                                <ul class="menu-ul-wrap" style="width: 50%;">
+                                    <a href="/products/<%= typed.type_url %>" class="type-a"><%= typed.i_type %></a>
                 
-
+                                    <% const filteredCategories = catData.filter(data => data.wear_type_id === typed.id); %>
+                                    
+                                    <% filteredCategories.forEach(data => { %>
+                                        <li>
+                                            <a href="/collection/<%= data.cat_slug %>" class="menu-item">
+                                                <%= data.cat_name %>
+                                            </a>
+                                        </li>
+                                    <% }) %>
+                                </ul>
+                            <% }) %>
+                        </div>
+                    </div>
+                </li> 
+               
                 <li><a href="/contact-us" class="m-item">Contact Us</a></li>
             </ul>
         </div>
@@ -284,4 +292,22 @@
             openProfileCards.style.display = "none";
         }
     })
+   document.addEventListener("DOMContentLoaded", function () {
+    const shopToggle = document.getElementById("shopToggle");
+    const dropdownMenu = document.querySelector(".dropdown-menu-wrappers");
+    const icon = shopToggle.querySelector(".icon-rotate i");
+
+    shopToggle.addEventListener("click", function (e) {
+        e.preventDefault();
+  
+        // Toggle dropdown visibility
+        if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+            dropdownMenu.style.display = "block";
+            icon.classList.add("rotate");
+        } else {
+            dropdownMenu.style.display = "none";
+            icon.classList.remove("rotate");
+        }
+    });
+});
 </script>
