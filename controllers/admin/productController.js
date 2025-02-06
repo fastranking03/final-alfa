@@ -36,7 +36,7 @@ export const addProduct = async (req, res) => {
         const additionalImages = req.files['p_images']; // Array of files
 
         const mainImageResult = await cloudinary.v2.uploader.upload(mainImage.path, {
-            folder: 'test-product-images',
+            folder: 'product-images',
         });
         const main_image_path = mainImageResult.secure_url;
 
@@ -52,7 +52,7 @@ export const addProduct = async (req, res) => {
 
         for (const file of additionalImages) {
             const result = await cloudinary.v2.uploader.upload(file.path, {
-                folder: 'test-product-images',
+                folder: 'product-images',
             });
             imageInsertData.push([product_id, result.secure_url]);
             fs.unlink(file.path, (err) => {

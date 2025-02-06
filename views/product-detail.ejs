@@ -153,7 +153,7 @@
                         <li class="relative" style="position: relative;">
                           <button class="size-button 
                                     <% if (size.quantity === 0) { %> size-disabled <% } else { %> bg-gray-100 <% } %>"
-                            data-size="<%= size.size %>" data-quantity="<%= size.quantity %>" data-selected="false" <%
+                            data-size="<%= size.id %>" data-quantity="<%= size.quantity %>" data-selected="false" <%
                             if (size.quantity===0) { %> disabled <% } %>
                               <% if (size.quantity < 5) { %>
                                 <%= size.quantity %> items available" <% } %>
@@ -196,7 +196,13 @@
 
                     </div>
                   </div>
-
+                
+                  <div>
+                     <ul>
+                        <li>Easy 14 days returns and Refund </li>
+                     </ul>
+                  </div>
+                  
                   <input type="hidden" name="product_id" value="<%= proDetailData.id %> ">
                   <input type="hidden" name="product_name" value="<%= proDetailData.p_name %> ">
                   <input type="hidden" name="product_price" value="<%= proDetailData.p_main_price %> ">

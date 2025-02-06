@@ -52,24 +52,26 @@ export const displayOrderDetail = async (req, res) => {
     const order = orderDetails[0];
  
     const [orderItems] = await connect.execute(
-      `SELECT oi.*, p.*
-       FROM new_order_itemsss oi 
-       JOIN products p ON oi.product_id = p.id 
+      `SELECT 
+          oi.*, 
+          p.p_name AS product_name,
+          p.p_image AS product_main_image,
+          p.p_price AS product_price,
+          r.r_status AS return_status,
+          r.id as return_id
+       FROM new_order_itemsss oi
+       JOIN products p ON oi.product_id = p.id
+       LEFT JOIN return_order r ON oi.id = r.order_item_id
        WHERE oi.orders_id = ?`,
       [order_id]
     );
-    console.log("Order Items:", orderItems);
+  
 
-    let subtotal = orderItems.reduce((acc, item) => {
-      const productPrice = parseFloat(item.p_price) || 0;
-      const quantity = parseInt(item.quantity, 10) || 0; 
-      return acc + productPrice * quantity;
-    }, 0)
-    console.log(subtotal)
-    let deliveryFee = subtotal < 75 ? 10 : 0;
+    let subtotal = orderItems.reduce((acc, item) => acc + item.product_price * item.quantity, 0);
+    let deliveryFee = subtotal < 100 ? 10 : 0;
     let vat = subtotal * 0.2;
-    let totalCost = subtotal +  vat + deliveryFee;
-    console.log(totalCost)
+    let totalCost = subtotal + vat + deliveryFee;
+  
 
     res.render("admin/order-details", {orderID, order,orderItems ,subtotal ,totalCost , deliveryFee ,vat});
   } catch (e) {
@@ -80,10 +82,30 @@ export const displayOrderDetail = async (req, res) => {
 
 
 export const updateStatus = async (req, res) => {
-  const { status } = req.body;
+  const { status ,delivery_date } = req.body;
   const { order_id } = req.params;
   try {
-    await connect.execute('UPDATE new_order SET status = ? WHERE id = ?', [status, order_id]);
+    await connect.execute('UPDATE new_order SET status = ?, delivery_date = ? WHERE id = ?', [status, delivery_date, order_id]);
+    res.redirect(`/admin/order-details/${order_id}`);
+  } catch (e) {
+    console.error("Error updating order status:", e);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+export const updateReturnStatus = async (req, res) => {
+  const { order_id, return_id, status } = req.body;
+
+  // Ensure all values are present
+  if (!order_id || !return_id || !status) {
+    console.error("Missing required fields:", { order_id, return_id, status });
+    return res.status(400).send("Missing required fields");
+  }
+
+  try {
+    const sql = 'UPDATE return_order SET r_status = ? WHERE id = ?';
+    await connect.execute(sql, [status, return_id]);
+
     res.redirect(`/admin/order-details/${order_id}`);
   } catch (e) {
     console.error("Error updating order status:", e);

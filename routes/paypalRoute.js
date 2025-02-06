@@ -12,6 +12,6 @@ router.get('/complete-order', completeOrder);
 router.get('/cancel-order', (req, res) => {
     res.redirect('/')
 })
-router.post('/api/cancel-order', cancelOrder)
+router.post('/api/cancel-order', cancelOrder);
 
 export default router

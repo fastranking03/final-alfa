@@ -81,10 +81,12 @@ export const displayUserOrders = async (req, res) => {
               p.p_name AS product_name,
               p.p_image AS product_main_image,
               p.p_price AS product_price,
-              r.r_status AS return_status
+              r.r_status AS return_status,
+              o.delivery_date AS delivery_date
           FROM new_order_itemsss oi
           JOIN products p ON oi.product_id = p.id
           LEFT JOIN return_order r ON oi.id = r.order_item_id
+          LEFT JOIN new_order o ON oi.orders_id = o.id
           WHERE oi.orders_id = ?
       `;
 
@@ -92,7 +94,7 @@ export const displayUserOrders = async (req, res) => {
 
       // Calculate costs
       let subtotal = orderItems.reduce((acc, item) => acc + item.product_price * item.quantity, 0);
-      let deliveryFee = subtotal < 75 ? 10 : 0;
+      let deliveryFee = subtotal < 100 ? 10 : 0;
       let vat = subtotal * 0.2;
       let totalCost = subtotal + vat + deliveryFee;
       const catData = await getAllCategory();
@@ -120,14 +122,14 @@ export const displayUserOrders = async (req, res) => {
 
 export const returnOrder = async (req, res) => {
     try {
-        const { orders_id, order_item_id, reason, by_cs, comment } = req.body;
+        const { orders_id, order_item_id, reason, by_cs, comment ,resturn_date } = req.body;
         
         const return_order_id = await generateReturnOrderId();
          
         
         await connect.execute(
-            'INSERT INTO return_order (order_id, order_item_id, return_order_id, reason, by_cs, comment, r_status) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            [orders_id, order_item_id, return_order_id, reason, by_cs, comment, 'PENDING']
+            'INSERT INTO return_order (order_id, order_item_id, return_order_id, reason, by_cs, comment, r_status ,resturn_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            [orders_id, order_item_id, return_order_id, reason, by_cs, comment, 'PENDING',resturn_date]
         );
         
         res.redirect(`/user-order-detail/${orders_id}`);

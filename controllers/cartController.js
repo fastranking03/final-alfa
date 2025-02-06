@@ -250,7 +250,7 @@ export const disCart = async (req, res, next) => {
             return sum + item.product_price * item.quantity;
         }, 0);
 
-        const deliveryFee = total < 70 ? 10 : 0;
+        const deliveryFee = total < 100 ? 10 : 0;
 
         res.render("my-cart", {
             cartData,
@@ -296,7 +296,7 @@ export const disAddress = async (req, res) => {
             return sum + item.product_price * item.quantity;
         }, 0);
 
-        const deliveryFee = total < 70 ? 10 : 0;
+        const deliveryFee = total < 100 ? 10 : 0;
         const vat = total * 0.2;
 
         res.render('delivery-info', { cu_address, cartData, typeData, cartCount,catData ,total ,deliveryFee,vat,whislistData, wishlistCount})

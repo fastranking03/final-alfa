@@ -839,6 +839,17 @@
        width: 100%;
   }
  }
+ .order-return{
+   background: #005d67;
+    color: #fff;
+    font-size: 11px;
+    padding: 4px;
+    border-radius: 5px;
+    position: absolute;
+    left: -45px;
+    top: 36px;
+    white-space: nowrap;
+ }
 </style>
 <body>
     <div>
@@ -908,6 +919,7 @@
                                           </select>
                                        </div>
                                        <input type="hidden" name="orderID" value="<%= orderID %>">
+                                       <input type="hidden" id="dateInput" name="delivery_date">
                                        <div class="flex justify-end mt-4">
                                           <button type="button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded mr-2"
                                              onclick="toggleModal('orderStatus')">Cancel</button>
@@ -919,23 +931,7 @@
                               </div>
                            </div>
                         </div>
-
-                        <script>
-                           var orderStatus = document.getElementById("orderStatus")
-                           document.getElementById("modalPopup").addEventListener('click',function(){
-                              orderStatus.style.display="flex"
-                           })
-                           function toggleModal(modalId) {
-                              const modal = document.getElementById(modalId);
-                              modal.classList.toggle('hidden');
-                           }
-                           window.addEventListener('click', function (e) {
-                              const modal = document.getElementById('orderStatus');
-                              if (e.target === modal) {
-                                 toggleModal('orderStatus');
-                              }
-                           });
-                        </script>
+                       
                         <div class="admin-order-detail-wrapper">
                             <div class="row sm:flex gap-10">
                                 <div class="col-md-8 w-[70%]">
@@ -964,27 +960,90 @@
                                                 <h5>Order Item</h5>
                                             </div>
                                             <% orderItems.forEach(product => { %>
-
                                                 <div class="od-items">
                                                     <div class="od-items-left">
                                                         <div class="od-item-img">
                                                             <img class="od-img"
-                                                                src="<%= product.p_image %>"
+                                                                src="<%= product.product_main_image %>"
                                                                 alt="">
                                                         </div>
                                                         <div class="od-product-text">
-                                                            <h6><%= product.p_name %></h6>
+                                                            <h6><%= product.product_name %></h6>
                                                             <span>Qty: <%= product.quantity %></span>
                                                         </div>
                                                     </div>
-                                                    <div class="od-items-right">
+                                                  
+                                                    
+                                                    <div class="od-items-right relative">
+                                                      <button class="order-return" id="<%= product.return_id %>orderButton" onclick="editToggleModal('<%= product.return_id %>orderStatus')">
+                                                         <% if (product.return_status) { %>
+                                                             RETURN <%= product.return_status %>
+                                                         <% } %>
+                                                     </button>
                                                         <h5>
-                                                            £<%= (product.p_price * product.quantity).toFixed(2) %>
+                                                            £<%= (product.product_price * product.quantity).toFixed(2) %>
                                                         </h5>
                                                      </div>
                                                 </div>
+                                                 <!-- Modal -->
+                                             <div id="<%= product.return_id %>orderStatus" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+                                                <div class="bg-white rounded-lg w-full max-w-lg shadow-lg">
+                                                   <!-- Modal Header -->
+                                                   <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                                                      <h5 class="text-lg font-semibold">Update Return Status</h5>
+                                                      <button type="button" class="text-gray-400 hover:text-gray-600" onclick="editToggleModal('<%= product.return_id %>orderStatus')">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                                               stroke="currentColor" class="w-6 h-6">
+                                                               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                            </svg>
+                                                      </button>
+                                                   </div>
+
+                                                   <!-- Modal Body -->
+                                                   <div class="p-6">
+                                                      <form method="post" action="/admin/update-return-status">
+                                                           <input type="text" name="return_id" value="<%= product.return_id %>">
+                                                           
+                                                           <input type="text" name="order_id" value="<%= product.orders_id %>">
+                                                            <div class="mb-4">
+                                                               <label for="status" class="block text-sm font-medium text-gray-700 uppercase">Order Status</label>
+                                                               <select name="status" id="r_status" class="mt-1 block w-full rounded-md border-gray-300 p-3 border-[1px] shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                                                  required>
+                                                                  <option value="PENDING"
+                                                                  <%=order.r_status==='PENDING' ? 'selected' : ''
+                                                                           %> >PENDING</option>
+                                                                     <option value="APPROVED"
+                                                                     <%=order.r_status==='APPROVED' ? 'selected' : ''
+                                                                     %> >APPROVED</option>
+                                                                     <option value="SUCCESS"
+                                                                     <%=order.r_status==='SUCCESS' ? 'selected' : ''
+                                                                     %> >SUCCESS</option>
+                                                                     <option value="CANCELLED"
+                                                                     <%=order.r_status==='CANCELLED' ? 'selected' : ''
+                                                                     %> >CANCELLED</option>
+                                                               </select>
+                                                            </div>
+                                                             <div class="flex justify-end mt-4">
+                                                               <button type="button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded mr-2"
+                                                                  onclick="toggleModal('orderStatus')">Cancel</button>
+                                                               <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                                                  Save changes
+                                                               </button>
+                                                            </div>
+                                                      </form>
+                                                   </div>
+                                                </div>
+                                             </div>
                                         <% }); %>
                                           </div>
+                                          <script>
+                                             function editToggleModal(id) {
+                                                 const modal = document.getElementById(id);
+                                                 if (modal) {
+                                                     modal.classList.toggle("hidden");
+                                                 }
+                                             }
+                                             </script>
                                         <hr style="margin: 0;">
                                         <div class="od-alfa-total">
                                             <ul>
@@ -1145,6 +1204,27 @@
                 </div>
         </div>
     </div>
+    <script>
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0];
+            document.getElementById('dateInput').value = formattedDate;
+         </script>
+            <script>
+               var orderStatus = document.getElementById("orderStatus")
+                document.getElementById("modalPopup").addEventListener('click',function(){
+                    orderStatus.style.display="flex"
+                })
+               function toggleModal(modalId) {
+                  const modal = document.getElementById(modalId);
+                  modal.classList.toggle('hidden');
+               }
+               window.addEventListener('click', function (e) {
+                  const modal = document.getElementById('orderStatus');
+                  if (e.target === modal) {
+                     toggleModal('orderStatus');
+                  }
+               });
+         </script>
 </body>
 
 </html>

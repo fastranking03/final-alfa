@@ -186,13 +186,24 @@
                                 </a>
                               </div>
                                <div class="check-price">
-                                <% if (order.status === "DELIVERED" && product.return_status !== "PENDING") { %>
+                              
+                                  <% 
+                                  const today = new Date();
+                                  const deliveryDate = new Date(product.delivery_date);
+                                  const diffDays = Math.floor((today - deliveryDate) / (1000 * 60 * 60 * 24));
+                                %>
+
+                                <% if (diffDays > 14) { %>
+
+                                  <span class="return-status not-allowed">Cannot Return</span>
+                                <% } else if (order.status === "DELIVERED") { %>
+                                  <!-- If within 2 days and delivered, show the return button -->
                                   <button class="order-return" data-bs-toggle="modal" data-bs-target="#exampleModal<%= product.id %>">
-                                      Return
+                                    Return
                                   </button>
-                              <% } else if (product.return_status === "PENDING") { %>
                                   <span class="return-status order-return"><%= product.return_status %></span>
-                              <% } %>
+                                <% } %>
+                             
                                     <h3>£<%= (product.product_price * product.quantity).toFixed(2) %></h3>
                               </div>
                             </div>
@@ -272,6 +283,7 @@
                                     </div>
                                   </div>
                                 </div>
+                                <input type="hidden" id="dateInput" name="resturn_date">
                                 <div class="modal-footers">
                                   <button type="submit" class="btn btn-primary return-btn">Submit</button>
                                 </div>
@@ -281,6 +293,7 @@
                         </div>
                         <% }); %>
                     </div>
+                   
                     <div class="alfa-cart-total">
                       <ul>
                         <li>
@@ -380,7 +393,6 @@
       // Order Return
       $(document).on("click", "#order-return", function () {
         var order_id = $("#order_id").val();
-        console.log(order_id);
         alertify.confirm("Are You Sure Want to Return this Order?")
           .set("onok", function (closeEvent) {
             $.ajax({
@@ -422,7 +434,11 @@
         }
       };
     </script>
-
+  <script>
+      const today = new Date();
+      const formattedDate = today.toISOString().split('T')[0];
+      document.getElementById('dateInput').value = formattedDate;
+</script>
     
 </body>
 
